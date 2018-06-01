@@ -7,16 +7,40 @@ const config = {
     filename: "bundle.js",
     publicPath: "build/"
   },
+  devServer: {
+    hot: true,
+    inline: true
+  },
   module: {
     rules: [
       {
-        use: "babel-loader",
         test: /\.js$/,
+        use: "babel-loader",
         exclude: "/node_modules/"
       },
       {
-        use: ["style-loader", "css-loader"],
-        test: /\.css$/
+        test: /\.css$/,
+        use: [
+          { 
+            loader: "style-loader" 
+          }, 
+          { loader: "css-loader" 
+          }
+        ]
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: "style-loader"
+          },
+          {
+            loader: "css-loader"
+          },
+          {
+            loader: "sass-loader"
+          }
+        ]
       }
     ]
   }

@@ -4,19 +4,20 @@ const config = {
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "build"),
-    filename: "bundle.js"
+    filename: "bundle.js",
+    publicPath: "build/"
   },
   module: {
     rules: [
-    	{ 
-    		use: "babel-loader", 
-    		test: /\.js$/,
-    		exclude: "/node_modules/"
-    	},
-    	{
-    		use: ["style-loader", "css-loader"],
-    		test: /\.css$/
-    	}
+      {
+        use: "babel-loader",
+        test: /\.js$/,
+        exclude: "/node_modules/"
+      },
+      {
+        use: ["style-loader", "css-loader"],
+        test: /\.css$/
+      }
     ]
   }
 };

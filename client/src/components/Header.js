@@ -5,12 +5,16 @@ class Header extends Component {
   render() {
     return (
       <div>
-        <div className="navigation">
-          <div className="navigation__burger" id="nav-toggle">
+       
+        <div className="header">
+        	<img className="header__logo" src={layovero} width="102" height="93" />
+         <div className="navigation">
+          <input type="checkbox" className="navigation__checkbox" id="nav-toggle" /> 
+         
             <label for="nav-toggle" className="navigation__button">
-              MENU
+              <span className="navigation__icon">&nbsp;</span>
             </label>
-            <div className="navigation__background">&nbsp;</div>
+            {/*<div className="navigation__background">&nbsp;</div>*/}
             <nav className="navigation__nav">
             	<ul className="navigation__list">
 
@@ -22,10 +26,9 @@ class Header extends Component {
             		<li className="navigation__item">Sign In</li>
             	</ul>
             </nav>
-          </div>
+         
         </div>
-        <div className="header">
-          <img src={layovero} width="102" height="93" />
+          
           {/*<nav className="header__item signin">sign in</nav>
 
         <nav className="header__item signup">sign up</nav>*/}

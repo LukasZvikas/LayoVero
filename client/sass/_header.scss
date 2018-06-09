@@ -2,7 +2,7 @@
   background-color: #fff;
   height: 10rem;
   display: grid;
-  grid-template-columns: 8fr 1fr 1fr;
+  grid-template-columns: 8fr 1fr;
   align-items: center;
   border-bottom: 1px solid #ccc;
 
@@ -14,12 +14,17 @@
     width: 100%;
   }
 
-  .signin {
-      grid-column-start: 3;
-      grid-row-start: 1;
-    }
-  .signup {
-      grid-column-start: 2;
-      grid-row-start: 1;
-    }
+  &__logo {
+     grid-column-start: 1;
+    
+  }
+
+  // .signin {
+  //     grid-column-start: 3;
+  //     grid-row-start: 1;
+  //   }
+  // .signup {
+  //     grid-column-start: 2;
+  //     grid-row-start: 1;
+  //   }
 }

@@ -1,0 +1,1 @@
+export const INSTA_FEED = "insta_feed";

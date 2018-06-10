@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import layovero from "../../images/layovero.png";
+import {connect} from "react-redux"
 
 class Header extends Component {
   render() {

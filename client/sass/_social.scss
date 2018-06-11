@@ -1,0 +1,89 @@
+.social {
+  margin: 0rem 22rem;
+  &__name {
+    font-size: 2.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    margin: 2rem;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(3, $insta-photo-largest-w);
+    grid-gap: 6rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__item-box {
+    display: grid;
+    height: $insta-photo-largest-h;
+    margin: 0 auto;
+  }
+
+  &__photo {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    margin: 0 auto;
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  &__photo-text {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-row: 1;
+    grid-column: 1;
+    font-size: 1.4rem;
+    color: #fff;
+    opacity: 0;
+    transition: all 0.3s;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  &__item-box:hover > &__photo-text {
+    opacity: 1;
+  }
+
+  &__icons {
+    text-align: center;
+    margin: 3rem;
+  }
+
+  &__icons-items {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+   &__icons-items:hover {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    opacity: 0.8;
+  }
+
+
+
+  &__text-body {
+    text-align: center;
+    font-size: 2rem;
+    line-height: 4rem;
+    margin: 5rem;
+  }
+
+  &__text-1 {
+    font-size: 2.5rem;
+  }
+
+  &__text-2 {
+    margin: 3rem;
+  }
+
+  &__text-3 {
+    margin-bottom: 5rem;
+  }
+}

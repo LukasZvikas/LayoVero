@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 
 import Header from "./Header";
-import ConnectWithUs from "./connectWithUs";
+import Social from "./Social";
 
 class Main extends Component {
   render() {
     return (
       <div>
         <Header />
-        <ConnectWithUs />
+        <Social />
       </div>
     );
   }

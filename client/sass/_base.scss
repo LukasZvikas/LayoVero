@@ -19,3 +19,29 @@ html {
   border-sizing: border-box;
   font-size: 62.5%; //10/16 = 62.
 }
+
+.main {
+  margin: 0 24rem;
+}
+
+.spinner:before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  border: 5px solid #d3d3d3;
+  border-top-color: #000;
+  height: 7rem;
+  width: 7rem;
+  margin-top: -3rem;
+  margin-left: -3rem;
+  animation: spinner 0.7s linear infinite;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}

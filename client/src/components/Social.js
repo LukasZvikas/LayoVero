@@ -27,7 +27,7 @@ class ConnectWithUs extends Component {
   render() {
     console.log(this.props.instaData.data);
     if (this.props.instaData.data == undefined) {
-      return <div> Loading...</div>;
+      return <div className="spinner"></div>;
     }
     return (
       <div className="social">

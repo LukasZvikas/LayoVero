@@ -53,7 +53,13 @@ const config = {
     ]
   },
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
+    proxy: {
+      "/blogPosts": {
+        target: "http://localhost:5000",
+        changeOrigin: true
+      }
+    }
   }
 };
 

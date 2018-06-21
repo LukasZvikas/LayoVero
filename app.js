@@ -16,6 +16,7 @@ app.use(passport.initialize())
 
 require("./routes/authRoutes")(app);
 require("./routes/socialRoutes")(app);
+require("./routes/blogRoutes")(app);
 
 const PORT = process.env.PORT || 5000;
 

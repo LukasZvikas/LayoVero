@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as socialActions from "../actions/socialActions";
-import facebookIcon from "../../images/SVG/facebook.svg";
-import instagramIcon from "../../images/SVG/instagram.svg";
-import youtubeIcon from "../../images/SVG/youtube.svg";
+import * as socialActions from "../../actions/socialActions";
+import facebookIcon from "../../../images/SVG/facebook.svg";
+import instagramIcon from "../../../images/SVG/instagram.svg";
+import youtubeIcon from "../../../images/SVG/youtube.svg";
 
 class ConnectWithUs extends Component {
   componentDidMount() {

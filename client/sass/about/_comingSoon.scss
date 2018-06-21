@@ -2,8 +2,8 @@
   display: grid;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
-  margin-top: 5rem;
+  font-size: 1.6rem;
+  margin: 5rem 0;
   line-height: 4rem;
 
   &__header-1 {
@@ -15,9 +15,11 @@
     margin: 3rem 0;
     text-transform: uppercase;
     text-align: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
   }
 
   &__text-1 {
+
   }
 
   &__header-2 {
@@ -29,22 +31,35 @@
     margin: 3rem 0;
     text-transform: uppercase;
     text-align: center;
+    border-bottom: 1px solid rgba(0,0,0,.15)
   }
 
   &__text-2 {
   }
 
   &__button-main {
+
     width: 16rem;
     height: 5rem;
-    border-radius: 4rem;
+    border: 3px solid #000;
     font-size: 1.6rem;
     text-transform: uppercase;
-    background-color: #000;
-    color: #fff;
+    background-color: #fff;
+    color: #000;
     display: grid;
     align-items: center;
     justify-content: center;
+    font-weight: bold;
+    // width: 16rem;
+    // height: 5rem;
+    // border-radius: 4rem;
+    // font-size: 1.6rem;
+    // text-transform: uppercase;
+    // background-color: #000;
+    // color: #fff;
+    // display: grid;
+    // align-items: center;
+    // justify-content: center;
   }
 
   &__button-box {
@@ -116,9 +131,7 @@
   &__text {
     display: grid;
     font-size: 1.6rem;
-    align-items: center;
-    justify-content: center;
-    margin: 0 3rem;
+    margin: 0 12rem;
     line-height: 2.4rem;
   }
 

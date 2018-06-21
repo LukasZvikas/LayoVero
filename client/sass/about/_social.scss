@@ -1,10 +1,12 @@
 .social {
+	margin-top: 5rem;
+	text-align: center;
   &__name {
     font-size: 3rem;
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 0.2rem;
-    margin: 3rem;
+    border-bottom: 1px solid rgba(0,0,0,.15);
   }
 
   &__list {
@@ -50,7 +52,6 @@
   }
 
   &__icons {
-    text-align: center;
     margin: 3rem;
   }
 
@@ -66,23 +67,21 @@
   }
 
   &__text-body {
-    font-size: 2rem;
+    font-size: 1.6rem;
     line-height: 4rem;
-    margin: 5rem;
+    margin: 5rem 0;
   }
 
   &__text-1 {
     font-size: 2.5rem;
-    text-align: center;
   }
 
   &__text-2 {
-    margin: 3rem;
-    text-align: center;
+    margin: 3rem 0;
   }
 
   &__text-3 {
-    margin: 0 11rem;
     margin-bottom: 5rem;
+    text-align: left;
   }
 }

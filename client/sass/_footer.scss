@@ -1,0 +1,13 @@
+.footer {
+  margin-left: -1px;
+  &__img-main {
+    width: 101%;
+    margin-bottom: -5px;
+  }
+
+  &__bottom {
+    height: 30rem;
+    background-color: #000;
+    width: 101%;
+  }
+}

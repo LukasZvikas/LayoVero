@@ -20,8 +20,10 @@ html {
   font-size: 62.5%; //10/16 = 62.
 }
 
-.main {
-  margin: 0 24rem;
+ .main > *:not(.about-secondary) {
+    max-width: 94rem;
+    width: 44%;
+    margin: 0 auto;
 }
 
 .spinner:before {

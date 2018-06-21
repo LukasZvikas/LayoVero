@@ -1,16 +1,22 @@
 import React, { Component } from "react";
-
+import aboutUsWrapper from "./aboutUs/aboutUsWrapper";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "./Header";
-import Social from "./Social";
-import ComingSoon from "./ComingSoon";
+import Footer from "./Footer";
 
 class Main extends Component {
   render() {
     return (
-      <div className="main">
-        <Header />
-        <Social />
-        <ComingSoon />
+      <div>
+        <BrowserRouter>
+          <div>
+            <Header />
+            <Switch>
+              <Route path="/about" component={aboutUsWrapper} />
+            </Switch>
+            <Footer />
+          </div>
+        </BrowserRouter>
       </div>
     );
   }

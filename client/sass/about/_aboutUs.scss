@@ -1,0 +1,49 @@
+.about {
+  &__header-main {
+    text-align: center;
+    font-size: 4.6rem;
+  }
+
+  &__text-box {
+    line-height: 4rem;
+    font-size: 1.6rem;
+  }
+
+  &__text {
+    margin: 2rem 0;
+  }
+}
+
+.about-secondary {
+  display: grid;
+  background-color: #000;
+  height: 80vh;
+  margin: 9rem 0;
+
+  &__text-box {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    color: #fff;
+    align-items: center;
+    justify-items: center;
+    margin: 0 20rem;
+  }
+
+  &__text-item {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    margin: 0 10rem;
+        grid-auto-rows: min-content;
+  }
+
+  &__header {
+  	margin-bottom: 2rem;
+  	font-size: 3.5rem;
+  }
+
+  &__text {
+  	font-size: 2rem;
+  	line-height: 4rem;
+  }
+}

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import layovero from "../../images/layovero.png";
+import layovero from "../../../images/layovero.png";
 
 class ComingSoon extends Component {
   render() {
@@ -23,7 +23,7 @@ class ComingSoon extends Component {
           </div>
           <div className="coming__button-box">
             <a href="#popup" className="coming__button-main">
-              Contact Us
+              Email Us
             </a>
           </div>
         </div>
@@ -33,7 +33,7 @@ class ComingSoon extends Component {
               <img
                 className="navigation__logo"
                 src={layovero}
-                width="102"
+                width="93"
                 height="93"
               />
             </div>

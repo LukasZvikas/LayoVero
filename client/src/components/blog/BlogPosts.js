@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchBlogPosts } from "../../actions/blogActions.js";
+import { fetchBlogPosts, openPost } from "../../actions/blogActions.js";
+import { Link } from "react-router-dom";
 
 class BlogPosts extends Component {
   componentDidMount() {
@@ -10,20 +11,32 @@ class BlogPosts extends Component {
   renderPosts(posts) {
     return posts.map(post => {
       return (
-        <div>
-          <div>{post.postName} </div>
-          <div> {post.blogPost} </div>
-          <div> {post.likes} </div>
-        </div>
+        <Link to={`/blog/post/${post.postName}`} className="blog-posts__post">
+          <img className="blog-posts__image" src={`../../${post.image}`} />
+          {/*<img className={`blog-posts__image--${2}`} src={"../../images/logoyoutube.png"} />
+          <img className={`blog-posts__image--${3}`} src={"../../images/logoyoutube.png"} />*/}
+          {/*<div className="blog-posts__name">{post.postName}</div>*/}
+          <div className="blog-posts__info">
+            <div className="blog-posts__name"> {post.postName} </div>
+            <div className="blog-posts__likes">{post.date.slice(0, 10)}</div>
+          </div>
+        </Link>
+        // {        <div className="blog-posts__post"> {post.blogPost} </div>
+        // <div className="blog-posts__post"> {post.likes} </div>}
+        //../../${post.image}
       );
     });
   }
 
   render() {
     if (this.props.blogPosts.blogs == undefined) {
-      return <div className="spinner"></div>;
+      return <div className="spinner" />;
     }
-    return <div>{this.renderPosts(this.props.blogPosts.blogs)}</div>;
+    return (
+      <div className="blog-posts">
+        {this.renderPosts(this.props.blogPosts.blogs)}
+      </div>
+    );
   }
 }
 
@@ -33,4 +46,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchBlogPosts })(BlogPosts);
+export default connect(mapStateToProps, { fetchBlogPosts, openPost })(
+  BlogPosts
+);

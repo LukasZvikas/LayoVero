@@ -1,11 +1,12 @@
 const path = require("path");
 
+
 const config = {
   entry: "./src/index.js",
   output: {
-    path: path.resolve(__dirname, "build"),
+    path: path.resolve(__dirname, "/build"),
     filename: "bundle.js",
-    publicPath: "build/"
+    publicPath: "/"
   },
   devServer: {
     hot: true,
@@ -58,7 +59,8 @@ const config = {
       "/blogPosts": {
         target: "http://localhost:5000",
         changeOrigin: true
-      }
+      },
+
     }
   }
 };

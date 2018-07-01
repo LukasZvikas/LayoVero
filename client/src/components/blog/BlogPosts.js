@@ -11,14 +11,14 @@ class BlogPosts extends Component {
   renderPosts(posts) {
     return posts.map(post => {
       return (
-        <Link to={`/blog/post/${post.postName}`} className="blog-posts__post">
-          <img className="blog-posts__image" src={`../../${post.image}`} />
+        <Link to={`/blog/post/${post.postName}`} className="blog-posts-main-post">
+          <img className="blog-posts-main-image" src={`../../${post.image}`} />
           {/*<img className={`blog-posts__image--${2}`} src={"../../images/logoyoutube.png"} />
           <img className={`blog-posts__image--${3}`} src={"../../images/logoyoutube.png"} />*/}
           {/*<div className="blog-posts__name">{post.postName}</div>*/}
-          <div className="blog-posts__info">
-            <div className="blog-posts__name"> {post.postName} </div>
-            <div className="blog-posts__likes">{post.date.slice(0, 10)}</div>
+          <div className="blog-posts-main-info">
+            <div className="blog-posts-main-name"> {post.postName} </div>
+            <div className="blog-posts-main-date">{post.date.slice(0, 10)}</div>
           </div>
         </Link>
         // {        <div className="blog-posts__post"> {post.blogPost} </div>
@@ -33,7 +33,7 @@ class BlogPosts extends Component {
       return <div className="spinner" />;
     }
     return (
-      <div className="blog-posts">
+      <div className="blog-posts-main">
         {this.renderPosts(this.props.blogPosts.blogs)}
       </div>
     );

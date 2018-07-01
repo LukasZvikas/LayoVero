@@ -1,0 +1,71 @@
+@mixin posts($class) {
+  .blog-posts-#{$class} {
+    grid-column: full-start/ full-end;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10rem;
+    @content;
+  }
+}
+
+@mixin post($class1, $class2) {
+  .blog-posts-#{$class1}-post {
+    @content;
+    &:hover > .blog-posts-#{$class2}-info {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+@mixin post-items($class1, $class2) {
+  .blog-posts-#{$class1}-#{$class2} {
+    display: grid;
+    height: 100%;
+
+    @content;
+  }
+}
+
+@mixin post-name($class1, $class2) {
+  .blog-posts-#{$class1}-#{$class2} {
+    text-align: center;
+    grid-gap: 5rem;
+    transition: all 0.4s;
+    color: #fff;
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+    padding: 0.5rem;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    border: 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    @content;
+
+    &:hover {
+      background-color: #fff;
+      color: #000;
+    }
+  }
+}
+
+@mixin post-date($class1, $class2) {
+  .blog-posts-#{$class1}-#{$class2} {
+    text-align: center;
+    /* grid-row: 2; */
+    /* grid-column: 1; */
+    // font-size: 1.8rem;
+    color: #fff;
+    display: block;
+    width: 16.4rem;
+    position: relative;
+    // top: 40%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    @content;
+  }
+}

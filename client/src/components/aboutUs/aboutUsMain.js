@@ -7,35 +7,39 @@ class About1 extends Component {
         <div className="about__header-main">Who We Are</div>
         <div className="about__text-box">
           <p className="about__text">
-            Who We Are Refinery29 is a trailblazing digital-media and
-            entertainment company for young women with a global audience
-            footprint of 550 million across all platforms.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
           </p>
 
           <p className="about__text">
-            We deliver style and substance to an audience that's highly engaged
-            across a variety of devices and destinations, from original video
-            and features, to live experiences and social storytelling. Our
-            audience is comprised of determined dreamers who are smart and
-            passionate, always seeking out the full potential in every aspect of
-            their lives.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident
           </p>
 
           <p className="about__text">
-            As the original next-generation women’s media company, we've changed
-            the way content and storytelling speaks to and represents women,
-            always sparking the conversations that matter most. Delivering on
-            that mission, we've driven intention-fueled initiatives such as
-            Shatterbox Anthology, a short-film series dedicated to increasing
-            opportunities for women in film; The 67%, dedicated to more and
-            better plus-size representation and equality; 29Rooms, an art-fueled
-            funhouse for the digital age that reimagines live events; and Strong
-            Opinions Loosely Held, where we blend pop culture and feminism.
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+            quae ab illo inventore veritatis et quasi architecto beatae vitae
+            dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
+            aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
+            eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est,
+            qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
+            sed quia non numquam eius modi tempora incidunt ut labore et dolore
+            magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis
+            nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut
+            aliquid ex ea commodi consequatur?
           </p>
 
           <p className="about__text">
-            We celebrate imperfections, banish taboos, and always strive to be
-            real and relatable — walking the walk in all that we do.
+            Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
+            quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat
+            quo voluptas nulla pariatur?
           </p>
         </div>
       </div>

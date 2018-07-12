@@ -4,13 +4,54 @@ import { openPost, fetchBlogPosts } from "../../actions/blogActions.js";
 import BlogPosts from "./BlogPosts";
 import { Link } from "react-router-dom";
 
+import fb from "../../../images/facebook.svg";
+import insta from "../../../images/instagram.svg";
+import thumbs from "../../../images/thumbs-up.svg";
+import twitter from "../../../images/twitter.svg";
+import youtube from "../../../images/youtube.svg";
+
 class BlogPost extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      slide: 0,
+      lastScrollY: 0,
+      visible: "visible",
+      opacity: 1
+    };
+
+    this.handleScroll = this.handleScroll.bind(this);
+  }
+
   componentDidMount() {
+    window.addEventListener("scroll", this.handleScroll);
+    console.log(window.scrollY);
+
     return (
       this.props.openPost(this.props.match.params[0]),
       this.props.fetchBlogPosts()
     );
   }
+
+  componentWillUnmount() {
+    console.log(window.scrollY);
+    window.removeEventListener("scroll", this.handleScroll);
+  }
+
+  handleScroll(event) {
+    console.log(event);
+    const { lastScrollY } = this.state;
+    const currentScroll = window.scrollY;
+
+    if (currentScroll > lastScrollY) {
+      this.setState({ visible: "hidden", opacity: 0 });
+    } else {
+      this.setState({ visible: "visible", opacity: 1 });
+    }
+    this.setState({ lastScrollY: currentScroll });
+  }
+
   refreshPage() {
     window.location.reload();
   }
@@ -21,7 +62,7 @@ class BlogPost extends Component {
           to={`/blog/post/${post.postName}`}
           className="blog-posts-secondary-post"
           onClick={() => {
-            this.refreshPage;
+            this.refreshPage();
           }}
         >
           <img
@@ -46,6 +87,7 @@ class BlogPost extends Component {
   }
 
   render() {
+    console.log(this.state);
     // console.log(this.props.match);
     if (
       this.props.foundPost == undefined ||
@@ -65,6 +107,21 @@ class BlogPost extends Component {
         <div className="more-stories">More Stories</div>
         <div className="blog-posts-secondary">
           {this.renderPosts(this.props.blogPosts.blogs)}
+        </div>
+        <div
+          className="postActionBar"
+          style={{
+            visibility: `${this.state.visible}`,
+            opacity: `${this.state.opacity}`,
+
+          }}
+        >
+          <img className="social__icons-items" src={thumbs} />
+          <img className="social__icons-items" src={twitter} />
+          <img className="social__icons-items" src={fb} />
+          <img className="social__icons-items" src={insta} />
+          <img className="social__icons-items" src={youtube} />
+        
         </div>
       </div>
     );

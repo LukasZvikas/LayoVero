@@ -11,8 +11,8 @@ class Header extends Component {
             <img
               className="navigation__logo"
               src={layovero}
-              width="93"
-              height="93"
+              width="53"
+              height="53"
             />
           </div>
           <input

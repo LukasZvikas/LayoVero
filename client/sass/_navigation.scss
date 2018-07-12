@@ -1,6 +1,7 @@
 .navigation {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 7rem;
   width: 100%;
   height: 100%;
   align-items: center;
@@ -124,6 +125,7 @@
       position: absolute;
       left: 0;
       transition: all 0.2s;
+
     }
 
     &::before {
@@ -138,6 +140,7 @@
   }
   &__button:hover &__icon::after {
     top: 1rem;
+    
   }
   &__checkbox:checked + &__button &__icon {
     background-color: transparent;
@@ -145,9 +148,11 @@
   &__checkbox:checked + &__button &__icon::before {
     top: 0;
     transform: rotate(135deg);
+    background-color: #fff;
   }
   &__checkbox:checked + &__button &__icon::after {
     top: 0;
     transform: rotate(-135deg);
+    background-color: #fff;
   }
 }

@@ -30,6 +30,7 @@
     margin: 0 auto;
     grid-row: 1;
     grid-column: 1;
+    object-fit: cover;
   }
 
   &__photo-text {
@@ -82,6 +83,6 @@
 
   &__text-3 {
     margin-bottom: 5rem;
-    text-align: left;
+    text-align: center;
   }
 }

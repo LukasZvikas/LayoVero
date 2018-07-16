@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { openPost, fetchBlogPosts } from "../../actions/blogActions.js";
 import BlogPosts from "./BlogPosts";
 import { Link } from "react-router-dom";
+import ProgImageLoading from "./loadingImage";
 
 import fb from "../../../images/facebook.svg";
 import insta from "../../../images/instagram.svg";
@@ -65,9 +66,12 @@ class BlogPost extends Component {
             this.refreshPage();
           }}
         >
-          <img
-            className="blog-posts-secondary-image"
-            src={`../../${post.image}`}
+   
+
+          <ProgImageLoading
+            regPhoto={`../..${post.image}`}
+            thumbPhoto={`../../${post.image}thumb`}
+            imageClass={"secondary"}
           />
           {/*<img className={`blog-posts__image--${2}`} src={"../../images/logoyoutube.png"} />
           <img className={`blog-posts__image--${3}`} src={"../../images/logoyoutube.png"} />*/}
@@ -87,7 +91,7 @@ class BlogPost extends Component {
   }
 
   render() {
-    console.log(this.state);
+    console.log(this.props);
     // console.log(this.props.match);
     if (
       this.props.foundPost == undefined ||
@@ -112,8 +116,7 @@ class BlogPost extends Component {
           className="postActionBar"
           style={{
             visibility: `${this.state.visible}`,
-            opacity: `${this.state.opacity}`,
-
+            opacity: `${this.state.opacity}`
           }}
         >
           <img className="social__icons-items" src={thumbs} />
@@ -121,7 +124,6 @@ class BlogPost extends Component {
           <img className="social__icons-items" src={fb} />
           <img className="social__icons-items" src={insta} />
           <img className="social__icons-items" src={youtube} />
-        
         </div>
       </div>
     );

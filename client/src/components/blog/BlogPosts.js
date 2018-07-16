@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchBlogPosts, openPost } from "../../actions/blogActions.js";
 import { Link } from "react-router-dom";
+import ProgImageLoading from "./loadingImage";
 
 class BlogPosts extends Component {
   componentDidMount() {
@@ -12,7 +13,11 @@ class BlogPosts extends Component {
     return posts.map(post => {
       return (
         <Link to={`/blog/post/${post.postName}`} className="blog-posts-main-post">
-          <img className="blog-posts-main-image" src={`../../${post.image}`} />
+            <ProgImageLoading
+            regPhoto={`../..${post.image}`}
+            thumbPhoto={`../../${post.image}thumb`}
+            imageClass={"main"}
+          />
           {/*<img className={`blog-posts__image--${2}`} src={"../../images/logoyoutube.png"} />
           <img className={`blog-posts__image--${3}`} src={"../../images/logoyoutube.png"} />*/}
           {/*<div className="blog-posts__name">{post.postName}</div>*/}

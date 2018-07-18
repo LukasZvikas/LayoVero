@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { openPost, fetchBlogPosts } from "../../actions/blogActions.js";
+import { openPost, fetchBlogPosts } from "../../actions/blogActions";
 import BlogPosts from "./BlogPosts";
 import { Link } from "react-router-dom";
 import ProgImageLoading from "./loadingImage";

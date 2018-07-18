@@ -59,7 +59,13 @@ const config = {
       "/blogPosts": {
         target: "http://localhost:5000",
         changeOrigin: true
-      },
+      }
+      ,
+      "/user": {
+        target: "http://localhost:5000",
+        changeOrigin: true
+      }
+
 
     }
   }

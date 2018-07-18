@@ -29,9 +29,9 @@ module.exports = app => {
     authController.googleToken
   );
 
-  app.post("/signup", authController.signup);
+  app.post("/user/signup", authController.signup);
 
-  app.post("/signin", requireSignin, authController.signin);
+  app.post("/user/signin", requireSignin, authController.signin);
 
   app.get("/confirmation/:token", emailController.confirmEmail);
 

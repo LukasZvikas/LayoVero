@@ -1,0 +1,44 @@
+.form-container {
+}
+
+.auth-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  height: 70vh;
+  width: 50vw;
+  border: 1px solid #dcdcdc;
+  border-radius: 0.7rem;
+  &__left {
+    background-color: #dcdcdc;
+    grid-column: 1;
+  }
+
+  &__right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  &__wrapper {
+    margin: 2rem;
+    border-bottom: 2px solid #dcdcdc;
+  }
+
+  &__item {
+    display: flex;
+    border: none;
+  }
+
+  &__item:focus {
+    outline: none;
+  }
+
+  &__error {
+  }
+
+  &__button {
+    width: 10rem;
+    height: 3rem;
+    border-radius: 1.6rem;
+  }
+}

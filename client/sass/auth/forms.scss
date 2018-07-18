@@ -3,13 +3,12 @@
 
 .auth-form {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  // grid-template-columns: 30rem 1fr;
   height: 70vh;
   width: 50vw;
   border: 1px solid #dcdcdc;
   border-radius: 0.7rem;
   &__left {
-    background-color: #dcdcdc;
     grid-column: 1;
   }
 
@@ -18,15 +17,65 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    // grid-column: 2;
+  }
+
+  &__logo {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__google,
+  &__facebook {
+    position: relative;
+    border: 1px solid;
+    border-radius: 2rem;
+    width: 16rem;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20rem;
+    height: 2.6rem;
+    margin: 2rem;
+  }
+
+  &__oauth-text {
+  }
+
+  &__oauth-logo {
+    position: absolute;
+    left: 1rem;
+  }
+
+  &__wrapper:first-of-type {
+    margin-top: 0;
+  }
+
+  &__wrapper:last-of-type {
+    margin-bottom: 0;
   }
   &__wrapper {
-    margin: 2rem;
+    margin: 4rem;
     border-bottom: 2px solid #dcdcdc;
   }
 
   &__item {
     display: flex;
     border: none;
+    font-size: 1.2rem;
+    width: 20rem;
+  }
+
+  .input {
+    font-size: 1.2rem;
+  }
+
+  .label {
+    margin: 1rem 0;
+    text-transform: uppercase;
   }
 
   &__item:focus {
@@ -40,5 +89,26 @@
     width: 10rem;
     height: 3rem;
     border-radius: 1.6rem;
+    margin: 3rem;
+  }
+
+  &__heading {
+    display: flex;
+  }
+
+  &__heading-item {
+    font-size: 3rem;
+    margin: 2rem 0.5rem;
+  }
+
+  &__legal {
+    margin-bottom: 2rem;
+  }
+
+  .up {
+    border-bottom: 2px solid;
+  }
+
+  .in {
   }
 }

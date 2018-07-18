@@ -16,14 +16,14 @@
 
 .about-secondary {
   display: grid;
-  background-color: #000;
+  background-color: var(--color-black);
   height: 80vh;
   margin: 9rem 0;
 
   &__text-box {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    color: #fff;
+    color: var(--color-white);
     align-items: center;
     justify-items: center;
     margin: 0 20rem;

@@ -32,7 +32,7 @@
     text-align: center;
     grid-gap: 5rem;
     transition: all 0.4s;
-    color: #fff;
+    color: var(--color-white);
     width: fit-content;
     height: fit-content;
     position: relative;
@@ -47,8 +47,8 @@
     @content;
 
     &:hover {
-      background-color: #fff;
-      color: #000;
+      background-color: var(--color-white);
+      color: var(--color-black);
     }
   }
 }
@@ -59,7 +59,7 @@
     /* grid-row: 2; */
     /* grid-column: 1; */
     // font-size: 1.8rem;
-    color: #fff;
+    color: var(--color-white);
     display: block;
     width: 16.4rem;
     position: relative;

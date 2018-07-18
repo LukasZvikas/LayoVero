@@ -7,8 +7,8 @@
   width: 100%;
   align-items: center;
   justify-items: end;
-  background-color: #fff;
-  box-shadow: 0 0.2px 0 0 #ffffff inset, 0 0 2px 0 #b3b3b3;
+  background-color: var(--color-white);
+  box-shadow: 0 0.2px 0 0 var(--color-white) inset, 0 0 2px 0 #b3b3b3;
   z-index: 400;
   
   &__checkbox {
@@ -70,7 +70,7 @@
   }
 
   &__item {
-    color: #fff;
+    color: var(--color-white);
     display: grid;
     font-size: 3rem;
     font-weight: 300;
@@ -83,7 +83,7 @@
       120deg,
       transparent 0%,
       transparent 50%,
-      #fff 50%
+      var(--color-white) 50%
     );
     background-size: 220%;
     transition: all 0.4s;
@@ -119,7 +119,7 @@
     &::after {
       width: 3.5rem;
       height: 3px;
-      background-color: #000;
+      background-color: var(--color-black);
       display: inline-block;
     }
 
@@ -150,11 +150,11 @@
   &__checkbox:checked + &__button &__icon::before {
     top: 0;
     transform: rotate(135deg);
-    background-color: #fff;
+    background-color: var(--color-white);
   }
   &__checkbox:checked + &__button &__icon::after {
     top: 0;
     transform: rotate(-135deg);
-    background-color: #fff;
+    background-color: var(--color-white);
   }
 }

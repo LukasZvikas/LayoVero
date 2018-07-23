@@ -5,11 +5,12 @@ import { connect } from "react-redux";
 import { SignUserUp } from "../../actions/authActions";
 import { Modal } from "../Modal";
 
+import fb from "../../../images/facebook.svg";
+import google from "../../../images/google.svg";
 import layovero from "../../../images/layovero.png";
 
-class SignUp extends Component {
+class SignIn extends Component {
   onFormSubmit({ email, password }) {
-    console.log("HERE", { email, password });
     this.props.SignUserUp({ email, password });
   }
 
@@ -55,32 +56,43 @@ class SignUp extends Component {
                 placehold={"*******"}
                 component={passwordField}
               />
-
-              <Field
-                key={"passwordConfirm"}
-                type="text"
-                label={"Confirm Password"}
-                name={"passwordConfirm"}
-                placehold={"*******"}
-                component={passwordField}
-              />
             </div>
             <button className="auth-form__button" type="submit">
-              Sign Up
+              Sign In
             </button>
-            <div className="auth-form__legal">
-              By clicking "Sign Up", you agree to Layovero's Terms of Use and
-              acknowledge you have read the Privacy Policy.
+            <div className="auth-form__cross-line">
+              <span className="auth-form__cross-text">or</span>
             </div>
-            <div className="auth-form__new">Already a Member?</div>
+            <div className="auth-form__oauth-box">
+              <div
+                className="auth-form__google"
+                style={{ backgroundColor: "#dd4b39" }}
+              >
+                <div className="auth-form__oauth-text">Sign in with Google</div>
+                <img
+                  className="auth-form__oauth-logo"
+                  src={google}
+                  style={{ left: 1.2 + "rem" }}
+                />
+              </div>
+              <div
+                className="auth-form__facebook"
+                style={{ backgroundColor: "#3b5998" }}
+              >
+                <div className="auth-form__oauth-text">
+                  Sign in with Facebook
+                </div>
+                <img className="auth-form__oauth-logo" src={fb} />
+              </div>
+            </div>
+            <div className="auth-form__new">Not a Member?</div>
           </div>
         </div>
       </form>
     );
   }
 }
-
 export default reduxForm({
-  form: "signUpForm",
+  form: "signInForm",
   fields: ["email", "password", "passwordConfirm"]
-})(connect(null, { SignUserUp })(SignUp));
+})(connect(null, { SignUserUp })(SignIn));

@@ -10,7 +10,7 @@
   background-color: var(--color-white);
   box-shadow: 0 0.2px 0 0 var(--color-white) inset, 0 0 2px 0 #b3b3b3;
   z-index: 400;
-  
+
   &__checkbox {
     display: none;
   }
@@ -158,3 +158,25 @@
     background-color: var(--color-white);
   }
 }
+
+//////////Sign Up/In MODAL
+
+.display-block {
+  display: block;
+  animation: fadeInLoad 0.5s;
+}
+
+.display-none {
+  display: none;
+}
+
+@keyframes fadeInLoad {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+

@@ -1,18 +1,39 @@
 .form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  border-radius: 3px;
+  transition: all 0.5s ease-in;
 }
 
 .auth-form {
-  display: grid;
   // grid-template-columns: 30rem 1fr;
-  height: 70vh;
+  height: 75vh;
   width: 50vw;
   border: 1px solid #dcdcdc;
   border-radius: 0.7rem;
+  background-color: var(--color-white);
+  transition: all 0.5s ease-in;
+
+  &__field-wrapper {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
   &__left {
     grid-column: 1;
   }
 
-  &__right {
+  &__box {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -30,19 +51,18 @@
   &__google,
   &__facebook {
     position: relative;
-    border: 1px solid;
     border-radius: 2rem;
-    width: 16rem;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 20rem;
-    height: 2.6rem;
-    margin: 2rem;
+    width: 25rem;
+    height: 3.8rem;
+    margin-bottom: 2rem;
   }
 
   &__oauth-text {
+    color: var(--color-white);
   }
 
   &__oauth-logo {
@@ -58,19 +78,24 @@
     margin-bottom: 0;
   }
   &__wrapper {
-    margin: 4rem;
-    border-bottom: 2px solid #dcdcdc;
+    margin-bottom: 4rem;
+    border-bottom: 2px solid var(--color-light-grey-2);
   }
 
   &__item {
     display: flex;
     border: none;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     width: 20rem;
   }
 
+  &__input-box {
+    width: 100%;
+  }
+
   .input {
-    font-size: 1.2rem;
+    font-size: 1.6rem;
+    padding: 0.4rem 0;
   }
 
   .label {
@@ -102,7 +127,40 @@
   }
 
   &__legal {
+    text-align: center;
     margin-bottom: 2rem;
+  }
+
+  &__exit {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: end;
+    font-size: 3rem;
+    margin: 1rem 2rem;
+    color: var(--color-black);
+  }
+
+  &__cross-line {
+    margin-bottom: 3rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__cross-text {
+    margin: 0 1rem;
+    font-size: 1.6rem;
+  }
+  &__cross-line:before,
+  &__cross-line:after {
+    background-color: #555;
+    content: "";
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    vertical-align: middle;
+    width: 50%;
   }
 
   .up {
@@ -110,5 +168,6 @@
   }
 
   .in {
+    color: var(--color-light-grey-1);
   }
 }

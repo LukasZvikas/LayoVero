@@ -6,6 +6,9 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import reduxThunk from "redux-thunk";
 import appReducer from "./reducers";
+import "regenerator-runtime/runtime";
+
+
 
 const store = createStore(appReducer, {}, applyMiddleware(reduxThunk));
 

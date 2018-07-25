@@ -16,8 +16,6 @@ exports.signup = async (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  console.log("HERE", email, password)
-
   if (!email || !password) {
     return res
       .status(422)

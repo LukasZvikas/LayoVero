@@ -15,7 +15,6 @@ const userSchema = new Schema({
 
 userSchema.pre("save", function(next) {
   const user = this;
-  console.log("USER", user);
 
   if (!user.isModified("password")) {
     return next();
@@ -42,7 +41,6 @@ userSchema.methods.verifyPassword = function(candidatePassword, callback) {
     if (err) {
       return callback(err);
     }
-
     callback(null, isMatch);
   });
 };

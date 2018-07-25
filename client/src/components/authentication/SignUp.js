@@ -80,7 +80,29 @@ class SignUp extends Component {
   }
 }
 
+const validate = values => {
+  const errors = {};
+
+  if (!values.email) {
+    errors.email = "Please enter an email";
+  }
+
+  if (!values.password) {
+    errors.password = "Please enter a password";
+  }
+
+  if (!values.passwordConfirm) {
+    errors.passwordConfirm = "Plase enter a password confirmation";
+  }
+
+  if (values.password != values.passwordConfirm) {
+    errors.passwordConfirm = "Both passwords must match";
+  }
+  return errors;
+};
+
 export default reduxForm({
   form: "signUpForm",
-  fields: ["email", "password", "passwordConfirm"]
+  fields: ["email", "password", "passwordConfirm"], 
+  validate
 })(connect(null, { SignUserUp })(SignUp));

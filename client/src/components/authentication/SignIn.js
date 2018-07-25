@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
 import { emailField, passwordField } from "./formFields.js";
 import { connect } from "react-redux";
-import { SignUserUp } from "../../actions/authActions";
+import { SignUserIn } from "../../actions/authActions";
 import { Modal } from "../Modal";
 
 import fb from "../../../images/facebook.svg";
@@ -11,13 +11,13 @@ import layovero from "../../../images/layovero.png";
 
 class SignIn extends Component {
   onFormSubmit({ email, password }) {
-    this.props.SignUserUp({ email, password });
+    this.props.SignUserIn({ email, password });
   }
 
   render() {
     const {
       handleSubmit,
-      fields: { email, password, passwordConfirm }
+      fields: { email, password}
     } = this.props;
 
     return (
@@ -94,5 +94,5 @@ class SignIn extends Component {
 }
 export default reduxForm({
   form: "signInForm",
-  fields: ["email", "password", "passwordConfirm"]
-})(connect(null, { SignUserUp })(SignIn));
+  fields: ["email", "password"]
+})(connect(null, { SignUserIn })(SignIn));

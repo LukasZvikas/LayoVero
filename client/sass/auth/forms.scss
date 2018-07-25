@@ -15,7 +15,7 @@
 
 .auth-form {
   // grid-template-columns: 30rem 1fr;
-  height: 75vh;
+  height: 77vh;
   width: 50vw;
   border: 1px solid #dcdcdc;
   border-radius: 0.7rem;
@@ -79,7 +79,6 @@
   }
   &__wrapper {
     margin-bottom: 4rem;
-    border-bottom: 2px solid var(--color-light-grey-2);
   }
 
   &__item {
@@ -96,11 +95,18 @@
   .input {
     font-size: 1.6rem;
     padding: 0.4rem 0;
+    border-bottom: 2px solid var(--color-light-grey-2);
+    width: 100%;
   }
 
   .label {
     margin: 1rem 0;
     text-transform: uppercase;
+  }
+
+  &__error {
+    font-size: 1.5rem;
+    color: #ff3232;
   }
 
   &__item:focus {
@@ -169,5 +175,40 @@
 
   .in {
     color: var(--color-light-grey-1);
+  }
+
+  //MAIL VERIFICATION MODAL
+  //////////
+  &__vm-logo-box {
+    display: grid;
+    width: 100%;
+    justify-items: center;
+    align-items: center;
+    margin-top: 2rem;
+  }
+  &__vm-logo {
+    height: 10rem;
+    width: 10rem;
+  }
+  &__vm-text-box {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.4rem;
+  }
+
+  &__vm-heading {
+    font-weight: bold;
+    text-align: center;
+    margin: 3rem 0 0.8rem 0;  
+  }
+
+  &__vm-text {
+    margin: 0.8rem;
+  }
+
+  &__vm-check {
+    height: 5rem;
   }
 }

@@ -4,13 +4,18 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import SignUp from "./authentication/SignUp";
 import SignIn from "./authentication/SignIn";
+import { VerifyEmail } from "./authentication/verifyEmail";
 import { Modal } from "./Modal";
 
 class Header extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { SignUpModal: false, SignInModal: false };
+    this.state = {
+      SignUpModal: false,
+      SignInModal: false,
+      VerificationModal: true
+    };
   }
 
   showModal(key) {
@@ -86,17 +91,19 @@ class Header extends Component {
           <Modal show={this.state.SignInModal}>
             <SignIn hide={() => this.hideModal("signin")} />
           </Modal>
-        ) : (
-          null
-        )}
+        ) : null}
+
+        {this.state.VerificationModal ? (
+          <Modal show={this.state.VerificationModal}>
+            <VerifyEmail />
+          </Modal>
+        ) : null}
 
         {this.state.SignUpModal ? (
           <Modal show={this.state.SignUpModal}>
             <SignUp hide={() => this.hideModal("signup")} />
           </Modal>
-        ) : (
-          null
-        )}
+        ) : null}
       </div>
     );
   }

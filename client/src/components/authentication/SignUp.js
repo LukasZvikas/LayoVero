@@ -9,7 +9,6 @@ import layovero from "../../../images/layovero.png";
 
 class SignUp extends Component {
   onFormSubmit({ email, password }) {
-    console.log("HERE", { email, password });
     this.props.SignUserUp({ email, password });
   }
 

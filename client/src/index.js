@@ -8,9 +8,11 @@ import reduxThunk from "redux-thunk";
 import appReducer from "./reducers";
 import "regenerator-runtime/runtime";
 
-
-
-const store = createStore(appReducer, {}, applyMiddleware(reduxThunk));
+const store = createStore(
+  appReducer,
+  {},
+  applyMiddleware(reduxThunk)
+);
 
 ReactDOM.render(
   <Provider store={store}>

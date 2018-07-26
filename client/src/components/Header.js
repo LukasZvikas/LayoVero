@@ -4,44 +4,30 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import SignUp from "./authentication/SignUp";
 import SignIn from "./authentication/SignIn";
-import { VerifyEmail } from "./authentication/verifyEmail";
+import VerifyEmail from "./authentication/verifyEmail";
+import * as authActions from "../actions/authActions";
 import { Modal } from "./Modal";
 
 class Header extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      SignUpModal: false,
-      SignInModal: false,
-      VerificationModal: true
-    };
-  }
-
   showModal(key) {
     switch (key) {
       case "signup":
-        this.setState({ SignUpModal: true });
+        this.props.ShowSignUpModal();
         break;
       case "signin":
-        this.setState({ SignInModal: true });
+        this.props.ShowSignInModal();
         break;
       default:
         break;
     }
   }
 
-  hideModal(key) {
-    switch (key) {
-      case "signup":
-        this.setState({ SignUpModal: false });
-      default:
-        this.setState({ SignInModal: false });
-    }
+  hideModal() {
+    console.log("hide");
+    this.props.HideModal();
   }
 
   render() {
-    console.log(this.state);
     return (
       <div>
         <div className="navigation">
@@ -87,21 +73,21 @@ class Header extends Component {
           </nav>
         </div>
 
-        {this.state.SignInModal ? (
-          <Modal show={this.state.SignInModal}>
-            <SignIn hide={() => this.hideModal("signin")} />
+        {this.props.auth.signIn ? (
+          <Modal show={this.props.auth.signIn}>
+            <SignIn hide={() => this.hideModal()} />
           </Modal>
         ) : null}
 
-        {this.state.VerificationModal ? (
-          <Modal show={this.state.VerificationModal}>
+        {this.props.auth.emailVerification ? (
+          <Modal show={this.props.auth.emailVerification}>
             <VerifyEmail />
           </Modal>
         ) : null}
 
-        {this.state.SignUpModal ? (
-          <Modal show={this.state.SignUpModal}>
-            <SignUp hide={() => this.hideModal("signup")} />
+        {this.props.auth.signUp ? (
+          <Modal show={this.props.auth.signUp}>
+            <SignUp hide={() => this.hideModal()} />
           </Modal>
         ) : null}
       </div>
@@ -109,4 +95,10 @@ class Header extends Component {
   }
 }
 
-export default Header;
+function mapStateToProps(state) {
+  return {
+    auth: state.auth
+  };
+}
+
+export default connect(mapStateToProps, authActions)(Header);

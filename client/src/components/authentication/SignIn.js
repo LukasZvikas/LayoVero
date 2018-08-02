@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
 import { emailField, passwordField } from "./formFields.js";
 import { connect } from "react-redux";
-import { SignUserIn } from "../../actions/authActions";
+import { SignUserIn, ShowForgotPassword } from "../../actions/authActions";
 import { Modal } from "../Modal";
 
 import fb from "../../../images/facebook.svg";
@@ -15,10 +15,7 @@ class SignIn extends Component {
   }
 
   render() {
-    const {
-      handleSubmit,
-      fields: { email, password}
-    } = this.props;
+    const { handleSubmit, fields: { email, password } } = this.props;
 
     return (
       <form
@@ -86,6 +83,12 @@ class SignIn extends Component {
               </div>
             </div>
             <div className="auth-form__new">Not a Member?</div>
+            <div
+              className="auth-form__new"
+              onClick={() => this.props.ShowForgotPassword()}
+            >
+              Forgot Password?
+            </div>
           </div>
         </div>
       </form>
@@ -95,4 +98,4 @@ class SignIn extends Component {
 export default reduxForm({
   form: "signInForm",
   fields: ["email", "password"]
-})(connect(null, { SignUserIn })(SignIn));
+})(connect(null, { SignUserIn, ShowForgotPassword })(SignIn));

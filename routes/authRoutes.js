@@ -35,9 +35,9 @@ module.exports = app => {
 
   app.get("/confirmation/:token", emailController.confirmEmail);
 
-  app.post("/forgot", emailController.forgot);
+  app.post("/user/forgot", emailController.forgot);
 
-  app.get("/reset/:token", emailController.forgotTokenGet);
+  app.get("/user/reset/:token", emailController.forgotTokenGet);
 
-  app.post("/reset/:token", emailController.forgotTokenPost);
+  app.post("/user/reset/:token", emailController.forgotTokenPost);
 };

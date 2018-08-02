@@ -22,7 +22,7 @@ exports.confirmEmail = async (req, res, next) => {
         res.status(422).send({ error: "User was not found" });
       }
 
-     await user.save(err => {
+      await user.save(err => {
         if (err) {
           return next(err);
         }
@@ -61,7 +61,7 @@ exports.forgot = async (req, res, next) => {
       }
     });
 
-    const url = `http://localhost:5000/reset/${resetToken}`;
+    const url = `http://localhost:8080/reset/${resetToken}`;
 
     const msg = {
       to: email,
@@ -78,48 +78,53 @@ exports.forgot = async (req, res, next) => {
 
 exports.forgotTokenGet = async (req, res, next) => {
   const token = req.params.token;
-
+  console.log(token)
   await User.findOne({ resetPassToken: token }, (err, user) => {
     if (err) {
       return next(err);
     }
-
+    console.log("USEr", user)
     if (!user) {
-      return res.status(401).send({error: "User was not found"});
+      console.log("HERE");
+      return res.send({ showReset: false });
     }
-
-    res.send({ success: "true" });
+    console.log("FORGOT TOKEN");
+    res.send({ showReset: true });
+    // res.redirect(`http://localhost:8080/reset/${token}`);
   });
 };
 
 exports.forgotTokenPost = async (req, res, next) => {
-  await User.findOne({ resetPassToken: req.params.token }, async (err, user) => {
-    if (err) {
-      return next(err);
-    }
-    if (!user) {
-      res.status(422).send({ error: "User was not found" });
-    }
-    user.password = req.body.password;
-    user.resetPassToken = undefined;
-
-    await user.save(err => {
+  await User.findOne(
+    { resetPassToken: req.params.token },
+    async (err, user) => {
       if (err) {
-        next(err);
+        return next(err);
       }
-    });
+      if (!user) {
+        res.status(422).send({ error: "User was not found" });
+      }
+      user.password = req.body.password;
+      user.resetPassToken = undefined;
 
-    const url = "http://localhost:5000/login";
+      await user.save(err => {
+        if (err) {
+          next(err);
+        }
+      });
 
-    const msg = {
-      to: user.email,
-      from: "lzvikas1@gmail.com",
-      subject: "Reset Your Password",
-      text: "and easy to do anywhere, even with Node.js",
-      html: resetTemplate(url)
-    };
-    sgMail.send(msg);
-  });
+      const url = "http://localhost:5000/login";
+
+      const msg = {
+        to: user.email,
+        from: "lzvikas1@gmail.com",
+        subject: "Reset Your Password",
+        text: "and easy to do anywhere, even with Node.js",
+        html: resetTemplate(url)
+      };
+      sgMail.send(msg);
+    }
+  );
 
   res.send({});
 };

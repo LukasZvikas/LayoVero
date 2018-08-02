@@ -1,6 +1,5 @@
 const path = require("path");
 
-
 const config = {
   entry: "./src/index.js",
   output: {
@@ -54,19 +53,18 @@ const config = {
     ]
   },
   devServer: {
-    historyApiFallback: true,
+    historyApiFallback: {
+      disableDotRule: true
+    },
     proxy: {
       "/blogPosts": {
         target: "http://localhost:5000",
         changeOrigin: true
-      }
-      ,
+      },
       "/user": {
         target: "http://localhost:5000",
         changeOrigin: true
       }
-
-
     }
   }
 };

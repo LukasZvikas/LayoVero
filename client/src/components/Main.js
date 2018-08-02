@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import SignUp from "./authentication/SignUp";
+import ResetPassword from "./authentication/resetPassword";
 
 class Main extends Component {
   render() {
@@ -19,6 +20,7 @@ class Main extends Component {
               <Route path="/blog/post/*" component={BlogPost} />
               <Route path="/blog" component={BlogWrapper} />
               <Route path="/signup" component={SignUp} />
+              <Route path="/reset/:token" component={ResetPassword} />
             </Switch>
             <Footer />
           </div>

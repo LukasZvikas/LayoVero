@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import SignUp from "./authentication/SignUp";
 import SignIn from "./authentication/SignIn";
 import VerifyEmail from "./authentication/verifyEmail";
+import ForgotPassword from "./authentication/forgotPassword";
+import ResetPassword from "./authentication/resetPassword";
 import * as authActions from "../actions/authActions";
 import { Modal } from "./Modal";
 
@@ -28,6 +30,8 @@ class Header extends Component {
   }
 
   render() {
+    console.log(window.location.pathname.match(/^\/reset\/[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/));
+    if (window.location.pathname.match(/^\/reset\/[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/)) return null;
     return (
       <div>
         <div className="navigation">
@@ -73,6 +77,12 @@ class Header extends Component {
           </nav>
         </div>
 
+        {this.props.auth.signUp ? (
+          <Modal show={this.props.auth.signUp}>
+            <SignUp hide={() => this.hideModal()} />
+          </Modal>
+        ) : null}
+
         {this.props.auth.signIn ? (
           <Modal show={this.props.auth.signIn}>
             <SignIn hide={() => this.hideModal()} />
@@ -85,9 +95,15 @@ class Header extends Component {
           </Modal>
         ) : null}
 
-        {this.props.auth.signUp ? (
-          <Modal show={this.props.auth.signUp}>
-            <SignUp hide={() => this.hideModal()} />
+        {this.props.auth.forgotPass ? (
+          <Modal show={this.props.auth.forgotPass}>
+            <ForgotPassword hide={() => this.hideModal()} />
+          </Modal>
+        ) : null}
+
+        {this.props.auth.resetPass ? (
+          <Modal show={this.props.auth.resetPass}>
+            <ResetPassword hide={() => this.hideModal()} />
           </Modal>
         ) : null}
       </div>

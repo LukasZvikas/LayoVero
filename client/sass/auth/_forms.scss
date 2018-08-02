@@ -13,6 +13,10 @@
   transition: all 0.5s ease-in;
 }
 
+.auth-form .reset-pass {
+  justify-content: center;
+}
+
 .auth-form {
   // grid-template-columns: 30rem 1fr;
   height: 77vh;
@@ -29,6 +33,11 @@
     justify-content: center;
     align-items: center;
   }
+
+  &__field-wrapper.forgot {
+    margin-top: 3rem;
+  }
+
   &__left {
     grid-column: 1;
   }
@@ -36,8 +45,8 @@
   &__box {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    height: 100%;
     // grid-column: 2;
   }
 
@@ -84,7 +93,7 @@
   &__item {
     display: flex;
     border: none;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     width: 20rem;
   }
 
@@ -93,7 +102,7 @@
   }
 
   .input {
-    font-size: 1.6rem;
+    font-size: 1.3rem;
     padding: 0.4rem 0;
     border-bottom: 2px solid var(--color-light-grey-2);
     width: 100%;
@@ -194,17 +203,18 @@
     display: grid;
     justify-content: center;
     align-items: center;
-
     font-size: 1.4rem;
   }
 
   &__vm-heading {
+    font-size: 2.6rem;
     font-weight: bold;
     text-align: center;
-    margin: 3rem 0 0.8rem 0;  
+    margin: 3rem 0 0.8rem 0;
   }
 
   &__vm-text {
+    font-size: 1.6rem;
     margin: 0.8rem;
   }
 

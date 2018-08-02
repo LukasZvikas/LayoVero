@@ -82,9 +82,9 @@ class SignIn extends Component {
                 <img className="auth-form__oauth-logo" src={fb} />
               </div>
             </div>
-            <div className="auth-form__new">Not a Member?</div>
+            <div className="auth-form__new-forgot">Not a Member?</div>
             <div
-              className="auth-form__new"
+              className="auth-form__new-forgot"
               onClick={() => this.props.ShowForgotPassword()}
             >
               Forgot Password?

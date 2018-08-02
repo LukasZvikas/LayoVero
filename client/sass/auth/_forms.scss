@@ -15,11 +15,11 @@
 
 .auth-form .reset-pass {
   justify-content: center;
+  margin: 3rem;
 }
 
 .auth-form {
   // grid-template-columns: 30rem 1fr;
-  height: 77vh;
   width: 50vw;
   border: 1px solid #dcdcdc;
   border-radius: 0.7rem;
@@ -43,6 +43,7 @@
   }
 
   &__box {
+    margin-bottom: 3rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -77,6 +78,11 @@
   &__oauth-logo {
     position: absolute;
     left: 1rem;
+  }
+
+  &__new-forgot {
+    margin: 0.5rem;
+    font-size: 1.4rem;
   }
 
   &__wrapper:first-of-type {
@@ -116,13 +122,11 @@
   &__error {
     font-size: 1.5rem;
     color: #ff3232;
+    margin: 0.6rem;
   }
 
   &__item:focus {
     outline: none;
-  }
-
-  &__error {
   }
 
   &__button {
@@ -130,6 +134,16 @@
     height: 3rem;
     border-radius: 1.6rem;
     margin: 3rem;
+  }
+
+  &__link {
+    border: 1px solid #a3a3a3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #000;
+    font-size: 1.2rem;
   }
 
   &__heading {

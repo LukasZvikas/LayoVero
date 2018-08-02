@@ -78,23 +78,20 @@ exports.forgot = async (req, res, next) => {
 
 exports.forgotTokenGet = async (req, res, next) => {
   const token = req.params.token;
-  console.log(token)
   await User.findOne({ resetPassToken: token }, (err, user) => {
     if (err) {
       return next(err);
     }
-    console.log("USEr", user)
     if (!user) {
-      console.log("HERE");
       return res.send({ showReset: false });
     }
-    console.log("FORGOT TOKEN");
     res.send({ showReset: true });
     // res.redirect(`http://localhost:8080/reset/${token}`);
   });
 };
 
 exports.forgotTokenPost = async (req, res, next) => {
+  console.log("PASS",req.body.password)
   await User.findOne(
     { resetPassToken: req.params.token },
     async (err, user) => {
@@ -102,6 +99,7 @@ exports.forgotTokenPost = async (req, res, next) => {
         return next(err);
       }
       if (!user) {
+
         res.status(422).send({ error: "User was not found" });
       }
       user.password = req.body.password;
@@ -118,7 +116,7 @@ exports.forgotTokenPost = async (req, res, next) => {
       const msg = {
         to: user.email,
         from: "lzvikas1@gmail.com",
-        subject: "Reset Your Password",
+        subject: "Successful Password Reset",
         text: "and easy to do anywhere, even with Node.js",
         html: resetTemplate(url)
       };

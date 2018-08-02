@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { passwordField } from "./formfields";
 import { connect } from "react-redux";
-import { SendForgotEmail, ShowResetComponent } from "../../actions/authActions";
+import { ResetPass, ShowResetComponent } from "../../actions/authActions";
+import { Link } from "react-router-dom";
 
 import layovero from "../../../images/layovero.png";
 
@@ -12,16 +13,17 @@ class ResetPassword extends Component {
     this.props.ShowResetComponent();
   }
 
-
-
-  onFormSubmit({ password }) {}
+  onFormSubmit({ password }) {
+    this.props.ResetPass({ password });
+  }
 
   render() {
     const {
       isResetShown,
       hide,
       handleSubmit,
-      fields: { password }
+      fields: { password },
+      ResetPassword
     } = this.props;
 
     console.log("IS IT SHOWS", isResetShown);
@@ -30,7 +32,8 @@ class ResetPassword extends Component {
         {isResetShown ? (
           <form
             className="auth-form"
-            style={{ height: 53 + "rem", width: 65 + "rem" }}
+            style={{ width: 65 + "rem" }}
+            onSubmit={handleSubmit(this.onFormSubmit.bind(this))}
           >
             <div className="auth-form__box reset-pass">
               <div className="auth-form__logo">
@@ -68,7 +71,29 @@ class ResetPassword extends Component {
             </div>
           </form>
         ) : (
-          <div>Wrong token</div>
+          <div className="auth-form" style={{ width: 65 + "rem" }}>
+            <div className="auth-form__box reset-pass">
+              <div className="auth-form__logo">
+                <img src={layovero} width="65" height="65" />
+              </div>
+              <div className="auth-form__vm-text-box">
+                <div className="auth-form__vm-heading">Invalid Link</div>
+                <div className="auth-form__vm-text">
+                  We are sorry, but this link to reset your password is either
+                  wrong or expired.
+                </div>
+                <div
+                  className="auth-form__vm-text"
+                  style={{ textAlign: "center" }}
+                >
+                  Please try to request another password reset.
+                </div>
+              </div>
+              <Link to="/about" className="auth-form__link auth-form__button">
+                OK
+              </Link>
+            </div>
+          </div>
         )}
       </div>
     );
@@ -85,8 +110,4 @@ const mapStateToProps = state => {
 export default reduxForm({
   form: "resetPassword",
   fields: ["password"]
-})(
-  connect(mapStateToProps, { SendForgotEmail, ShowResetComponent })(
-    ResetPassword
-  )
-);
+})(connect(mapStateToProps, { ResetPass, ShowResetComponent })(ResetPassword));

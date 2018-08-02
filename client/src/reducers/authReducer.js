@@ -4,7 +4,8 @@ import {
   SHOW_SIGNIN,
   HIDE_MODAL,
   SHOW_FORGOT_PASS,
-  SHOW_RESET
+  SHOW_RESET,
+  SEND_FORGOT
 } from "./types";
 
 export default function(
@@ -13,7 +14,8 @@ export default function(
     signUp: false,
     forgotPass: false,
     emailVerification: false,
-    resetPass: false
+    resetPass: false,
+    forgetPassSuccess: false
   },
   action
 ) {
@@ -26,11 +28,18 @@ export default function(
       return { signIn: true, emailVerification: false };
     case SHOW_FORGOT_PASS:
       return { forgotPass: true, signIn: false };
+    case SEND_FORGOT:
+      return { forgetPassSuccess: true };
     case SHOW_RESET:
-      console.log("payload", action.payload)
+      console.log("payload", action.payload);
       return action.payload;
     case HIDE_MODAL:
-      return { signIn: false, signUp: false, emailVerification: false };
+      return {
+        signIn: false,
+        signUp: false,
+        emailVerification: false,
+        forgetPassSuccess: false
+      };
     default:
       return state;
   }

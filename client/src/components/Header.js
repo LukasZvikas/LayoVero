@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import layovero from "../../images/layovero.png";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import SignUp from "./authentication/SignUp";
 import SignIn from "./authentication/SignIn";
 import VerifyEmail from "./authentication/verifyEmail";
 import ForgotPassword from "./authentication/forgotPassword";
 import ResetPassword from "./authentication/resetPassword";
+import ForgetPassSuccess from "./authentication/forgetPassSuccess";
 import * as authActions from "../actions/authActions";
 import { Modal } from "./Modal";
 
@@ -30,8 +31,12 @@ class Header extends Component {
   }
 
   render() {
-    console.log(window.location.pathname.match(/^\/reset\/[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/));
-    if (window.location.pathname.match(/^\/reset\/[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/)) return null;
+    if (
+      window.location.pathname.match(
+        /^\/reset\/[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/
+      )
+    )
+      return null;
     return (
       <div>
         <div className="navigation">
@@ -106,6 +111,12 @@ class Header extends Component {
             <ResetPassword hide={() => this.hideModal()} />
           </Modal>
         ) : null}
+
+        {this.props.auth.forgetPassSuccess ? (
+          <Modal show={this.props.auth.forgetPassSuccess}>
+            <ForgetPassSuccess hide={() => this.hideModal()} />
+          </Modal>
+        ) : null}
       </div>
     );
   }
@@ -117,4 +128,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, authActions)(Header);
+export default withRouter(connect(mapStateToProps, authActions)(Header));

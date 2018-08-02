@@ -16,7 +16,7 @@ class ForgotPassword extends Component {
     return (
       <form
         className="auth-form"
-        style={{ height: 48 + "rem", width: 65 + "rem" }}
+        style={{ width: 65 + "rem" }}
         onSubmit={handleSubmit(this.onFormSubmit.bind(this))}
       >
         <div className="auth-form__exit" onClick={hide}>

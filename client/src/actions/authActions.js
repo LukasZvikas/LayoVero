@@ -6,7 +6,8 @@ import {
   HIDE_MODAL,
   SHOW_FORGOT_PASS,
   SEND_FORGOT,
-  SHOW_RESET
+  SHOW_RESET,
+  RESET_PASS
 } from "../reducers/types";
 import axios from "axios";
 
@@ -29,6 +30,28 @@ export const SendForgotEmail = ({ email }) => {
 
   return { type: SEND_FORGOT };
 };
+
+export const ResetPass = ({ password }) => async dispatch => {
+  const token = window.location.pathname.slice(7);
+
+  const res = await axios.post(`/user/reset/${token}`, { password });
+
+  dispatch({ type: RESET_PASS, payload: res.data });
+};
+
+/// SHOW/HIDE MODALS
+////////////////////
+
+export const ShowResetComponent = () => async dispatch => {
+  const token = window.location.pathname.slice(7);
+
+  const res = await axios.get(`/user/reset/${token}`);
+
+  console.log("RES", res);
+
+  dispatch({ type: SHOW_RESET, payload: res.data });
+};
+
 export const ShowSignUpModal = () => {
   return { type: SHOW_SIGNUP };
 };
@@ -39,17 +62,6 @@ export const ShowSignInModal = () => {
 
 export const ShowForgotPassword = () => {
   return { type: SHOW_FORGOT_PASS };
-};
-
-export const ShowResetComponent = () => async dispatch => {
-
-  const token = window.location.pathname.slice(7);
-  
-  const res = await axios.get(`/user/reset/${token}`);
-
-  console.log("RES", res);
-
-  dispatch({ type: SHOW_RESET, payload: res.data });
 };
 
 export const HideModal = () => {

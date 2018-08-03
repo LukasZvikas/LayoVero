@@ -114,12 +114,15 @@ exports.forgotTokenPost = async (req, res, next) => {
       const url = "http://localhost:5000/login";
 
       const msg = {
-        to: user.email,
+        to: user.username,
         from: "lzvikas1@gmail.com",
         subject: "Successful Password Reset",
         text: "and easy to do anywhere, even with Node.js",
         html: resetTemplate(url)
       };
+
+      console.log(user)
+      console.log(msg)
       sgMail.send(msg);
     }
   );

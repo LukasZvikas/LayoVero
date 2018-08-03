@@ -8,6 +8,7 @@ import VerifyEmail from "./authentication/verifyEmail";
 import ForgotPassword from "./authentication/forgotPassword";
 import ResetPassword from "./authentication/resetPassword";
 import ForgetPassSuccess from "./authentication/forgetPassSuccess";
+import SuccessPassReset from "./authentication/successPassReset";
 import * as authActions from "../actions/authActions";
 import { Modal } from "./Modal";
 
@@ -26,11 +27,11 @@ class Header extends Component {
   }
 
   hideModal() {
-    console.log("hide");
     this.props.HideModal();
   }
 
   render() {
+    console.log("REDUX", this.props)
     if (
       window.location.pathname.match(
         /^\/reset\/[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/
@@ -109,6 +110,12 @@ class Header extends Component {
         {this.props.auth.resetPass ? (
           <Modal show={this.props.auth.resetPass}>
             <ResetPassword hide={() => this.hideModal()} />
+          </Modal>
+        ) : null}
+
+        {this.props.auth.showResetSuccess ? (
+          <Modal show={this.props.auth.showResetSuccess}>
+            <SuccessPassReset hide={() => this.hideModal()} />
           </Modal>
         ) : null}
 

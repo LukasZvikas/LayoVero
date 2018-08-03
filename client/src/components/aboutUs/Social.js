@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as socialActions from "../../actions/socialActions";
-import facebookIcon from "../../../images/facebook.svg";
+import facebookIcon from "../../../images/twitter.svg";
 import instagramIcon from "../../../images/instagram.svg";
 import youtubeIcon from "../../../images/youtube.svg";
 

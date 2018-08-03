@@ -5,20 +5,21 @@ import {
   HIDE_MODAL,
   SHOW_FORGOT_PASS,
   SHOW_RESET,
-  SEND_FORGOT
+  SEND_FORGOT,
+  RESET_PASS
 } from "./types";
 
-export default function(
-  state = {
-    signIn: false,
-    signUp: false,
-    forgotPass: false,
-    emailVerification: false,
-    resetPass: false,
-    forgetPassSuccess: false
-  },
-  action
-) {
+const initialState = {
+  signIn: false,
+  signUp: false,
+  forgotPass: false,
+  emailVerification: false,
+  resetPass: false,
+  forgetPassSuccess: false,
+  showResetSuccess: false
+};
+
+export default function(state = initialState, action) {
   switch (action.type) {
     case SIGN_UP:
       return action.payload, { emailVerification: true, signUp: false };
@@ -31,15 +32,11 @@ export default function(
     case SEND_FORGOT:
       return { forgetPassSuccess: true };
     case SHOW_RESET:
-      console.log("payload", action.payload);
       return action.payload;
+    case RESET_PASS:
+      return initialState, { showResetSuccess: true };
     case HIDE_MODAL:
-      return {
-        signIn: false,
-        signUp: false,
-        emailVerification: false,
-        forgetPassSuccess: false
-      };
+      return initialState;
     default:
       return state;
   }

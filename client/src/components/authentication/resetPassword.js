@@ -3,7 +3,7 @@ import { Field, reduxForm } from "redux-form";
 import { passwordField } from "./formfields";
 import { connect } from "react-redux";
 import { ResetPass, ShowResetComponent } from "../../actions/authActions";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 import layovero from "../../../images/layovero.png";
 
@@ -15,6 +15,7 @@ class ResetPassword extends Component {
 
   onFormSubmit({ password }) {
     this.props.ResetPass({ password });
+    this.props.history.push("/about");
   }
 
   render() {
@@ -59,7 +60,7 @@ class ResetPassword extends Component {
                     key={"password"}
                     type="text"
                     label={"Confirm Password"}
-                    name={"password"}
+                    name={"passwordConfirm"}
                     placehold={"Confirm password"}
                     component={passwordField}
                   />
@@ -107,7 +108,9 @@ const mapStateToProps = state => {
   };
 };
 
-export default reduxForm({
-  form: "resetPassword",
-  fields: ["password"]
-})(connect(mapStateToProps, { ResetPass, ShowResetComponent })(ResetPassword));
+export default withRouter(
+  reduxForm({
+    form: "resetPassword",
+    fields: ["password"]
+  })(connect(mapStateToProps, { ResetPass, ShowResetComponent })(ResetPassword))
+);

@@ -31,7 +31,10 @@ exports.signup = async (req, res, next) => {
       res.status(422).send({ error: "This email is in use" });
     }
 
+    const id = crypto.randomBytes(16).toString("hex");
+
     const newUser = User({
+      _id: id,
       username: email,
       password: password
     });
@@ -79,8 +82,18 @@ exports.signin = async (req, res, next) => {
   });
 };
 
-exports.googleToken = async (req, res, next) => {
-  const token = userToken(req.user);
-  console.log("TOKEN", req.user);
-  res.json({ token: userToken(req.user) });
+exports.googleToken = (req, res) => {
+  const jwt = userToken(req.user);
+  const htmlWithEmbeddedJWT = `
+    <html>
+      <script>
+        // Save JWT to localStorage
+        window.localStorage.setItem('token', '${jwt}');
+        // Redirect browser to root of application
+        window.location.href = '/about';
+      </script>
+    </html>
+    `;
+
+  res.send(htmlWithEmbeddedJWT);
 };

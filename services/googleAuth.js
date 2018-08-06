@@ -8,22 +8,30 @@ passport.use(
     {
       clientID: keys.GOOGLE_CLIENT_ID,
       clientSecret: keys.GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:5000/auth/google/callback"
+      callbackURL: "http://localhost:8080/user/auth/google/callback"
     },
     async (accessToken, refreshToken, profile, done) => {
-      // console.log("PROFILE", profile)
-      // console.log("HERE", profile.emails[0].value)
-      // console.log("HERE2", profile)
+      // console.log("PROFILE", profile);
+      console.log("HERE", profile.emails[0].value);
 
-      const user = await User.findOne({ userId: profile.id });
+      await User.findOne(
+        { $or: [{ _id: profile.id }, { username: profile.emails[0].value }] },
+        async (err, user) => {
+          console.log("USER", user);
+          if (user) {
+            console.log("LOLOLOLOL");
+            return done(null, user);
+          }
+          console.log("Doesnt Work");
+          const newUser = await new User({
+            _id: profile.id,
+            username: profile.emails[0].value,
+            confirmed: true
+          }).save();
 
-      if (user) {
-        return done(null, user);
-      }
-
-      const newUser = await new User({ userId: profile.id }).save();
-
-      return done(null, newUser);
+          return done(null, newUser);
+        }
+      );
     }
   )
 );

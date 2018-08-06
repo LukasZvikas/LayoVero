@@ -1,12 +1,12 @@
 .social {
-	margin-top: 5rem;
-	text-align: center;
+  margin: 5rem 24rem 0 24rem;
+  text-align: center;
   &__name {
     font-size: 3rem;
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 0.2rem;
-    border-bottom: 1px solid rgba(0,0,0,.15);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
   }
 
   &__list {

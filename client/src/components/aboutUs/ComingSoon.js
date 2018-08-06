@@ -28,7 +28,7 @@ class ComingSoon extends Component {
           </div>
         </div>
         <div className="popup" id="popup">
-          <div className="popup__content">
+          <div className="popup__box">
             <div className="popup__left">
               <img
                 className="navigation__logo"

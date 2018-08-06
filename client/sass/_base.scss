@@ -5,7 +5,7 @@
   --color-light-grey-1: #b3b3b3;
   --color-light-grey-2: #dcdcdc;
 
-  --shadow-overlay-popup: rgba(0, 0, 0, 0.75)
+  --shadow-overlay-popup: rgba(0, 0, 0, 0.75);
 }
 
 $insta-photo-largest-w: 26.5rem;
@@ -34,12 +34,25 @@ html {
   font-size: 62.5%; //10/16 = 62.
 }
 
-.main > *:not(.about-secondary) {
-  max-width: 94rem;
-  width: 44%;
-  margin: 10rem auto;
+// .main > *:not(.about-secondary) {
+//   max-width: 94rem;
+//   width: 44%;
+//   margin: 10rem auto;
+// }
+
+.main {
+  margin: 7rem auto;
 }
 
+//////////Sign Up/In MODAL
+.display-block {
+  display: block;
+  animation: fadeInLoad 0.5s;
+}
+
+.display-none {
+  display: none;
+}
 .spinner:before {
   content: "";
   box-sizing: border-box;

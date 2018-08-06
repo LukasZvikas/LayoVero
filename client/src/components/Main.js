@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import aboutUsWrapper from "./aboutUs/aboutUsWrapper";
 import BlogWrapper from "./blog/BlogWrapper";
 import BlogPost from "./blog/BlogPost";
+import BeforeAuth from "./index/BeforeAuth";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -21,6 +22,7 @@ class Main extends Component {
               <Route path="/blog" component={BlogWrapper} />
               <Route path="/signup" component={SignUp} />
               <Route path="/reset/:token" component={ResetPassword} />
+              <Route exact path="/" component={BeforeAuth} />
             </Switch>
             <Footer />
           </div>

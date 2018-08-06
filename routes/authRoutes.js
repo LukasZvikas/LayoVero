@@ -4,6 +4,7 @@ const emailController = require("../controllers/emailController");
 const passport = require("passport");
 const JWT = require("jwt-simple");
 const keys = require("../config/keys");
+const crypto = require("crypto");
 
 const requireSignin = passport.authenticate("local", { session: false });
 const requireAuth = passport.authenticate("jwt", { session: false });
@@ -17,13 +18,12 @@ module.exports = app => {
     res.send({ hey: "there" });
   });
 
-  app.get("/auth/google", googleAuth);
+  app.get("/user/auth/google", googleAuth);
 
   app.get(
-    "/auth/google/callback",
+    "/user/auth/google/callback",
     passport.authenticate("google", {
       session: false,
-      successRedirect: "/user",
       failureRedirect: "/signup"
     }),
     authController.googleToken

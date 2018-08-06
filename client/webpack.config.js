@@ -53,6 +53,7 @@ const config = {
     ]
   },
   devServer: {
+
     historyApiFallback: {
       disableDotRule: true
     },

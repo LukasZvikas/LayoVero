@@ -2,8 +2,13 @@ import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
 import { emailField, passwordField } from "./formFields.js";
 import { connect } from "react-redux";
-import { SignUserIn, ShowForgotPassword } from "../../actions/authActions";
+import {
+  SignUserIn,
+  SignInWithGoogle,
+  ShowForgotPassword
+} from "../../actions/authActions";
 import { Modal } from "../Modal";
+import { Link } from "react-router-dom";
 
 import fb from "../../../images/facebook.svg";
 import google from "../../../images/google.svg";
@@ -65,7 +70,10 @@ class SignIn extends Component {
                 className="auth-form__google"
                 style={{ backgroundColor: "#dd4b39" }}
               >
-                <div className="auth-form__oauth-text">Sign in with Google</div>
+                <a href="/user/auth/google" className="auth-form__oauth-text">
+                  Login With Google
+                </a>
+
                 <img
                   className="auth-form__oauth-logo"
                   src={google}
@@ -98,4 +106,4 @@ class SignIn extends Component {
 export default reduxForm({
   form: "signInForm",
   fields: ["email", "password"]
-})(connect(null, { SignUserIn, ShowForgotPassword })(SignIn));
+})(connect(null, { SignUserIn, SignInWithGoogle, ShowForgotPassword })(SignIn));

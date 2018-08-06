@@ -25,6 +25,13 @@ export const SignUserIn = ({ email, password }) => async dispatch => {
   dispatch({ type: SIGN_IN });
 };
 
+export const SignInWithGoogle = () => async dispatch => {
+  const res = await axios.get("/user/auth/google");
+
+  console.log("RES", res);
+
+};
+
 export const SendForgotEmail = ({ email }) => {
   const res = axios.post("/user/forgot", { email });
 

@@ -32,7 +32,6 @@
     cursor: pointer;
     justify-items: center;
     align-items: center;
-    margin: 1.3rem;
   }
 
   // &__background {
@@ -72,13 +71,13 @@
   &__item {
     color: var(--color-white);
     display: grid;
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: 300;
     padding: 1rem 2rem;
     text-decoration: none;
     text-transform: uppercase;
     margin: 1rem;
-    border: 1px solid #d3d3d3;
+    // border: 1px solid #d3d3d3;
     background-image: linear-gradient(
       120deg,
       transparent 0%,
@@ -102,8 +101,8 @@
 
   &__checkbox:checked ~ &__nav {
     opacity: 1;
-    width: 30%;
-    background-color: rgba(0, 0, 0, 0.85);
+    width: 20%;
+    background-color: rgba(0, 0, 0, 1);
   }
 
   &__toggle {
@@ -157,6 +156,14 @@
     transform: rotate(-135deg);
     background-color: var(--color-white);
   }
+
+  &__icon-box {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 100%;
+    margin-bottom: 8rem;
+  }
 }
 
 @keyframes fadeInLoad {
@@ -167,5 +174,3 @@
     opacity: 1;
   }
 }
-
-

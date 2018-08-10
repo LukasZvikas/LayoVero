@@ -5,10 +5,11 @@ import { connect } from "react-redux";
 import {
   SignUserIn,
   SignInWithGoogle,
-  ShowForgotPassword
+  ShowForgotPassword,
+  ShowSignUpModal
 } from "../../actions/authActions";
 import { Modal } from "../Modal";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 import fb from "../../../images/facebook.svg";
 import google from "../../../images/google.svg";
@@ -17,10 +18,15 @@ import layovero from "../../../images/layovero.png";
 class SignIn extends Component {
   onFormSubmit({ email, password }) {
     this.props.SignUserIn({ email, password });
+    this.props.history.push("/");
   }
 
   render() {
-    const { handleSubmit, fields: { email, password } } = this.props;
+    const {
+      handleSubmit,
+      fields: { email, password },
+      ShowSignUpModal
+    } = this.props;
 
     return (
       <form
@@ -35,9 +41,14 @@ class SignIn extends Component {
             <img src={layovero} width="65" height="65" />
           </div>
           <div className="auth-form__heading">
-            <div className="auth-form__heading-item in">Sign In</div>
+            <div className="auth-form__heading-item selected">Sign In</div>
             <span className="auth-form__heading-item or">or</span>
-            <div className="auth-form__heading-item up"> Sign Up </div>
+            <div
+              className="auth-form__heading-item idle"
+              onClick={() => ShowSignUpModal()}
+            >
+              Sign Up
+            </div>
           </div>
           <div className="auth-form__field-wrapper">
             <div className="auth-form__input-box">
@@ -103,7 +114,16 @@ class SignIn extends Component {
     );
   }
 }
-export default reduxForm({
-  form: "signInForm",
-  fields: ["email", "password"]
-})(connect(null, { SignUserIn, SignInWithGoogle, ShowForgotPassword })(SignIn));
+export default withRouter(
+  reduxForm({
+    form: "signInForm",
+    fields: ["email", "password"]
+  })(
+    connect(null, {
+      SignUserIn,
+      SignInWithGoogle,
+      ShowForgotPassword,
+      ShowSignUpModal
+    })(SignIn)
+  )
+);

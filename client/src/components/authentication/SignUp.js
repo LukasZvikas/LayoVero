@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
 import { emailField, passwordField } from "./formFields.js";
 import { connect } from "react-redux";
-import { SignUserUp } from "../../actions/authActions";
+import { SignUserUp, ShowSignInModal } from "../../actions/authActions";
 import { Modal } from "../Modal";
 
 import layovero from "../../../images/layovero.png";
@@ -15,7 +15,8 @@ class SignUp extends Component {
   render() {
     const {
       handleSubmit,
-      fields: { email, password, passwordConfirm }
+      fields: { email, password, passwordConfirm },
+      ShowSignInModal
     } = this.props;
 
     return (
@@ -31,9 +32,14 @@ class SignUp extends Component {
             <img src={layovero} width="65" height="65" />
           </div>
           <div className="auth-form__heading">
-            <div className="auth-form__heading-item in">Sign In</div>
+            <div
+              className="auth-form__heading-item idle"
+              onClick={() => ShowSignInModal()}
+            >
+              Sign In
+            </div>
             <span className="auth-form__heading-item or">or</span>
-            <div className="auth-form__heading-item up"> Sign Up </div>
+            <div className="auth-form__heading-item selected"> Sign Up </div>
           </div>
           <div className="auth-form__field-wrapper">
             <div className="auth-form__input-box">
@@ -102,6 +108,6 @@ const validate = values => {
 
 export default reduxForm({
   form: "signUpForm",
-  fields: ["email", "password", "passwordConfirm"], 
+  fields: ["email", "password", "passwordConfirm"],
   validate
-})(connect(null, { SignUserUp })(SignUp));
+})(connect(null, { SignUserUp, ShowSignInModal })(SignUp));

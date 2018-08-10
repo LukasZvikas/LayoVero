@@ -103,6 +103,10 @@
     width: 20rem;
   }
 
+  .input:focus {
+    outline: none;
+    border-bottom: 2px solid #0b4246;
+  }
   &__input-box {
     width: 100%;
   }
@@ -123,10 +127,6 @@
     font-size: 1.5rem;
     color: #ff3232;
     margin: 0.6rem;
-  }
-
-  &__item:focus {
-    outline: none;
   }
 
   &__button {
@@ -192,13 +192,43 @@
     width: 50%;
   }
 
-  .up {
-    border-bottom: 2px solid;
+  .selected {
+    position: relative;
   }
 
-  .in {
-    color: var(--color-light-grey-1);
+  .selected::before {
+    content: "";
+    position: absolute;
+    background: #000;
+    height: 2px;
+    top: 100%;
+    left: 0;
+    width: 100%;
   }
+
+  .idle {
+    color: var(--color-light-grey-1);
+    position: relative;
+  }
+
+  .idle::before {
+    content: "";
+    position: absolute;
+    background: #0b4246;
+    height: 2px;
+    top: 100%;
+    left: 0;
+    width: 0%;
+    transition: width 0.5s ease;
+  }
+
+  .idle:hover::before {
+    width: 100%;
+  }
+  // .idle:hover {
+  //   color: #a9a9a9;
+  //   border-bottom: 2px solid #a9a9a9;
+  // }
 
   //MAIL VERIFICATION MODAL
   //////////

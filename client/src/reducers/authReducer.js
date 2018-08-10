@@ -6,7 +6,8 @@ import {
   SHOW_FORGOT_PASS,
   SHOW_RESET,
   SEND_FORGOT,
-  RESET_PASS
+  RESET_PASS,
+  SIGN_IN
 } from "./types";
 
 const initialState = {
@@ -23,10 +24,12 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case SIGN_UP:
       return action.payload, { emailVerification: true, signUp: false };
+    case SIGN_IN:
+      return { authenticated: true };
     case SHOW_SIGNUP:
       return { signUp: true };
     case SHOW_SIGNIN:
-      return { signIn: true, emailVerification: false };
+      return { signIn: true, emailVerification: false, signUp: false };
     case SHOW_FORGOT_PASS:
       return { forgotPass: true, signIn: false };
     case SEND_FORGOT:

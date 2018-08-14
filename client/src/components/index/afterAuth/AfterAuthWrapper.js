@@ -2,17 +2,19 @@ import React, { Component } from "react";
 
 import chicago from "../../../../images/chicago.jpg";
 import SearchComponent from "./SearchComponent";
-import PopularPlaces from "./PopularPlaces";
+import PlacesContainer from "./PlacesContainer";
+import PlacesContainerSecondary from "./PlacesContainerSecondary";
 
 class AfterAuthWrapper extends Component {
-	render() {
-		return (
-			<div>
-				<SearchComponent />
-				<PopularPlaces />
-			</div>
-		);
-	}
+  render() {
+    return (
+      <div>
+        <SearchComponent />
+        <PlacesContainer />
+        <PlacesContainerSecondary />
+      </div>
+    );
+  }
 }
 
 export default AfterAuthWrapper;

@@ -3,7 +3,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		height: 40rem;
+		height: 50rem;
 		background-repeat: no-repeat;
 		background-size: cover;
 		box-sizing: border-box;
@@ -15,9 +15,9 @@
 	&__heading {
 		font-size: 3rem;
 		position: absolute;
-		top: 10rem;
+		top: 15rem;
 		color: #fff;
-		font-weight: bold;
+		// font-weight: bold;
 	}
 	&__search-bar-input {
 		height: 5.5rem;

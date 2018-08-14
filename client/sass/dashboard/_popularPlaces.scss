@@ -1,0 +1,51 @@
+.popular-places {
+  margin: 6rem 0;
+  &__wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 0 20rem;
+    grid-gap: 5rem;
+  }
+  &__heading {
+    margin: 0 20rem 2rem 20rem;
+    font-size: 2rem;
+  }
+  &__container {
+    height: 38rem;
+    width: 35rem;
+    display: grid;
+    grid-template-rows: 6fr 9rem;
+    // border: 1px solid #a3a3a3;
+    box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.3);
+  }
+
+  &__photo-box {
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  &__text-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0rem 1rem;
+  }
+  &__city {
+    font-size: 3rem;
+  }
+
+  &__description {
+    grid-row: 3;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  &__city,
+  &__description {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem 2rem;
+  }
+}

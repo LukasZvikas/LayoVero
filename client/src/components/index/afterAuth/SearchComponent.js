@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import chicago from "../../../../images/chicago.jpg";
+import nyc from "../../../../images/nyc.jpg";
 import { Field, reduxForm} from "redux-form";
 import { Location } from "../../svgIcons";
 
@@ -13,7 +13,7 @@ class SearchComponent extends Component {
 				<form className="dashboard" style={{ marginTop: 7 + "rem" }} onSubmit={handleSubmit}>
 					<div
 						className="dashboard__search-container"
-						style={{ backgroundImage: `url(${chicago})` }}
+						style={{ backgroundImage: `url(${nyc})` }}
 					>
 						<div className="dashboard__heading">
 							Look for the best layover options in your favorite

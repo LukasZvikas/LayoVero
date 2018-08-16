@@ -4,7 +4,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     margin: 0 20rem;
-    grid-gap: 5rem;
+    grid-gap: 8rem;
   }
   &__heading {
     margin: 0 20rem 2rem 20rem;
@@ -12,7 +12,6 @@
   }
   &__container {
     height: 38rem;
-    width: 35rem;
     display: grid;
     grid-template-rows: 6fr 9rem;
     // border: 1px solid #a3a3a3;

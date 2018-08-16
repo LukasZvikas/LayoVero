@@ -14,6 +14,7 @@ import { Link, withRouter } from "react-router-dom";
 import fb from "../../../images/facebook.svg";
 import google from "../../../images/google.svg";
 import layovero from "../../../images/layovero.png";
+import { Facebook } from "../svgIcons";
 
 class SignIn extends Component {
   onFormSubmit({ email, password }) {
@@ -98,7 +99,13 @@ class SignIn extends Component {
                 <div className="auth-form__oauth-text">
                   Sign in with Facebook
                 </div>
-                <img className="auth-form__oauth-logo" src={fb} />
+
+                <Facebook
+                  svgClass={"auth-form__oauth-logo"}
+                  height={2.4 + "rem"}
+                  width={2.4 + "rem"}
+                  fill={"#fff"}
+                />
               </div>
             </div>
             <div className="auth-form__new-forgot">Not a Member?</div>

@@ -10,3 +10,6 @@ export const SHOW_FORGOT_PASS = "show_forgot_pass";
 export const SEND_FORGOT = "send_forgot";
 export const SHOW_RESET = "show_reset";
 export const RESET_PASS = "reset_pass";
+
+export const PARTIAL_QUERY = "partial_query";
+export const CLEAR_STATE = "clear_state";

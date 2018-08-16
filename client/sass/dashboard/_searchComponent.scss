@@ -1,4 +1,5 @@
 .dashboard {
+	position: relative;
 	&__search-container {
 		display: flex;
 		justify-content: center;
@@ -47,5 +48,34 @@
 		background-color: #00b3b3;
 		border: 1px solid #00b3b3;
 		color: var(--color-white);
+	}
+
+	&__suggestions {
+		list-style-type: none;
+		width: 53rem;
+		background-color: #fff;
+		position: absolute;
+		right: auto;
+		left: 52rem;
+		top: 28rem;
+		border-radius: 3px;
+	}
+	&__suggestions-item {
+		font-size: 2rem;
+		padding: 1rem;
+		display: flex;
+		align-items: center;
+		height: 3.5rem;
+	}
+
+	&__suggestions-item:hover {
+		background-color: #f5f5f5;
+	}
+
+	&__suggestions-search-icon {
+		height: 2rem;
+	}
+	&__suggestions-city {
+		padding: 0 0.5rem;
 	}
 }

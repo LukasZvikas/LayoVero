@@ -8,6 +8,7 @@ import ForgotPassword from "../authentication/forgotPassword";
 import ResetPassword from "../authentication/resetPassword";
 import ForgetPassSuccess from "../authentication/forgetPassSuccess";
 import SuccessPassReset from "../authentication/successPassReset";
+import ComingSoon from "../aboutUs/ComingSoon";
 import * as authActions from "../../actions/authActions";
 import { Modal, ModalTemplate } from "../Modal";
 import { Authenticated, NotAuthenticated } from "./authContainers";
@@ -89,6 +90,10 @@ class Header extends Component {
         <ModalTemplate
           modalType={this.props.auth.forgetPassSuccess}
           modalContainer={<ForgetPassSuccess hide={() => this.hideModal()} />}
+        />
+        <ModalTemplate
+          modalType={this.props.auth.sendUsEmail}
+          modalContainer={<ComingSoon hide={() => this.hideModal()} />}
         />
       </div>
     );

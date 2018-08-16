@@ -44,11 +44,11 @@ class ConnectWithUs extends Component {
           <div className="social__text-2">
             We got you covered! Follow us on Instagram <b>@layoveroapp</b>
           </div>
-          <div className="social__text-3">
+          {/*<div className="social__text-3">
             Our account is divided into editions to help You find destinations
             easily. So, find Your destination, save photos into categories for
             the specific destination and start planning your next trip!
-          </div>
+          </div>*/}
         </div>
         <div className="social__list">
           {this.renderFeed(this.props.instaData.data)}

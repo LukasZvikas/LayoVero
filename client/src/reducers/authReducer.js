@@ -7,7 +7,8 @@ import {
   SHOW_RESET,
   SEND_FORGOT,
   RESET_PASS,
-  SIGN_IN
+  SIGN_IN,
+  SEND_US_EMAIL
 } from "./types";
 
 const initialState = {
@@ -17,7 +18,8 @@ const initialState = {
   emailVerification: false,
   resetPass: false,
   forgetPassSuccess: false,
-  showResetSuccess: false
+  showResetSuccess: false,
+  sendUsEmail: false
 };
 
 export default function(state = initialState, action) {
@@ -38,6 +40,8 @@ export default function(state = initialState, action) {
       return action.payload;
     case RESET_PASS:
       return initialState, { showResetSuccess: true };
+    case SEND_US_EMAIL:
+      return { sendUsEmail: true };
     case HIDE_MODAL:
       return initialState;
     default:

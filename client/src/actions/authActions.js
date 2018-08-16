@@ -7,7 +7,8 @@ import {
   SHOW_FORGOT_PASS,
   SEND_FORGOT,
   SHOW_RESET,
-  RESET_PASS
+  RESET_PASS, 
+  SEND_US_EMAIL
 } from "../reducers/types";
 import axios from "axios";
 
@@ -29,7 +30,6 @@ export const SignInWithGoogle = () => async dispatch => {
   const res = await axios.get("/user/auth/google");
 
   console.log("RES", res);
-
 };
 
 export const SendForgotEmail = ({ email }) => {
@@ -69,6 +69,11 @@ export const ShowSignInModal = () => {
 
 export const ShowForgotPassword = () => {
   return { type: SHOW_FORGOT_PASS };
+};
+
+export const SendUsEmail = () => {
+  console.log("here")
+  return { type: SEND_US_EMAIL };
 };
 
 export const HideModal = () => {

@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import layovero from "../../../images/layovero.png";
+import { SendUsEmail } from "../../actions/authActions";
+import { connect } from "react-redux";
+import { Modal, ModalTemplate } from "../Modal";
 
 class ComingSoon extends Component {
   render() {
@@ -22,12 +25,15 @@ class ComingSoon extends Component {
             the help!
           </div>
           <div className="coming__button-box">
-            <a href="#popup" className="coming__button-main">
+            <div
+              className="coming__button-main"
+              onClick={() => this.props.SendUsEmail()}
+            >
               Email Us
-            </a>
+            </div>
           </div>
         </div>
-        <div className="popup" id="popup">
+        <div className="popup">
           <div className="popup__box">
             <div className="popup__left">
               <img
@@ -38,14 +44,16 @@ class ComingSoon extends Component {
               />
             </div>
             <div className="popup__right">
-              <div className="popup__header">Send us an email!</div>
-              <a href="#" className="popup__exit">
+              <div className="auth-form__exit" onClick={this.props.hide}>
                 &times;
-              </a>
+              </div>
+              <div className="popup__header">Send us an email!</div>
+
               <div className="popup__text">
-                We are dedicated to making your trips unforgettable an as convenient as possible. If you have any
-                questions or need help with a recent trip, please send us an
-                email. We will respond within 24 hours.
+                We are dedicated to making your trips unforgettable an as
+                convenient as possible. If you have any questions or need help
+                with a recent trip, please send us an email. We will respond
+                within 24 hours.
               </div>
               <div className="popup__form">
                 <input className="popup__email" placeholder="Email" />
@@ -63,4 +71,4 @@ class ComingSoon extends Component {
   }
 }
 
-export default ComingSoon;
+export default connect(null, { SendUsEmail })(ComingSoon);

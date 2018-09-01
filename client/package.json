@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=production npm run clean && webpack -p",
-    "server": "webpack-dev-server --hot"
+    "dev": "webpack-dev-server --hot",
+    "server": "NODE_ENV=production npm run clean && webpack -p"
   },
   "author": "",
   "license": "ISC",

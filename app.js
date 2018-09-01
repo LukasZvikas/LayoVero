@@ -40,6 +40,7 @@ if (process.env.NODE_ENV !== 'production') {
   // const webpackMiddleware = require('webpack-dev-middleware');
   const webpack = require('webpack');
   const webpackConfig = require('./client/webpack.config.js');
+  const path = require("path")
   // app.use(webpackMiddleware(webpack(webpackConfig)));
 } else {
   app.use(express.static('build'));

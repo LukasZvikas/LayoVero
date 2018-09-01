@@ -40,9 +40,10 @@ if (process.env.NODE_ENV !== 'production') {
   // const webpackMiddleware = require('webpack-dev-middleware');
   const webpack = require('webpack');
   const webpackConfig = require('./client/webpack.config.js');
-  const path = require("path")
+
   // app.use(webpackMiddleware(webpack(webpackConfig)));
 } else {
+  const path = require("path")
   app.use(express.static('build'));
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'build/index.html'));

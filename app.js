@@ -36,13 +36,15 @@ require("./routes/routeRoutes")(app);
 
 const PORT = process.env.PORT || 5000;
 
-if (process.env.NODE_ENV == "production") {
-  app.use(express.static("client/build"));
-
-  const path = require("path");
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+if (process.env.NODE_ENV !== 'production') {
+  // const webpackMiddleware = require('webpack-dev-middleware');
+  const webpack = require('webpack');
+  const webpackConfig = require('./client/webpack.config.js');
+  // app.use(webpackMiddleware(webpack(webpackConfig)));
+} else {
+  app.use(express.static('build'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build/index.html'));
   });
 }
 

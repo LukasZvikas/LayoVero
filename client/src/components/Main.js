@@ -3,7 +3,7 @@ import aboutUsWrapper from "./aboutUs/aboutUsWrapper";
 import BlogWrapper from "./blog/BlogWrapper";
 import BlogPost from "./blog/BlogPost";
 import AfterAuthWrapper from "./index/afterAuth/AfterAuthWrapper";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { HashRouter, Route, Switch } from "react-router-dom";
 import Header from "./Header/Header";
 import Footer from "./Footer";
 import SignUp from "./authentication/SignUp";
@@ -13,7 +13,7 @@ class Main extends Component {
   render() {
     return (
       <div>
-        <BrowserRouter>
+        <HashRouter>
           <div>
             <Header />
             <Switch>
@@ -26,7 +26,7 @@ class Main extends Component {
             </Switch>
             <Footer />
           </div>
-        </BrowserRouter>
+        </HashRouter>
       </div>
     );
   }

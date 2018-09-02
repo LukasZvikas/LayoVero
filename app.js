@@ -44,7 +44,7 @@ if (process.env.NODE_ENV !== "production") {
   // app.use(webpackMiddleware(webpack(webpackConfig)));
 } else {
   const path = require("path");
-  app.use(express.static(__dirname));
+  app.use(express.static(__dirname + 'client/build'));
   app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "client", "index.html"));
   });

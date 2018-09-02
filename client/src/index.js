@@ -8,6 +8,8 @@ import reduxThunk from "redux-thunk";
 import appReducer from "./reducers";
 import "regenerator-runtime/runtime";
 
+console.log(React.version);
+
 const store = createStore(
   appReducer,
   {},

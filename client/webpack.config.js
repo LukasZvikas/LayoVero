@@ -5,7 +5,7 @@ const config = {
   output: {
     path: path.resolve(__dirname, "./build"),
     filename: "bundle.js",
-    
+    publicPath: "/"
   },
   devServer: {
     hot: true,
@@ -53,7 +53,6 @@ const config = {
     ]
   },
   devServer: {
-
     historyApiFallback: {
       disableDotRule: true
     },

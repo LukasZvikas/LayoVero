@@ -1,9 +1,10 @@
 const path = require("path");
+var HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const config = {
   entry: "./src/index.js",
   output: {
-    path: path.join(__dirname, 'build'),
+    path: path.join(__dirname, "build"),
     filename: "bundle.js",
     publicPath: "/"
   },
@@ -52,6 +53,7 @@ const config = {
       }
     ]
   },
+  plugins: [new HtmlWebpackPlugin()],
   devServer: {
     historyApiFallback: {
       disableDotRule: true

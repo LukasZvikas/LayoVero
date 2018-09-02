@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "heroku-postbuild": "npm run server --prefix=client"
+    "heroku-postbuild": "npm run server --prefix client"
   },
   "author": "",
   "license": "ISC",

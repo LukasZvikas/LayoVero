@@ -1,5 +1,4 @@
 const path = require("path");
-const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
 
 const config = {
   entry: "./src/index.js",
@@ -53,10 +52,6 @@ const config = {
       }
     ]
   },
-  plugins: [
-    new CaseSensitivePathsPlugin()
-    // other plugins ...
-  ],
   devServer: {
     historyApiFallback: {
       disableDotRule: true

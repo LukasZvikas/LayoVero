@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --hot",
-    "server": "NODE_ENV=production npm run clean && webpack -p"
+    "server": "NODE_ENV=production webpack -p"
   },
   "author": "",
   "license": "ISC",

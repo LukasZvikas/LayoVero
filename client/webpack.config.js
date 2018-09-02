@@ -3,8 +3,8 @@ const path = require("path");
 const config = {
   entry: "./src/index.js",
   output: {
-    // path: path.resolve(__dirname, "/build"),
-    // filename: "bundle.js",
+    path: path.resolve(__dirname, "./build"),
+    filename: "bundle.js",
     publicPath: "/"
   },
   devServer: {

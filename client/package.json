@@ -20,8 +20,6 @@
     "classnames": "^2.2.6",
     "css-loader": "^0.28.11",
     "lodash": "^4.17.10",
-    "lodash-es": "^4.17.10",
-    "lodash.map": "^4.6.0",
     "node-sass": "^4.9.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.0",

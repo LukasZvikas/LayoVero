@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rimraf build",
     "dev": "webpack-dev-server --hot",
-    "server": "NODE_ENV=production npm run clean && webpack -p --config ./webpack.production.config.js"
+    "server": "NODE_ENV=production npm run clean && webpack -p"
   },
   "author": "",
   "license": "ISC",
@@ -30,7 +30,7 @@
     "html-webpack-plugin": "^3.2.0",
     "lodash": "^4.17.10",
     "lodash-webpack-plugin": "^0.11.5",
-    "node-sass": "^4.9.0",
+    "node-sass": "4.9.3",
     "react": "^16.4.2",
     "react-dom": "^16.4.0",
     "react-hot-loader": "^4.2.0",
@@ -46,5 +46,7 @@
     "webpack": "^4.12.0",
     "webpack-dev-server": "^3.1.5"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "webpack-cli": "^3.1.0"
+  }
 }

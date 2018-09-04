@@ -10,8 +10,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "postinstall":
-      "npm install --prefix client && npm run server --prefix client"
+    "postinstall": "npm install --prefix client && npm run server --prefix client"
   },
   "author": "",
   "license": "ISC",
@@ -38,6 +37,7 @@
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "sharp": "^0.20.5",
-    "webpack": "^4.17.1"
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0"
   }
 }

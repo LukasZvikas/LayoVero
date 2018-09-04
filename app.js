@@ -40,13 +40,9 @@ if (process.env.NODE_ENV == "production") {
   const path = require("path");
 
   app.get("/", function(req, res) {
-    const index = path.join(__dirname, "client", "build", "index.html");
-    res.sendFile(index);
+     res.sendfile('index.html', { root: __dirname + '/client/build' });
   });
-  app.use(
-    "/client/build",
-    express.static(path.join(__dirname, "client/build"))
-  );
+ server.use(express.static(__dirname + '/client/build'));
   // app.use(express.static("client/build"));
 }
 

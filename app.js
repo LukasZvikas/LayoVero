@@ -38,11 +38,11 @@ const PORT = process.env.PORT || 5000;
 
 if (process.env.NODE_ENV == "production") {
   const path = require("path");
-
+  app.use(express.static("client/dist"));
   app.get("/", function(req, res) {
-     res.sendfile('index.html', { root: __dirname + '/client/build' });
+    res.sendFile(path.join(__dirname, "client/build/index.html"));
   });
- server.use(express.static(__dirname + '/client/build'));
+
   // app.use(express.static("client/build"));
 }
 

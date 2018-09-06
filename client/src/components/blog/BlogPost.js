@@ -69,8 +69,8 @@ class BlogPost extends Component {
    
 
           <ProgImageLoading
-            regPhoto={`../..${post.image}`}
-            thumbPhoto={`../../${post.image}thumb`}
+            regPhoto={`${post.image}`}
+            thumbPhoto={`${post.image}thumb`}
             imageClass={"secondary"}
           />
           {/*<img className={`blog-posts__image--${2}`} src={"../../images/logoyoutube.png"} />

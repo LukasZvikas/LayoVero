@@ -26,7 +26,7 @@ class ProgImageLoading extends Component {
   render() {
     const { regPhoto, thumbPhoto } = this.props;
     const { ready } = this.state;
-    // console.log(this.state)
+    console.log(regPhoto, thumbPhoto);
     return (
       <div className="progressive-loading">
         {ready ? (

@@ -66,16 +66,11 @@ class BlogPost extends Component {
             this.refreshPage();
           }}
         >
-   
-
           <ProgImageLoading
-            regPhoto={`${post.image}`}
-            thumbPhoto={`${post.image}thumb`}
+            regPhoto={`../../..${post.image}`}
+            thumbPhoto={`../../..${post.image}`}
             imageClass={"secondary"}
           />
-          {/*<img className={`blog-posts__image--${2}`} src={"../../images/logoyoutube.png"} />
-          <img className={`blog-posts__image--${3}`} src={"../../images/logoyoutube.png"} />*/}
-          {/*<div className="blog-posts__name">{post.postName}</div>*/}
           <div className="blog-posts-secondary-info">
             <div className="blog-posts-secondary-name"> {post.postName} </div>
             <div className="blog-posts-secondary-date">

@@ -4,8 +4,8 @@ import { fetchBlogPosts, openPost } from "../../actions/blogActions.js";
 import { Link } from "react-router-dom";
 import ProgImageLoading from "./loadingImage";
 
-import img from "../../../../uploads/4b8b378225e5dd1c79503fbfd30156e5.jpg"
-import imgThumb from "../../../../uploads/4b8b378225e5dd1c79503fbfd30156e5.jpg"
+import img from "../../../../uploads/4b8b378225e5dd1c79503fbfd30156e5.jpg";
+import imgThumb from "../../../../uploads/4b8b378225e5dd1c79503fbfd30156e5.jpg";
 
 class BlogPosts extends Component {
   componentDidMount() {
@@ -16,8 +16,11 @@ class BlogPosts extends Component {
     return posts.map(post => {
       console.log(post);
       return (
-        <Link to={`/blog/post/${post.postName}`} className="blog-posts-main-post">
-            <ProgImageLoading
+        <Link
+          to={`/blog/post/${post.postName}`}
+          className="blog-posts-main-post"
+        >
+          <ProgImageLoading
             regPhoto={`../../../..${post.image}.jpg`}
             thumbPhoto={`../../../..${post.image}thumb.jpg`}
             imageClass={"main"}

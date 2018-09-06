@@ -4,6 +4,8 @@ import { fetchBlogPosts, openPost } from "../../actions/blogActions.js";
 import { Link } from "react-router-dom";
 import ProgImageLoading from "./loadingImage";
 
+import img from "../../../../uploads/4b8b378225e5dd1c79503fbfd30156e5.jpg"
+
 class BlogPosts extends Component {
   componentDidMount() {
     return this.props.fetchBlogPosts();
@@ -14,8 +16,8 @@ class BlogPosts extends Component {
       return (
         <Link to={`/blog/post/${post.postName}`} className="blog-posts-main-post">
             <ProgImageLoading
-            regPhoto={`../../../..${post.image}.jpg`}
-            thumbPhoto={`../../../..${post.image}thumb.jpg`}
+            regPhoto={img}
+            thumbPhoto={img}
             imageClass={"main"}
           />
           {/*<img className={`blog-posts__image--${2}`} src={"../../images/logoyoutube.png"} />

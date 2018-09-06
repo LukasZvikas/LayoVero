@@ -15,7 +15,7 @@ class BlogPosts extends Component {
         <Link to={`/blog/post/${post.postName}`} className="blog-posts-main-post">
             <ProgImageLoading
             regPhoto={`../../..${post.image}`}
-            thumbPhoto={`../../..${post.image}thumb`}
+            thumbPhoto={`../../../${post.image}thumb`}
             imageClass={"main"}
           />
           {/*<img className={`blog-posts__image--${2}`} src={"../../images/logoyoutube.png"} />

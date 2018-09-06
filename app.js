@@ -32,7 +32,7 @@ app.use(passport.initialize());
 require("./routes/authRoutes")(app);
 require("./routes/socialRoutes")(app);
 require("./routes/blogRoutes")(app);
-require("./routes/routeRoutes")(app); 
+require("./routes/routeRoutes")(app);
 
 const PORT = process.env.PORT || 5000;
 

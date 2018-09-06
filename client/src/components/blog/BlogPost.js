@@ -67,8 +67,8 @@ class BlogPost extends Component {
           }}
         >
           <ProgImageLoading
-            regPhoto={`../../..${post.image}`}
-            thumbPhoto={`../../..${post.image}`}
+            regPhoto={`../../../..${post.image}.jpg`}
+            thumbPhoto={`../../../..${post.image}.jpg`}
             imageClass={"secondary"}
           />
           <div className="blog-posts-secondary-info">

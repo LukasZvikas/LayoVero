@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-import chicago from "../../../../images/chicago.jpg";
 import SearchComponent from "./SearchComponent";
 import PlacesContainer from "./PlacesContainer";
 import PlacesContainerSecondary from "./PlacesContainerSecondary";

@@ -13,7 +13,7 @@
     "server-dev": "nodemon app.js",
     "webpack-dev": "webpack-dev-server --hot--mode development",
     "dev": "concurrently \"npm run server-dev\" \"npm run webpack-dev\"",
-    "build": "NODE_ENV=production webpack -p --mode production"
+    "build": "NODE_ENV=production npm run clean && webpack -p --mode production"
   },
   "author": "",
   "license": "ISC",

@@ -25,17 +25,11 @@ class BlogPosts extends Component {
             thumbPhoto={`../../../..${post.image}thumb.jpg`}
             imageClass={"main"}
           />
-          {/*<img className={`blog-posts__image--${2}`} src={"../../images/logoyoutube.png"} />
-          <img className={`blog-posts__image--${3}`} src={"../../images/logoyoutube.png"} />*/}
-          {/*<div className="blog-posts__name">{post.postName}</div>*/}
           <div className="blog-posts-main-info">
             <div className="blog-posts-main-name"> {post.postName} </div>
             <div className="blog-posts-main-date">{post.date.slice(0, 10)}</div>
           </div>
         </Link>
-        // {        <div className="blog-posts__post"> {post.blogPost} </div>
-        // <div className="blog-posts__post"> {post.likes} </div>}
-        //../../${post.image}
       );
     });
   }

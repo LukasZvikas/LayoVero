@@ -1,12 +1,12 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const config = {
   entry: "./client/src/index.js",
   output: {
     path: path.join(__dirname, "build"),
-    filename: "bundle.js",
-    publicPath: "/"
+    filename: "bundle.js"
   },
   devServer: {
     hot: true,
@@ -59,7 +59,14 @@ const config = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "client/index.html"
-    })
+    }),
+    new CopyWebpackPlugin([
+      {
+        from: "uploads",
+        to: "uploads",
+        toType: "dir"
+      }
+    ])
   ],
   devServer: {
     historyApiFallback: {

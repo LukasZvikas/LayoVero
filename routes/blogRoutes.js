@@ -1,6 +1,6 @@
 const blogController = require("../controllers/blogController");
 var multer = require("multer");
-var upload = multer({ dest: "uploads/" });
+var upload = multer({ dest: "./uploads/" });
 
 module.exports = app => {
   app.post("/admin/newPost", upload.single("image"), blogController.newPost);

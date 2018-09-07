@@ -4,9 +4,6 @@ import { fetchBlogPosts, openPost } from "../../actions/blogActions.js";
 import { Link } from "react-router-dom";
 import ProgImageLoading from "./loadingImage";
 
-import img from "../../../../uploads/4b8b378225e5dd1c79503fbfd30156e5.jpg";
-import imgThumb from "../../../../uploads/4b8b378225e5dd1c79503fbfd30156e5.jpg";
-
 class BlogPosts extends Component {
   componentDidMount() {
     return this.props.fetchBlogPosts();

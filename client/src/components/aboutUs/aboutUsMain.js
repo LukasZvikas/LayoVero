@@ -7,8 +7,8 @@ class About1 extends Component {
       <div className="about">
         <div className="about__grid-item about__photo">
           <ProgImageLoading
-            regPhoto={"../../../../uploads/1994942444a34606069bbc3b83fdeb70"}
-            thumbPhoto={"../../../../uploads/1994942444a34606069bbc3b83fdeb70thumb"}
+            regPhoto={"../../../../uploads/1994942444a34606069bbc3b83fdeb70.jpg"}
+            thumbPhoto={"../../../../uploads/1994942444a34606069bbc3b83fdeb70thumb.jpg"}
             imageClass={"secondary"}
           />
         </div>

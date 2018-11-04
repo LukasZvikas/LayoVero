@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import nyc from "../../../../images/nyc.jpg";
+import forest from "../../../../images/forest.jpg";
 import { Field, reduxForm } from "redux-form";
 import { Location } from "../../svgIcons";
 import { getCityFromPartialQuery, clearState } from "../../../actions/routeActions";
@@ -14,7 +14,6 @@ class SearchComponent extends Component {
 	}
 
 	handleInputChange = event => {
-		// this.setState({ searchQuery: event.target.value }, () => {
 		if (event.target.value && event.target.value.length > 0) {
 
 			this.props.getCityFromPartialQuery(event.target.value);
@@ -23,11 +22,6 @@ class SearchComponent extends Component {
 		else {
 			this.props.clearState();
 		}
-
-
-
-
-		// });
 	};
 
 	render() {
@@ -43,7 +37,7 @@ class SearchComponent extends Component {
 			>
 				<div
 					className="dashboard__search-container"
-					style={{ backgroundImage: `url(${nyc})` }}
+					style={{ backgroundImage: `url(${forest})` }}
 				>
 					<div className="dashboard__heading">
 						Look for the best layover options in your favorite

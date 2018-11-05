@@ -5,6 +5,12 @@ import AuthPageWrapper from "./sliderComps/auth/authPageWrapper";
 
 class GameWrapper extends Component {
   renderPageByType = type => {
+    if (type != "initialPage") {
+      let el = document.getElementsByTagName("body")[0];
+      console.log(el);
+      el.style.backgroundColor = "#fff";
+      // console.log("el", el);
+    }
     switch (type) {
       case "initialPage":
         return <InitialPageWrapper />;

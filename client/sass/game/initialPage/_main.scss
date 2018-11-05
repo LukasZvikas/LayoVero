@@ -1,12 +1,12 @@
 .game-wrapper {
-  margin: 20rem 0 10rem 0;
+  margin: 15rem 0 0 0;
 }
 .ip {
   @include flexCenter;
   flex-direction: column;
 
-  $main-heading: 70rem, 16rem, 0.4rem;
-  $play-button: 28rem, 5rem, 3rem;
+  $main-heading: 70rem, 16rem, 0.4rem, var(--color-white), var(--color-primary);
+  $play-button: 28rem, 5rem, 3rem, var(--color-white), var(--color-primary);
 
   &__main-heading {
     margin: 0 0 4rem 0;
@@ -26,10 +26,7 @@
     color: var(--color-white);
 
     &:hover {
-      color: var(--color-primary);
-      background-color: var(--color-white);
-      transform: translateY(3px);
-      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.3);
+      @include buttonHover(var(--color-primary), var(--color-white));
     }
 
     &:focus {

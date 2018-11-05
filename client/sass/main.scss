@@ -1,6 +1,10 @@
 @import "base";
+
+@import "game/base";
 @import "game/initialPage/IPMixins";
 @import "game/initialPage/main";
+@import "game/authPage/main";
+
 @import "blogMixins";
 @import "auth/formMixins";
 @import "navigation";

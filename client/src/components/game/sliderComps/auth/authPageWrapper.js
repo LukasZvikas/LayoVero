@@ -1,10 +1,15 @@
 import React from "react";
+import AuthButton from "./authButton";
 
 const AuthPageWrapper = () => {
   return (
-    <div style={{ margin: 20 + "rem" }}>
-      <button>Sign Up</button>
-      <button>Sign In</button>
+    <div className="game-auth">
+      <div className="secondary-heading">
+        ARE YOU <span className="special-word">READY</span> TO...?
+      </div>
+      <AuthButton name={"Sign Up"} />
+      <AuthButton name={"Sign In"} />
+      <AuthButton name={"Not yet"} />
     </div>
   );
 };

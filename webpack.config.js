@@ -10,8 +10,7 @@ const config = {
     publicPath: "/"
   },
   devServer: {
-    hot: true,
-    inline: true
+    hot: true
   },
   module: {
     rules: [

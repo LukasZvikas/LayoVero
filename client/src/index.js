@@ -1,18 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import Root from "./root";
 import Main from "./components/Main";
 import "../sass/main.scss";
-import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
-import reduxThunk from "redux-thunk";
-import appReducer from "./reducers";
 import "regenerator-runtime/runtime";
 
-const store = createStore(appReducer, {}, applyMiddleware(reduxThunk));
-
 ReactDOM.render(
-  <Provider store={store}>
+  <Root>
     <Main />
-  </Provider>,
+  </Root>,
   document.querySelector("#root")
 );

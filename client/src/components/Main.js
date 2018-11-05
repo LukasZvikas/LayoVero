@@ -3,6 +3,7 @@ import aboutUsWrapper from "./aboutUs/aboutUsWrapper";
 import BlogWrapper from "./blog/BlogWrapper";
 import BlogPost from "./blog/BlogPost";
 import AfterAuthWrapper from "./index/afterAuth/AfterAuthWrapper";
+import GameWrapper from "./game/gameWrapper";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "./Header/Header";
 import Footer from "./Footer";
@@ -17,12 +18,12 @@ class Main extends Component {
           <div>
             <Header />
             <Switch>
-              <Route path="/about" component={aboutUsWrapper} />
+{/*              <Route path="/about" component={aboutUsWrapper} />
               <Route path="/blog/post/*" component={BlogPost} />
               <Route path="/blog" component={BlogWrapper} />
               <Route path="/signup" component={SignUp} />
-              <Route path="/reset/:token" component={ResetPassword} />
-              <Route exact path="/" component={AfterAuthWrapper} />
+              <Route path="/reset/:token" component={ResetPassword} />*/}
+              <Route exact path="/" component={GameWrapper} />
             </Switch>
             <Footer />
           </div>

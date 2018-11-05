@@ -1,0 +1,39 @@
+.game-wrapper {
+  margin: 20rem 0 10rem 0;
+}
+.ip {
+  @include flexCenter;
+  flex-direction: column;
+
+  $main-heading: 70rem, 16rem, 0.4rem;
+  $play-button: 28rem, 5rem, 3rem;
+
+  &__main-heading {
+    margin: 0 0 4rem 0;
+    @include borderStyle($main-heading...);
+
+    &__text {
+      @include flexCenter;
+      color: var(--color-white);
+      font-size: 7rem;
+      height: 100%;
+    }
+  }
+
+  &__play-button {
+    @include borderStyle($play-button...);
+    font-size: 2rem;
+    color: var(--color-white);
+
+    &:hover {
+      color: var(--color-primary);
+      background-color: var(--color-white);
+      transform: translateY(3px);
+      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.3);
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

@@ -13,21 +13,22 @@
     "server-dev": "nodemon app.js",
     "webpack-dev": "webpack-dev-server --hot--mode development",
     "dev": "concurrently \"npm run server-dev\" \"npm run webpack-dev\"",
-    "build": "NODE_ENV=production npm run clean && webpack -p"
+    "build": "NODE_ENV=production npm run clean && webpack -p",
+    "test": "jest"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.js?$": "babel-jest"
+    },
+    "setupFiles": [
+      "/Users/lukas/Documents/GitHub/layovero/client/src/setupTests.js"
+    ]
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/cli": "^7.0.0",
     "@sendgrid/mail": "^6.2.1",
     "axios": "^0.18.0",
-    "babel-plugin-lodash": "^3.3.4",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
     "classnames": "^2.2.6",
@@ -35,6 +36,8 @@
     "cors": "^2.8.4",
     "create-react-app": "^1.5.2",
     "css-loader": "^1.0.0",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.6.0",
     "express": "^4.16.3",
     "file-loader": "^2.0.0",
     "glob": "^7.1.2",
@@ -47,6 +50,7 @@
     "mongoose-auto-increment": "^5.0.1",
     "mongoose-sequence": "^4.0.1",
     "multer": "^1.3.0",
+    "node-sass": "^4.9.3",
     "nodemailer": "^4.6.4",
     "nodemon": "^1.17.5",
     "passport": "^0.4.0",
@@ -62,21 +66,33 @@
     "redux": "^4.0.0",
     "redux-form": "^7.4.2",
     "redux-thunk": "^2.3.0",
+    "sass-loader": "^7.1.0",
     "sharp": "^0.20.5",
-    "@babel/core": "^7.0.0",
+    "style-loader": "^0.23.0",
+    "webpack": "^4.17.2",
+    "webpack-cli": "^3.1.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
     "@babel/plugin-proposal-class-properties": "^7.0.0",
     "@babel/plugin-proposal-decorators": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.2",
-    "node-sass": "^4.9.3",
-    "sass-loader": "^7.1.0",
-    "style-loader": "^0.23.0",
-    "webpack": "^4.17.2",
-    "webpack-cli": "^3.1.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-lodash": "^3.3.4",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "copy-webpack-plugin": "^4.5.2",
+    "jest": "^23.6.0",
+    "react-test-renderer": "^16.6.0",
+    "regenerator-runtime": "^0.12.1",
     "webpack-dev-server": "^3.1.7"
-  },
-  "devDependencies": {
-    "copy-webpack-plugin": "^4.5.2"
   }
 }

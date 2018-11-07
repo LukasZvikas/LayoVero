@@ -1,17 +1,28 @@
-import React from "react";
-import AuthButton from "./authButton";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { askForName } from "../../../../actions/gameActions";
+import { GameButton, Heading } from "../../customComps";
 
-const AuthPageWrapper = () => {
-  return (
-    <div className="game-auth">
-      <div className="secondary-heading">
-        ARE YOU <span className="special-word">READY</span> TO...?
+class AuthPageWrapper extends Component {
+  render() {
+    const { askForName } = this.props;
+    return (
+      <div className="game-info__main-wrap game-info__wrap-height">
+        <Heading
+          primaryText={"ARE YOU"}
+          secondaryText={"READY"}
+          tertiaryText={"TO..?"}
+        />
+        <GameButton name={"Sign Up"} classType={"game-info__btn-secondary"} />
+        <GameButton name={"Sign In"} classType={"game-info__btn-secondary"} />
+        <GameButton
+          name={"Not yet"}
+          classType={"game-info__btn-primary"}
+          action={() => askForName()}
+        />
       </div>
-      <AuthButton name={"Sign Up"} />
-      <AuthButton name={"Sign In"} />
-      <AuthButton name={"Not yet"} />
-    </div>
-  );
-};
+    );
+  }
+}
 
-export default AuthPageWrapper;
+export default connect(null, { askForName })(AuthPageWrapper);

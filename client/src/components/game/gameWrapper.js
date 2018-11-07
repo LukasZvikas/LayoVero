@@ -2,14 +2,20 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import InitialPageWrapper from "./initialPage/initialPageWrapper";
 import AuthPageWrapper from "./sliderComps/auth/authPageWrapper";
+import NamePageWrapper from "./sliderComps/name/namePageWrapper";
+import ContactPageWrapper from "./sliderComps/contact/contactPageWrapper";
+import PlanPageWrapper from "./sliderComps/plan/planPageWrapper";
 
 class GameWrapper extends Component {
+  removeFooter = () => {
+    let footer = document.getElementsByClassName("footer__img-main")[0];
+
+    footer.remove();
+  };
   renderPageByType = type => {
     if (type != "initialPage") {
       let el = document.getElementsByTagName("body")[0];
-      console.log(el);
       el.style.backgroundColor = "#fff";
-      // console.log("el", el);
     }
     switch (type) {
       case "initialPage":
@@ -17,24 +23,22 @@ class GameWrapper extends Component {
       case "authPage":
         return <AuthPageWrapper />;
       case "namePage":
-        return <div>Name</div>;
+        return <NamePageWrapper />;
       case "contactPage":
-        return <div>Contact</div>;
+        return <ContactPageWrapper />;
       case "planPage":
-        return <div>Plan</div>;
+        this.removeFooter();
+        return <PlanPageWrapper />;
     }
   };
+
   render() {
-    console.log("PROPS", this.props);
     const { pageState } = this.props;
-    return (
-      <div className="game-wrapper">{this.renderPageByType(pageState)};</div>
-    );
+    return <div className="game-info">{this.renderPageByType(pageState)};</div>;
   }
 }
 
 const mapStateToProps = state => {
-  console.log("STATE", state);
   return {
     pageState: state.game.stateOfPage
   };

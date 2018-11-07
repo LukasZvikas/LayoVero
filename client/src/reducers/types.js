@@ -20,3 +20,4 @@ export const INITIAL_PAGE = "initial_page";
 export const AUTH_PAGE = "auth_page";
 export const NAME_PAGE = "name_page";
 export const CONTACT_PAGE = "contact_page";
+export const PLAN_PAGE = "plan_page";

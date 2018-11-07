@@ -1,0 +1,142 @@
+.game-info {
+  margin: 12rem 0 0 0;
+  &__main-wrap {
+    @include flexCenter;
+    @include columnSpaceAround;
+  }
+  &__wrap-height {
+    height: 30rem;
+  }
+  &__main-heading {
+    $main-heading: 70rem, 16rem, 0.4rem, 7rem, var(--color-white),
+      var(--color-primary);
+    margin: 0 0 4rem 0;
+    @include borderStyle($main-heading...);
+
+    &__text {
+      @include flexCenter;
+      color: var(--color-white);
+      height: 100%;
+    }
+  }
+  &__secondary-heading {
+    font-size: 4.5rem;
+  }
+
+  &__tertiary-heading {
+  	width: 50%;
+    font-size: 1.8rem;
+    line-height: 3.5rem;
+    text-align: center;
+    margin: 5rem;
+  }
+
+  &__special-word {
+    color: var(--color-primary);
+  }
+
+  &__btn-primary {
+    $btn-pri: 28rem, 5rem, 3rem, 1.8rem, var(--color-primary),
+      var(--color-white);
+    @include borderStyle($btn-pri...);
+
+    &:hover {
+      @include buttonHover(var(--color-white), var(--color-primary));
+    }
+    @include noOutlineFocus;
+  }
+
+  &__btn-secondary {
+    $btn-sec: 28rem, 5rem, 3rem, 2rem, var(--color-white),
+      var(--color-light-grey-1);
+    @include borderStyle($btn-sec...);
+    border: none;
+
+    &:hover {
+      @include buttonHover(var(--color-white), var(--color-primary));
+    }
+
+    @include noOutlineFocus;
+  }
+
+  &__btn-tertiary {
+    $btn-ter: 28rem, 5rem, 3rem, 2rem, var(--color-white), var(--color-primary);
+    @include borderStyle($btn-ter...);
+    &:hover {
+      @include buttonHover(var(--color-primary), var(--color-white));
+    }
+
+    @include noOutlineFocus;
+  }
+
+  &__input {
+    $play-button: 28rem, 5rem, 3rem, 2rem, var(--color-white),
+      var(--color-light-grey-1);
+    @include borderStyle($play-button...);
+    border: none;
+    padding: 0rem 2rem;
+
+    @include noOutlineFocus;
+  }
+  ::placeholder {
+    color: var(--color-white);
+  }
+
+  &__input-error-wrap {
+    @include flexCenter;
+    @include columnSpaceAround;
+  }
+  &__input-error {
+    @include flexCenter;
+    width: 90%;
+    height: 3rem;
+    font-size: 1.8rem;
+    color: var(--color-error);
+  }
+
+  &__image-box-wrap-main {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 5rem;
+        margin: 0 0 5rem 0;
+  }
+
+  &__image-wrap {
+    width: 22rem;
+    height: 22rem;
+    @include flexCenter;
+    @include columnSpaceAround;
+    background-color: var(--color-primary);
+
+    &:hover {
+      background-color: var(--color-secondary);
+    }
+  }
+
+  &__image {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+    @include flexCenter;
+    position: relative;
+  }
+
+  &__image-main-text {
+    position: absolute;
+    font-size: 2.4rem;
+  }
+
+  &__image-main-title {
+    font-size: 2.4rem;
+    margin: 0.6rem;
+    text-align: center;
+  }
+
+  .cs {
+    background: rgba(0, 0, 0, 0.15);
+  }
+
+  .blurred {
+    opacity: 0.5;
+  }
+}

@@ -1,8 +1,12 @@
 .footer {
-  margin-left: -1px;
+  @include flexCenter;
+  display: flex;
+  justify-content: center;
+
   &__img-main {
-    width: 101%;
-    margin-bottom: -5px;
+    width: 85%;
+    position: fixed;
+    bottom: 0px;
   }
 
   &__bottom {

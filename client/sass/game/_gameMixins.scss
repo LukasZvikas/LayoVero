@@ -1,12 +1,15 @@
-@mixin borderStyle ($width, $height, $bradius, $color, $backColor) {
+@mixin borderStyle ($width, $height, $bradius, $fontSize, $color, $backColor) {
   border-style: solid;
-  border-width: 3px;
+  border-width: 2px;
   background-color: $backColor;
   border-color: $color;
   width: $width;
   height: $height;
   border-radius: $bradius;
   font-weight: bold;
+  color: $color;
+  font-size: $fontSize;
+  outline: none;
 }
 
 @mixin flexCenter {
@@ -21,4 +24,15 @@
   background-color: $backColor;
   transform: translateY(3px);
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.3);
+}
+
+@mixin columnSpaceAround {
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+@mixin noOutlineFocus {
+  &:focus {
+    outline: none;
+  }
 }

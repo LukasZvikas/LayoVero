@@ -2,7 +2,7 @@ import React from "react";
 import { shallow, mount } from "enzyme";
 import InitialPageWrapper from "../initialPageWrapper";
 import MainHeading from "../mainHeading";
-import PlayButton from "../playButton";
+import { GameButton } from "../../customComps";
 import Root from "../../../../root";
 
 describe("InitialPage components", () => {
@@ -13,11 +13,15 @@ describe("InitialPage components", () => {
         <InitialPageWrapper />
       </Root>
     );
-    console.log(wrapper.children());
   });
 
   it("main div has a className ip", () => {
-    expect(wrapper.find("div").first().prop("className")).toBe("ip");
+    expect(
+      wrapper
+        .find("div")
+        .first()
+        .prop("className")
+    ).toBe("game-info__main-wrap");
   });
 
   it("should have a Play A Game heading", () => {
@@ -25,8 +29,8 @@ describe("InitialPage components", () => {
   });
 
   it("should have a play button and an action prop as a function", () => {
-  	//console.log("here2", wrapper.find(PlayButton).prop("action").type())
-    expect(wrapper.find(PlayButton)).toHaveLength(1);
+    //console.log("here2", wrapper.find(PlayButton).prop("action").type())
+    expect(wrapper.find(GameButton)).toHaveLength(1);
     //expect(wrapper.find(PlayButton).props().action).
   });
 });

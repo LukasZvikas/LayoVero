@@ -6,9 +6,6 @@ class Footer extends Component {
     return (
       <div className="footer">
         <img className="footer__img-main" src={layoveroFooter} />
-{/*        <div className="footer__bottom">
-
-        </div>*/}
       </div>
     );
   }

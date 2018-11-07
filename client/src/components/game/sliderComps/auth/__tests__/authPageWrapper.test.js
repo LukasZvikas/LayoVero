@@ -1,17 +1,26 @@
 import React from "react";
 import { mount } from "enzyme";
 import AuthPageWrapper from "../authPageWrapper";
-import AuthButton from "../authButton";
+import MainPageWrapper from "../../../MainPageWrapper";
+import { GameButton, GameInput } from "../../../customComps";
+import Root from "../../../../../root";
 
 describe("authPageWrapper", () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(<AuthPageWrapper />);
+    wrapper = mount(
+      <Root>
+        <AuthPageWrapper />
+      </Root>
+    );
+  });
+  afterEach(() => {
+    wrapper.unmount();
   });
 
-  it("has two AuthButtons", () => {
-    expect(wrapper.find(AuthButton)).toHaveLength(3);
+  it("has three GameButtons", () => {
+    expect(wrapper.find(GameButton)).toHaveLength(3);
   });
 
   it("has two divs", () => {
@@ -22,3 +31,5 @@ describe("authPageWrapper", () => {
     expect(wrapper.find("span")).toHaveLength(1);
   });
 });
+
+

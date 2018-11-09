@@ -1,14 +1,17 @@
 import React from "react";
+import { connect } from "react-redux";
 import { GameButton, GameInput, Heading, ImageBox } from "../../customComps";
 import imageBoxTypes from "./imageBoxTypes";
+import { startGame, getRoundQuestions } from "../../../../actions/gameActions";
+import { renderRoundBoxes } from "../../helperFunctions";
 
-const PlanPageWrapper = () => {
-  const renderBoxes = arr => {
-    return arr.map(item => (
-      <ImageBox img={item.image} title={item.title} status={item.status} key={item.title} />
-    ));
+const PlanPageWrapper = props => {
+  const getActions = () => {
+    return {
+      startGame: props.startGame,
+      getRoundQuestions: props.getRoundQuestions
+    };
   };
-
   return (
     <div className="game-info__main-wrap">
       <Heading primaryText={"LET'S"} secondaryText={"PLAY A GAME"} />
@@ -31,11 +34,11 @@ const PlanPageWrapper = () => {
         that will be announced later!
       </div>
       <div class="game-info__image-box-wrap-main">
-        {renderBoxes(imageBoxTypes)}
+        {renderRoundBoxes(imageBoxTypes, getActions())}
       </div>
       <GameButton name={"Rules"} classType={"game-info__btn-primary"} />
     </div>
   );
 };
 
-export default PlanPageWrapper;
+export default connect(null, { startGame, getRoundQuestions })(PlanPageWrapper);

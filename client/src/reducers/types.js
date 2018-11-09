@@ -21,3 +21,5 @@ export const AUTH_PAGE = "auth_page";
 export const NAME_PAGE = "name_page";
 export const CONTACT_PAGE = "contact_page";
 export const PLAN_PAGE = "plan_page";
+export const START_GAME = "start_game";
+export const GET_ROUND_CITY = "get_round_city";

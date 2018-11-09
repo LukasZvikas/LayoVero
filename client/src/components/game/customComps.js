@@ -33,7 +33,7 @@ export const Heading = ({ primaryText, secondaryText, tertiaryText }) => {
   );
 };
 
-export const ImageBox = ({ img, title, status }) => {
+export const ImageBox = ({ img, title, status, onClick }) => {
   const checkBoxStatus = status => {
     return status ? "game-info__image-wrap" : "game-info__image-wrap cs";
   };
@@ -48,9 +48,13 @@ export const ImageBox = ({ img, title, status }) => {
     return status ? "game-info__image" : "game-info__image blurred";
   };
 
+  const onClickCheck = clickEvent => {
+    return clickEvent ? clickEvent : console.log("no onclick");
+  };
+  console.log(onClick)
   return (
     <div>
-      <div className={checkBoxStatus(status)}>
+      <div className={checkBoxStatus(status)} onClick={onClickCheck(onClick)}>
         <img src={img} className={checkImageOpacity(status)} />
         {checkTextStatus(status)}
       </div>

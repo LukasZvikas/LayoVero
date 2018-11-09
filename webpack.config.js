@@ -80,6 +80,10 @@ const config = {
       "/user": {
         target: "http://localhost:5000",
         changeOrigin: true
+      },
+      "/game/*": {
+        target: "http://localhost:5000",
+        changeOrigin: true
       }
     }
   }

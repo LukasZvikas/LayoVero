@@ -1,6 +1,15 @@
-import { INITIAL_PAGE, AUTH_PAGE, NAME_PAGE, CONTACT_PAGE, PLAN_PAGE} from "./types";
+import {
+  INITIAL_PAGE,
+  AUTH_PAGE,
+  NAME_PAGE,
+  CONTACT_PAGE,
+  PLAN_PAGE,
+  START_GAME,
+  GET_ROUND_CITY
+} from "./types";
 
 export default (state = {}, action) => {
+  console.log(state);
   switch (action.type) {
     // case INITIAL_PAGE:
     case AUTH_PAGE:
@@ -11,6 +20,11 @@ export default (state = {}, action) => {
       return { stateOfPage: "contactPage" };
     case PLAN_PAGE:
       return { stateOfPage: "planPage" };
+    case START_GAME:
+      return { ...state, stateOfPage: "startGame" };
+    case GET_ROUND_CITY:
+      console.log("REDUCER", action.payload);
+      return { ...state, questions: action.payload };
     default:
       return { stateOfPage: "initialPage" };
   }

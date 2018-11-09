@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import errorRenderer from "./helperFunctions";
+import { errorRenderer } from "./helperFunctions";
 import * as actions from "../../actions/gameActions";
 
 export class MainPageWrapper extends Component {

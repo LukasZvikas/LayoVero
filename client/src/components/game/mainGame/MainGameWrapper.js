@@ -24,22 +24,44 @@ class MainGameWrapper extends Component {
     ));
   };
 
+  // questionCountCheck = (content) => {
+  // 	let roundCounter = this.state.questCount;
+  // 	let questionLength = this.state.questions.length;
+  //   if (question === roundCounter) return content;
+  // }
+
   getRoundQuestions = arr => {
     let roundCounter = this.state.questCount;
-    console.log("counter", roundCounter);
     if (arr.length === roundCounter) return <div>No more Questions </div>;
-    console.log("ITS BAD");
     let currentQuest = arr[roundCounter];
     return this.renderQuestions(currentQuest);
   };
 
+  getQuestTitle = () => {
+    let roundCounter = this.state.questCount;
+    if (this.state.questions.length === roundCounter)
+      return { primary: "That's", special: "IT" };
+    const getCurrentQuests = this.state.questions[this.state.questCount];
+    const primary = getCurrentQuests.primaryText;
+    const special = getCurrentQuests.specialWord;
+    return { primary, special };
+  };
+
   render() {
-    console.log("STATE", this.state);
+    if (this.state.questions === null) return <div />;
+    console.log("STATE", this.state.questions[this.state.questCount]);
+
+    const titleItems = this.getQuestTitle();
+
     const { questions } = this.state;
 
     return (
       <div className="game-info__main-wrap">
-        <Heading primaryText={"ha"} secondaryText={"ha"} tertiaryText={"?"} />
+        <Heading
+          primaryText={titleItems.primary}
+          secondaryText={titleItems.special}
+          tertiaryText={"?"}
+        />
         <div class="game-info__image-box-wrap-main">
           {questions ? (
             this.getRoundQuestions(this.state.questions)

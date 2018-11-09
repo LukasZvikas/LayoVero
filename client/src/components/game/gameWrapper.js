@@ -42,6 +42,7 @@ class GameWrapper extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log("ST", state);
   return {
     pageState: state.game.stateOfPage
   };

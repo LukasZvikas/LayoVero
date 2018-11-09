@@ -9,7 +9,7 @@ import {
 } from "./types";
 
 export default (state = {}, action) => {
-  console.log(state);
+  console.log("RED",state);
   switch (action.type) {
     // case INITIAL_PAGE:
     case AUTH_PAGE:

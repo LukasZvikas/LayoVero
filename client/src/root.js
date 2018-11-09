@@ -6,11 +6,13 @@ import appReducer from "./reducers";
 import { loadState, saveState } from "./localStorage";
 
 const persistedState = loadState();
-const store = createStore(appReducer, {}, applyMiddleware(reduxThunk));
+const store = createStore(appReducer, persistedState, applyMiddleware(reduxThunk));
 
 store.subscribe(() => {
   saveState({ game: store.getState() });
 });
+
+console.log("store", store.getState());
 
 export default props => {
   return <Provider store={store}>{props.children}</Provider>;

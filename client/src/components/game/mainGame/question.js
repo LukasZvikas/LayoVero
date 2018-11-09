@@ -1,10 +1,11 @@
 import React from "react";
+import sacreCoeur from "../../../../images/sacreCoeur.png";
 
-const Question = ({ img, title }) => {
+const Question = ({ img, title, onClick }) => {
   return (
     <div>
-      <div className="game-info__image-wrap">
-        <img src={img} className="game-info__image" />
+      <div className="game-info__image-wrap" onClick={onClick}>
+        <img src={sacreCoeur} className="game-info__image" />
       </div>
       <div className="game-info__image-main-title">{title}</div>
     </div>

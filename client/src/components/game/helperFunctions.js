@@ -33,8 +33,8 @@ export const renderRoundBoxes = (arr, action) => {
           status={item.status}
           key={item.title}
           onClick={() => {
-            action.startGame();
             action.getRoundQuestions(item.city);
+            action.startGame();
           }}
         />
       );

@@ -5,7 +5,7 @@ import AuthPageWrapper from "./sliderComps/auth/authPageWrapper";
 import NamePageWrapper from "./sliderComps/name/namePageWrapper";
 import ContactPageWrapper from "./sliderComps/contact/contactPageWrapper";
 import PlanPageWrapper from "./sliderComps/plan/planPageWrapper";
-import MainGameWrapper from "./mainGame/MainGameWrapper";
+// import MainGameWrapper from "./mainGame/MainGameWrapper";
 
 class GameWrapper extends Component {
   removeFooter = () => {
@@ -27,8 +27,6 @@ class GameWrapper extends Component {
         return <NamePageWrapper />;
       case "contactPage":
         return <ContactPageWrapper />;
-      case "startGame":
-        return <MainGameWrapper />;
       case "planPage":
         this.removeFooter();
         return <PlanPageWrapper />;

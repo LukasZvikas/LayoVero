@@ -2,6 +2,9 @@ import React from "react";
 import sacreCoeur from "../../../../images/sacreCoeur.png";
 
 const Question = ({ img, title, onClick }) => {
+	// const selectAnswer = () => {
+		
+	// }
   return (
     <div>
       <div className="game-info__image-wrap" onClick={onClick}>

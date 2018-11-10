@@ -7,6 +7,8 @@ import {
   START_GAME,
   GET_ROUND_CITY
 } from "../reducers/types";
+import history from "../utilities/history";
+
 import axios from "axios";
 
 export const askForAuth = () => {
@@ -32,8 +34,12 @@ export const showPlan = () => {
 export const getRoundQuestions = city => async dispatch => {
   console.log(city);
   const res = await axios.post("/game/getRoundCity", { city });
+
   console.log("RES", res);
 
-  localStorage.setItem("questions", JSON.stringify(res.data));
+  await localStorage.setItem("questions", JSON.stringify(res.data));
+
+  // history.push("/round/1");
+  
   dispatch({ type: GET_ROUND_CITY, payload: res.data });
 };

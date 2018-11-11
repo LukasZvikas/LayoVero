@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const GameButton = ({ action, name, classType }) => {
   return (
@@ -48,17 +49,16 @@ export const ImageBox = ({ img, title, status, onClick }) => {
     return status ? "game-info__image" : "game-info__image blurred";
   };
 
-  const onClickCheck = clickEvent => {
-    return clickEvent ? clickEvent : console.log("no onclick");
-  };
-  console.log(onClick)
-  return (
-    <div>
-      <div className={checkBoxStatus(status)} onClick={onClickCheck(onClick)}>
-        <img src={img} className={checkImageOpacity(status)} />
-        {checkTextStatus(status)}
+  const mainStructure = () => {
+    return (
+      <div>
+        <div className={checkBoxStatus(status)}>
+          <img src={img} className={checkImageOpacity(status)} />
+          {checkTextStatus(status)}
+        </div>
+        <div className="game-info__image-main-title">{title}</div>
       </div>
-      <div className="game-info__image-main-title">{title}</div>
-    </div>
-  );
+    );
+  };
+  return status ? <Link to="/round/1">{mainStructure()}</Link> : mainStructure();
 };

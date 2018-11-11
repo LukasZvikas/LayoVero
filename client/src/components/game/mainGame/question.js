@@ -3,7 +3,7 @@ import sacreCoeur from "../../../../images/sacreCoeur.png";
 
 const Question = ({ img, title, onClick }) => {
 	// const selectAnswer = () => {
-		
+
 	// }
   return (
     <div>
@@ -11,6 +11,7 @@ const Question = ({ img, title, onClick }) => {
         <img src={sacreCoeur} className="game-info__image" />
       </div>
       <div className="game-info__image-main-title">{title}</div>
+      <div className="game-info__answer"></div> 
     </div>
   );
 };

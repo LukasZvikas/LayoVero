@@ -1,13 +1,39 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import parisQData from "./parisQData";
-import { renderBoxes } from "../helperFunctions";
 import { Heading, GameButton } from "../customComps";
 import Question from "./question";
 import { getRoundQuestions } from "../../../actions/gameActions";
 
 class MainGameWrapper extends Component {
-  state = { questions: null, questCount: 0, choice: "", correctAnswer: "" };
+  state = {
+    questionsFromLS: null,
+    questCount: 0,
+    choice: "",
+    answered: false
+  };
+
+  checkLocalStorage = () => {
+    let storage = localStorage.getItem("questions");
+    if (storage === null) this.props.getRoundQuestions("paris");
+    else {
+      let parsedStorage = JSON.parse(storage);
+      this.setState({ questionsFromLS: parsedStorage });
+    }
+  };
+
+  questCountMatcher = () => {
+    let storage = localStorage.getItem("questCount");
+    const { questCount } = this.state;
+    if (questCount !== storage && storage !== null) return storage;
+    return questCount;
+  };
+
+  getQuestCount = () => {
+    let savedQuestCount = localStorage.getItem("questCount");
+    const { questCount } = this.state;
+    return savedQuestCount ? savedQuestCount : questCount;
+  };
 
   removeFooter = () => {
     let footer = document.getElementsByClassName("footer__img-main")[0];
@@ -17,18 +43,13 @@ class MainGameWrapper extends Component {
   };
   componentDidMount() {
     this.removeFooter();
-    this.props.getRoundQuestions("paris");
+    //first check where to render data from. Make a request or just get it from localStorage.
+    this.checkLocalStorage();
   }
 
   renderQuestions = questArray => {
     let answersArr = questArray.answers;
     return answersArr.map(item => {
-      console.log(item.title);
-      console.log("ISCORRECT", item.correct);
-      if (item.correct) {
-        console.log(item.correct);
-        this.setState({ correctAnswer: item.title });
-      }
       return (
         <Question
           title={item.title}
@@ -38,59 +59,100 @@ class MainGameWrapper extends Component {
     });
   };
 
-  // questionCountCheck = (content) => {
-  // 	let roundCounter = this.state.questCount;
-  // 	let questionLength = this.state.questions.length;
-  //   if (question === roundCounter) return content;
-  // }
-
+  changeToAnswered = () => {
+    this.setState({ answered: true });
+  };
+  renderButtonType = state => {
+    let isMatch = this.questCountMatcher();
+    if (state === false)
+      return (
+        <GameButton
+          name={"Check answer"}
+          classType={"game-info__btn-primary"}
+          action={() => {
+            this.checkIfCorrect(this.state.choice);
+            this.changeToAnswered();
+          }}
+        />
+      );
+    return (
+      <GameButton
+        name={"Next question"}
+        classType={"game-info__btn-primary"}
+        action={() => {
+          this.setState(
+            prevState => ({
+              questCount: prevState.questCount + 1
+            }),
+            () => {
+              localStorage.setItem("questCount", this.state.questCount);
+              this.setState({ answered: false, choice: "" });
+              this.refreshCorrect();
+            }
+          );
+        }}
+      />
+    );
+  };
   getRoundQuestions = arr => {
-    let roundCounter = this.state.questCount;
-    if (arr.length === roundCounter) return <div>No more Questions </div>;
+    let roundCounter = this.getQuestCount();
+    if (arr.length == roundCounter) return <div>No more Questions </div>;
+    console.log("roundCounter", roundCounter);
     let currentQuest = arr[roundCounter];
     return this.renderQuestions(currentQuest);
   };
 
   getQuestTitle = arr => {
-    let roundCounter = this.state.questCount;
-    if (arr.length === roundCounter)
+    let roundCounter = this.getQuestCount();
+    console.log("WHAT IS THIS", arr.length, roundCounter);
+    if (arr.length == roundCounter) {
+      console.log("WHAT?");
       return { primary: "That's", special: "IT" };
-    const getCurrentQuests = arr[this.state.questCount];
+    }
+    const getCurrentQuests = arr[roundCounter];
     const primary = getCurrentQuests.primaryText;
     const special = getCurrentQuests.specialWord;
     return { primary, special };
   };
 
-  checkIfCorrect = choice => {
-    if (choice === correctChoice) return <div>CORRECT!</div>;
+  refreshCorrect = () => {
+    document.getElementsByClassName("game-info__answer")[0].innerHTML = "";
+  };
 
-    return <div>INCORRECT </div>;
+  checkIfCorrect = choice => {
+    const { questionsFromLS } = this.state;
+    let roundCounter = this.getQuestCount();
+
+    if (choice === questionsFromLS[roundCounter].correct_answer)
+      document.getElementsByClassName("game-info__answer")[0].innerHTML =
+        "CORRECT";
+    else
+      document.getElementsByClassName("game-info__answer")[0].innerHTML =
+        "INCORRECT";
+    return;
   };
 
   render() {
-    console.log("STATES", this.props);
+    const { questionsFromReq } = this.props;
+    const { questionsFromLS } = this.state;
 
-    const { questionArray } = this.props;
-
-    if (questionArray) {
-      const titleItems = this.getQuestTitle(questionArray);
+    const questionsSource = questionsFromReq || questionsFromLS;
+    console.log("ups", this.state);
+    if (questionsSource) {
+      const titleItems = this.getQuestTitle(questionsSource);
       return (
-        <div className="game-info__main-wrap">
-          <Heading
-            primaryText={titleItems.primary}
-            secondaryText={titleItems.special}
-            tertiaryText={"?"}
-          />
-          <div class="game-info__image-box-wrap-main">
-            {this.getRoundQuestions(questionArray)}
+        <div className="game-info">
+          <div className="game-info__main-wrap">
+            <Heading
+              primaryText={titleItems.primary}
+              secondaryText={titleItems.special}
+              tertiaryText={"?"}
+            />
+            <div class="game-info__image-box-wrap-main">
+              {this.getRoundQuestions(questionsSource)}
+            </div>
+            {this.renderButtonType(this.state.answered)}
           </div>
-          <GameButton
-            name={"Check answer"}
-            classType={"game-info__btn-primary"}
-            action={() =>
-              this.setState({ questCount: this.state.questCount + 1 })
-            }
-          />
         </div>
       );
     }
@@ -101,7 +163,7 @@ class MainGameWrapper extends Component {
 
 const mapStateToProps = state => {
   return {
-    questionArray: state.game.questions
+    questionsFromReq: state.game.questions
   };
 };
 

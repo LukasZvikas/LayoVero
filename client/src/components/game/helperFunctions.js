@@ -32,10 +32,6 @@ export const renderRoundBoxes = (arr, action) => {
           title={item.title}
           status={item.status}
           key={item.title}
-          onClick={() => {
-            action.getRoundQuestions(item.city);
-            action.startGame();
-          }}
         />
       );
     }

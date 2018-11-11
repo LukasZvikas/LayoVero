@@ -10,29 +10,8 @@ class MainGameWrapper extends Component {
     questionsFromLS: null,
     questCount: 0,
     choice: "",
-    answered: false
-  };
-
-  checkLocalStorage = () => {
-    let storage = localStorage.getItem("questions");
-    if (storage === null) this.props.getRoundQuestions("paris");
-    else {
-      let parsedStorage = JSON.parse(storage);
-      this.setState({ questionsFromLS: parsedStorage });
-    }
-  };
-
-  questCountMatcher = () => {
-    let storage = localStorage.getItem("questCount");
-    const { questCount } = this.state;
-    if (questCount !== storage && storage !== null) return storage;
-    return questCount;
-  };
-
-  getQuestCount = () => {
-    let savedQuestCount = localStorage.getItem("questCount");
-    const { questCount } = this.state;
-    return savedQuestCount ? savedQuestCount : questCount;
+    answered: false,
+    resultCount: 0
   };
 
   removeFooter = () => {
@@ -41,12 +20,35 @@ class MainGameWrapper extends Component {
     let el = document.getElementsByTagName("body")[0];
     el.style.backgroundColor = "#fff";
   };
+
+  getInitialQuestions = () => {
+    let storage = localStorage.getItem("questions");
+    if (storage === null) this.props.getRoundQuestions("paris");
+    else {
+      let parsedStorage = JSON.parse(storage);
+      this.setState({ questionsFromLS: parsedStorage });
+    }
+  };
+
+  checkCountMatch = key => {
+    //checks if localStorage's and state's questCount's match
+    let storage = localStorage.getItem(key);
+    const { questCount } = this.state;
+    if (questCount !== storage && storage !== null) return storage;
+    return questCount;
+  };
+
+  changeToAnswered = () => {
+    this.setState({ answered: true });
+  };
+
+  //first check where to render data from. Make a request or just get it from localStorage.
   componentDidMount() {
     this.removeFooter();
-    //first check where to render data from. Make a request or just get it from localStorage.
-    this.checkLocalStorage();
+    this.getInitialQuestions();
   }
 
+  // render a set of 4 questions everytime.
   renderQuestions = questArray => {
     let answersArr = questArray.answers;
     return answersArr.map(item => {
@@ -59,18 +61,55 @@ class MainGameWrapper extends Component {
     });
   };
 
-  changeToAnswered = () => {
-    this.setState({ answered: true });
+  incrementLSCount = key => {
+    let storage = localStorage.getItem(key);
+
+    if (!storage) {
+      localStorage.setItem(key, this.state.resultCount);
+    } else {
+      let parsedStorage = JSON.parse(storage);
+
+      parsedStorage++;
+
+      let stringStorage = JSON.stringify(parsedStorage);
+
+      localStorage.setItem(key, stringStorage);
+    }
   };
+
+  incrementCount = () => {
+    this.setState(
+      prevState => ({
+        questCount: prevState.questCount + 1
+      }),
+      () => {
+        this.incrementLSCount("questCount");
+        this.setState({ answered: false, choice: "" });
+        this.resetAnswerCheck();
+      }
+    );
+  };
+
   renderButtonType = state => {
-    let isMatch = this.questCountMatcher();
+    let isMatch = this.checkCountMatch("questCount");
     if (state === false)
       return (
         <GameButton
           name={"Check answer"}
           classType={"game-info__btn-primary"}
           action={() => {
-            this.checkIfCorrect(this.state.choice);
+            let isCorrect = this.checkIfCorrect(this.state.choice);
+            isCorrect
+              ? this.setState(
+                  prevState => ({
+                    resultCount: prevState.resultCount + 1
+                  }),
+                  () => {
+                    this.incrementLSCount("resultCount");
+                  }
+                )
+              : console.log("incorrect");
+
             this.changeToAnswered();
           }}
         />
@@ -79,34 +118,22 @@ class MainGameWrapper extends Component {
       <GameButton
         name={"Next question"}
         classType={"game-info__btn-primary"}
-        action={() => {
-          this.setState(
-            prevState => ({
-              questCount: prevState.questCount + 1
-            }),
-            () => {
-              localStorage.setItem("questCount", this.state.questCount);
-              this.setState({ answered: false, choice: "" });
-              this.refreshCorrect();
-            }
-          );
-        }}
+        action={() => this.incrementCount()}
       />
     );
   };
+
+  // check if there are more questions, call renderQuestions if there are, otherwise return stub.
   getRoundQuestions = arr => {
-    let roundCounter = this.getQuestCount();
+    let roundCounter = this.checkCountMatch("questCount");
     if (arr.length == roundCounter) return <div>No more Questions </div>;
-    console.log("roundCounter", roundCounter);
     let currentQuest = arr[roundCounter];
     return this.renderQuestions(currentQuest);
   };
 
   getQuestTitle = arr => {
-    let roundCounter = this.getQuestCount();
-    console.log("WHAT IS THIS", arr.length, roundCounter);
+    let roundCounter = this.checkCountMatch("questCount");
     if (arr.length == roundCounter) {
-      console.log("WHAT?");
       return { primary: "That's", special: "IT" };
     }
     const getCurrentQuests = arr[roundCounter];
@@ -115,29 +142,28 @@ class MainGameWrapper extends Component {
     return { primary, special };
   };
 
-  refreshCorrect = () => {
+  resetAnswerCheck = () => {
     document.getElementsByClassName("game-info__answer")[0].innerHTML = "";
   };
 
   checkIfCorrect = choice => {
     const { questionsFromLS } = this.state;
-    let roundCounter = this.getQuestCount();
+    let roundCounter = this.checkCountMatch("questCount");
 
-    if (choice === questionsFromLS[roundCounter].correct_answer)
+    if (choice === questionsFromLS[roundCounter].correct_answer) {
       document.getElementsByClassName("game-info__answer")[0].innerHTML =
         "CORRECT";
-    else
-      document.getElementsByClassName("game-info__answer")[0].innerHTML =
-        "INCORRECT";
-    return;
+      return true;
+    }
+    document.getElementsByClassName("game-info__answer")[0].innerHTML =
+      "INCORRECT";
+    return false;
   };
 
   render() {
     const { questionsFromReq } = this.props;
     const { questionsFromLS } = this.state;
-
     const questionsSource = questionsFromReq || questionsFromLS;
-    console.log("ups", this.state);
     if (questionsSource) {
       const titleItems = this.getQuestTitle(questionsSource);
       return (

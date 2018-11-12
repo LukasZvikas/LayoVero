@@ -22,12 +22,24 @@ class MainGameWrapper extends Component {
   };
 
   getInitialQuestions = () => {
-    let storage = localStorage.getItem("questions");
-    if (storage === null) this.props.getRoundQuestions("paris");
-    else {
-      let parsedStorage = JSON.parse(storage);
-      this.setState({ questionsFromLS: parsedStorage });
+    let LSquestions = localStorage.getItem("questions");
+    let LSresultCount = localStorage.getItem("resultCount");
+    let LSquestCount = localStorage.getItem("questCount");
+    let LSquestCountHelp = localStorage.getItem("questCountHelp");
+
+    if (LSquestions === null) {
+      this.props.getRoundQuestions(1);
+      localStorage.setItem("questCount", 0);
+      localStorage.setItem("resultCount", 0);
+      localStorage.setItem("questCountHelp", 0);
+    } else {
+      //added LSquestCountHelp to make sure that if the question is answered and page is refreshed, it shows a new question, instead of the one answered
+      if (LSquestCount !== LSquestCountHelp) {
+        this.incrementLSCount("questCount");
+      }
     }
+    let parsedLSQuestions = JSON.parse(LSquestions);
+    this.setState({ questionsFromLS: parsedLSQuestions });
   };
 
   checkCountMatch = key => {
@@ -55,7 +67,11 @@ class MainGameWrapper extends Component {
       return (
         <Question
           title={item.title}
-          onClick={() => this.setState({ choice: item.title })}
+          onClick={() =>
+            this.state.answered
+              ? this.incrementCount()
+              : this.setState({ choice: item.title })
+          }
         />
       );
     });
@@ -65,14 +81,11 @@ class MainGameWrapper extends Component {
     let storage = localStorage.getItem(key);
 
     if (!storage) {
-      localStorage.setItem(key, this.state.resultCount);
+      localStorage.setItem(key, 1);
     } else {
       let parsedStorage = JSON.parse(storage);
-
       parsedStorage++;
-
       let stringStorage = JSON.stringify(parsedStorage);
-
       localStorage.setItem(key, stringStorage);
     }
   };
@@ -88,6 +101,11 @@ class MainGameWrapper extends Component {
         this.resetAnswerCheck();
       }
     );
+  };
+
+  buttonStateCheck = state => {
+    if (state === "") return true;
+    return false;
   };
 
   renderButtonType = state => {
@@ -106,12 +124,13 @@ class MainGameWrapper extends Component {
                   }),
                   () => {
                     this.incrementLSCount("resultCount");
+                    this.incrementLSCount("questCountHelp");
                   }
                 )
-              : console.log("incorrect");
-
+              : this.incrementLSCount("questCountHelp");
             this.changeToAnswered();
           }}
+          isDisabled={this.buttonStateCheck(this.state.choice)}
         />
       );
     return (
@@ -119,6 +138,7 @@ class MainGameWrapper extends Component {
         name={"Next question"}
         classType={"game-info__btn-primary"}
         action={() => this.incrementCount()}
+        isDisabled={this.buttonStateCheck(this.state.choice)}
       />
     );
   };
@@ -126,7 +146,6 @@ class MainGameWrapper extends Component {
   // check if there are more questions, call renderQuestions if there are, otherwise return stub.
   getRoundQuestions = arr => {
     let roundCounter = this.checkCountMatch("questCount");
-    if (arr.length == roundCounter) return <div>No more Questions </div>;
     let currentQuest = arr[roundCounter];
     return this.renderQuestions(currentQuest);
   };
@@ -134,7 +153,7 @@ class MainGameWrapper extends Component {
   getQuestTitle = arr => {
     let roundCounter = this.checkCountMatch("questCount");
     if (arr.length == roundCounter) {
-      return { primary: "That's", special: "IT" };
+      return { primary: "Your", special: "Score" };
     }
     const getCurrentQuests = arr[roundCounter];
     const primary = getCurrentQuests.primaryText;
@@ -148,36 +167,60 @@ class MainGameWrapper extends Component {
 
   checkIfCorrect = choice => {
     const { questionsFromLS } = this.state;
+    const { questionsFromReq } = this.props;
     let roundCounter = this.checkCountMatch("questCount");
-
-    if (choice === questionsFromLS[roundCounter].correct_answer) {
-      document.getElementsByClassName("game-info__answer")[0].innerHTML =
-        "CORRECT";
+    let whichAvailable = questionsFromLS || questionsFromReq;
+    if (choice === whichAvailable[roundCounter].correct_answer) {
+      document.getElementsByClassName("game-info__answer")[0].innerHTML = "CORRECT";
       return true;
     }
-    document.getElementsByClassName("game-info__answer")[0].innerHTML =
-      "INCORRECT";
+    document.getElementsByClassName("game-info__answer")[0].innerHTML = "INCORRECT";
     return false;
+  };
+
+  incrementedQuestCount = () => {
+    let storage = localStorage.getItem("questCount");
+    let parsedStorage = JSON.parse(storage);
+    parsedStorage++;
+    return parsedStorage;
   };
 
   render() {
     const { questionsFromReq } = this.props;
     const { questionsFromLS } = this.state;
     const questionsSource = questionsFromReq || questionsFromLS;
+    const roundCounter = this.checkCountMatch("questCount");
     if (questionsSource) {
-      const titleItems = this.getQuestTitle(questionsSource);
+      if (questionsSource.length != roundCounter) {
+        const titleItems = this.getQuestTitle(questionsSource);
+        return (
+          <div className="game-info">
+            <div className="game-info__correct-count">
+              Question{" "}
+              {localStorage.getItem("questCount")
+                ? this.incrementedQuestCount()
+                : this.state.questCount + 1}{" "}
+              / 20{" "}
+            </div>
+            <div className="game-info__main-wrap">
+              <Heading
+                primaryText={titleItems.primary}
+                secondaryText={titleItems.special}
+                tertiaryText={"?"}
+              />
+              <div class="game-info__image-box-wrap-main">
+                {this.getRoundQuestions(questionsSource)}
+              </div>
+              {this.renderButtonType(this.state.answered)}
+            </div>
+          </div>
+        );
+      }
       return (
         <div className="game-info">
-          <div className="game-info__main-wrap">
-            <Heading
-              primaryText={titleItems.primary}
-              secondaryText={titleItems.special}
-              tertiaryText={"?"}
-            />
-            <div class="game-info__image-box-wrap-main">
-              {this.getRoundQuestions(questionsSource)}
-            </div>
-            {this.renderButtonType(this.state.answered)}
+          <div className="game-info__end-wrap">
+            Congratulations, you finished the Quiz! You earned{" "}
+            {localStorage.getItem("resultCount")} points.{" "}
           </div>
         </div>
       );

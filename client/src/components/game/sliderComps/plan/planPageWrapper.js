@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router";
 import { connect } from "react-redux";
 import { GameButton, GameInput, Heading, ImageBox } from "../../customComps";
 import imageBoxTypes from "./imageBoxTypes";

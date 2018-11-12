@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const GameButton = ({ action, name, classType }) => {
+export const GameButton = ({ action, name, classType, isDisabled }) => {
+  console.log("ISIT", isDisabled);
   return (
-    <button onClick={action} className={classType}>
+    <button onClick={action} className={classType} disabled={isDisabled}>
       {name}
     </button>
   );
@@ -28,7 +29,7 @@ export const Heading = ({ primaryText, secondaryText, tertiaryText }) => {
   return (
     <div className="game-info__secondary-heading">
       {primaryText}{" "}
-      <span className="game-info__special-word">{secondaryText}</span>{" "}
+      <span className="game-info__special-word">{secondaryText}</span>
       {tertiaryText}
     </div>
   );
@@ -60,5 +61,9 @@ export const ImageBox = ({ img, title, status, onClick }) => {
       </div>
     );
   };
-  return status ? <Link to="/round/1">{mainStructure()}</Link> : mainStructure();
+  return status ? (
+    <Link to="/round/1">{mainStructure()}</Link>
+  ) : (
+    mainStructure()
+  );
 };

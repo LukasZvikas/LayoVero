@@ -31,9 +31,9 @@ export const showPlan = () => {
   return { type: PLAN_PAGE };
 };
 
-export const getRoundQuestions = city => async dispatch => {
-  console.log(city);
-  const res = await axios.post("/game/getRoundCity", { city });
+export const getRoundQuestions = round => async dispatch => {
+  console.log(round);
+  const res = await axios.post("/game/getRoundCity", { round });
 
   console.log("RES", res);
 

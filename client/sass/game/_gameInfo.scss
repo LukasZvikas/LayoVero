@@ -21,10 +21,13 @@
   }
   &__secondary-heading {
     font-size: 4.5rem;
+    width: 65%;
+    text-align: center;
+    line-height: 6rem;
   }
 
   &__tertiary-heading {
-  	width: 50%;
+    width: 50%;
     font-size: 1.8rem;
     line-height: 3.5rem;
     text-align: center;
@@ -98,7 +101,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 5rem;
-        margin: 0 0 5rem 0;
+    margin: 7.5rem 0 7.5rem 0;
   }
 
   &__image-wrap {
@@ -138,5 +141,20 @@
 
   .blurred {
     opacity: 0.5;
+  }
+
+  &__correct-count {
+    color: var(--color-primary);
+    font-size: 2.8rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: flex-end;
+    margin: 4rem 4rem 4rem 0;
+  }
+
+  &__end-wrap {
+    display: flex;
+    justify-content: center;
+    font-size: 2.8rem;
   }
 }

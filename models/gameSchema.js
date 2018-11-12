@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const gameQuestionSchema = new Schema({
   _id: String,
-  city: String,
+  round: Number,
   question: String,
   primaryText: String,
   specialWord: String,

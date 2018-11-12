@@ -51,7 +51,7 @@ export const Question = ({
       return "CORRECT!";
     } else if (!isCorrect && isAnswered && choice === title) {
       if (type === "class") return "incorrect";
-      return "INCORRECT"!;
+      return "INCORRECT!";
     }
     return "";
   };

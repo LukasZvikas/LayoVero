@@ -27,17 +27,41 @@ import { Heading, GameButton } from "../customComps";
 //   );
 // };
 
-export const Question = ({ img, title, onClick }) => {
-  // const selectAnswer = () => {
+export const Question = ({
+  img,
+  title,
+  onClick,
+  image,
+  choice,
+  isAnswered,
+  isCorrect
+}) => {
+  //`../../../../images/${image}.png`
 
-  // }
+  const isChosen = () => {
+    if (choice === title) {
+      return "chosen";
+    }
+    return "";
+  };
+
+  const answerStyle = () => {
+    if (isCorrect && isAnswered && choice === title)
+      return <div className="game-info__answer correct">CORRECT!</div>;
+    else if (!isCorrect && isAnswered && choice === title)
+      return <div className="game-info__answer incorrect">INCORRECT!</div>;
+    return <div />;
+  };
+
   return (
     <div>
-      <div className="game-info__image-wrap" onClick={onClick}>
-        <img src={sacreCoeur} className="game-info__image" />
+      <div className={isChosen()}>
+        <div className="game-info__image-wrap" onClick={onClick}>
+          <img src={sacreCoeur} className="game-info__image" />
+        </div>
+        <div className="game-info__image-main-title">{title}</div>
       </div>
-      <div className="game-info__image-main-title">{title}</div>
-      <div className="game-info__answer" />
+      {answerStyle()}
     </div>
   );
 };

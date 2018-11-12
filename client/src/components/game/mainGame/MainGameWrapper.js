@@ -6,13 +6,17 @@ import Question from "./question";
 import { getRoundQuestions } from "../../../actions/gameActions";
 
 class MainGameWrapper extends Component {
-  state = {
-    questionsFromLS: null,
-    questCount: 0,
-    choice: "",
-    answered: false,
-    resultCount: 0
-  };
+  constructor(props) {
+    super(props);
+    this.initialState = {
+      questionsFromLS: null,
+      questCount: 0,
+      choice: "",
+      answered: false,
+      resultCount: 0
+    };
+    this.state = this.initialState;
+  }
 
   removeFooter = () => {
     let footer = document.getElementsByClassName("footer__img-main")[0];
@@ -60,8 +64,13 @@ class MainGameWrapper extends Component {
     this.getInitialQuestions();
   }
 
+  isCorrect = (title, correctAnswer) => {
+    if (title === correctAnswer) return true;
+    return false;
+  };
   // render a set of 4 questions everytime.
-  renderQuestions = questArray => {
+  renderQuestions = (questArray, correctAnswer) => {
+    console.log(correctAnswer);
     let answersArr = questArray.answers;
     return answersArr.map(item => {
       return (
@@ -72,6 +81,10 @@ class MainGameWrapper extends Component {
               ? this.incrementCount()
               : this.setState({ choice: item.title })
           }
+          image={item.image}
+          choice={this.state.choice}
+          isCorrect={this.isCorrect(item.title, correctAnswer)}
+          isAnswered={this.state.answered}
         />
       );
     });
@@ -147,7 +160,7 @@ class MainGameWrapper extends Component {
   getRoundQuestions = arr => {
     let roundCounter = this.checkCountMatch("questCount");
     let currentQuest = arr[roundCounter];
-    return this.renderQuestions(currentQuest);
+    return this.renderQuestions(currentQuest, arr[roundCounter].correct_answer);
   };
 
   getQuestTitle = arr => {
@@ -171,10 +184,12 @@ class MainGameWrapper extends Component {
     let roundCounter = this.checkCountMatch("questCount");
     let whichAvailable = questionsFromLS || questionsFromReq;
     if (choice === whichAvailable[roundCounter].correct_answer) {
-      document.getElementsByClassName("game-info__answer")[0].innerHTML = "CORRECT";
+      // document.getElementsByClassName("game-info__answer")[0].innerHTML =
+      //   "CORRECT";
       return true;
     }
-    document.getElementsByClassName("game-info__answer")[0].innerHTML = "INCORRECT";
+    // document.getElementsByClassName("game-info__answer")[0].innerHTML =
+    //   "INCORRECT";
     return false;
   };
 
@@ -221,6 +236,18 @@ class MainGameWrapper extends Component {
           <div className="game-info__end-wrap">
             Congratulations, you finished the Quiz! You earned{" "}
             {localStorage.getItem("resultCount")} points.{" "}
+            <GameButton
+              name={"Play Again"}
+              classType={"game-info__btn-primary"}
+              action={() => {
+                localStorage.removeItem("resultCount");
+                localStorage.removeItem("questCount");
+                localStorage.removeItem("questions");
+                localStorage.removeItem("questCountHelp");
+                this.setState(this.initialState);
+                window.location.reload();
+              }}
+            />
           </div>
         </div>
       );

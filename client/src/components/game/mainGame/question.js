@@ -45,12 +45,15 @@ export const Question = ({
     return "";
   };
 
-  const answerStyle = () => {
-    if (isCorrect && isAnswered && choice === title)
-      return <div className="game-info__answer correct">CORRECT!</div>;
-    else if (!isCorrect && isAnswered && choice === title)
-      return <div className="game-info__answer incorrect">INCORRECT!</div>;
-    return <div />;
+  const answerStyle = type => {
+    if (isCorrect && isAnswered && choice === title) {
+      if (type === "class") return "correct";
+      return "CORRECT!";
+    } else if (!isCorrect && isAnswered && choice === title) {
+      if (type === "class") return "incorrect";
+      return "INCORRECT"!;
+    }
+    return "";
   };
 
   return (
@@ -61,7 +64,10 @@ export const Question = ({
         </div>
         <div className="game-info__image-main-title">{title}</div>
       </div>
-      {answerStyle()}
+      <div className={`game-info__answer ${answerStyle("class")}`}>
+        {" "}
+        {answerStyle("text")}{" "}
+      </div>
     </div>
   );
 };

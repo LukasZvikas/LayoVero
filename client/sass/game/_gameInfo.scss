@@ -31,7 +31,7 @@
     font-size: 1.8rem;
     line-height: 3.5rem;
     text-align: center;
-    margin: 5rem;
+    margin: 3rem 0 0 0;
   }
 
   &__special-word {
@@ -101,7 +101,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 5rem;
-    margin: 7.5rem 0 7.5rem 0;
+    margin: 5.5rem 0 5.5rem 0;
   }
 
   &__image-wrap {
@@ -167,21 +167,20 @@
     color: var(--color-secondary);
   }
 
-  .correct {
-    font-size: 2rem;
-    color: var(--color-primary); ;
+  &__answer {
+  	font-size: 2rem;
     display: flex;
     justify-content: center;
     height: 4rem;
     align-items: center;
   }
 
+  .correct {
+    color: var(--color-primary); 
+   }
+
   .incorrect {
-  	font-size: 2rem;
-    color: var(--color-error); ;
-    display: flex;
-    justify-content: center;
-    height: 4rem;
-    align-items: center;
-  }
+	color: var(--color-error);
+	}
+
 }

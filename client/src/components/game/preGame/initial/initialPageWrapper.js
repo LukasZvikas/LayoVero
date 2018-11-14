@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { askForAuth } from "../../../actions/gameActions";
-import { GameButton } from "../customComps";
+import { askForAuth } from "../../../../actions/gameActions";
+import { GameButton } from "../../customComps";
 import MainHeading from "./mainHeading";
 
 class InitialPageWrapper extends Component {

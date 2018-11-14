@@ -3,7 +3,7 @@ import aboutUsWrapper from "./aboutUs/aboutUsWrapper";
 import BlogWrapper from "./blog/BlogWrapper";
 import BlogPost from "./blog/BlogPost";
 import AfterAuthWrapper from "./index/afterAuth/AfterAuthWrapper";
-import GameWrapper from "./game/gameWrapper";
+import PreGameWrapper from "./game/preGame/preGameWrapper";
 import MainGameWrapper from "./game/mainGame/MainGameWrapper";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "./Header/Header";
@@ -24,7 +24,7 @@ class Main extends Component {
               <Route path="/blog" component={BlogWrapper} />
               <Route path="/signup" component={SignUp} />
               <Route path="/reset/:token" component={ResetPassword} />*/}
-              <Route exact path="/" component={GameWrapper} />
+              <Route exact path="/" component={PreGameWrapper} />
               <Route exact path="/round/:token" component={MainGameWrapper} />
             </Switch>
             <Footer />

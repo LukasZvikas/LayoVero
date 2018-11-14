@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import parisQData from "./parisQData";
 import { Heading, GameButton } from "../customComps";
 import Question from "./question";
 import { getRoundQuestions } from "../../../actions/gameActions";
+import { removeFooter } from "../helperFunctions";
 
 class MainGameWrapper extends Component {
   constructor(props) {
@@ -17,14 +17,6 @@ class MainGameWrapper extends Component {
     };
     this.state = this.initialState;
   }
-
-  removeFooter = () => {
-    let footer = document.getElementsByClassName("footer__img-main")[0];
-    if (footer) footer.remove();
-    let el = document.getElementsByTagName("body")[0];
-    el.style.backgroundColor = "#fff";
-  };
-
   getInitialQuestions = () => {
     let LSquestions = localStorage.getItem("questions");
     let LSresultCount = localStorage.getItem("resultCount");
@@ -46,21 +38,9 @@ class MainGameWrapper extends Component {
     this.setState({ questionsFromLS: parsedLSQuestions });
   };
 
-  checkCountMatch = key => {
-    //checks if localStorage's and state's questCount's match
-    let storage = localStorage.getItem(key);
-    const { questCount } = this.state;
-    if (questCount !== storage && storage !== null) return storage;
-    return questCount;
-  };
-
-  changeToAnswered = () => {
-    this.setState({ answered: true });
-  };
-
   //first check where to render data from. Make a request or just get it from localStorage.
   componentDidMount() {
-    this.removeFooter();
+    removeFooter();
     this.getInitialQuestions();
   }
 
@@ -70,7 +50,6 @@ class MainGameWrapper extends Component {
   };
   // render a set of 4 questions everytime.
   renderQuestions = (questArray, correctAnswer) => {
-    console.log(correctAnswer);
     let answersArr = questArray.answers;
     return answersArr.map(item => {
       return (
@@ -121,6 +100,24 @@ class MainGameWrapper extends Component {
     return false;
   };
 
+  changeToAnswered = () => {
+    this.setState({ answered: true });
+  };
+
+  answerHandler = isCorrect => {
+    return isCorrect
+      ? this.setState(
+          prevState => ({
+            resultCount: prevState.resultCount + 1
+          }),
+          () => {
+            this.incrementLSCount("resultCount");
+            this.incrementLSCount("questCountHelp");
+          }
+        )
+      : this.incrementLSCount("questCountHelp");
+  };
+
   renderButtonType = state => {
     let isMatch = this.checkCountMatch("questCount");
     if (state === false)
@@ -129,18 +126,12 @@ class MainGameWrapper extends Component {
           name={"Check answer"}
           classType={"game-info__btn-primary"}
           action={() => {
-            let isCorrect = this.checkIfCorrect(this.state.choice);
-            isCorrect
-              ? this.setState(
-                  prevState => ({
-                    resultCount: prevState.resultCount + 1
-                  }),
-                  () => {
-                    this.incrementLSCount("resultCount");
-                    this.incrementLSCount("questCountHelp");
-                  }
-                )
-              : this.incrementLSCount("questCountHelp");
+            let isCorrect = this.checkIfCorrect(
+              this.state.choice,
+              this.state.questionsFromLS,
+              this.props.questionsFromReq
+            );
+            this.answerHandler(isCorrect);
             this.changeToAnswered();
           }}
           isDisabled={this.buttonStateCheck(this.state.choice)}
@@ -165,9 +156,6 @@ class MainGameWrapper extends Component {
 
   getQuestTitle = arr => {
     let roundCounter = this.checkCountMatch("questCount");
-    if (arr.length == roundCounter) {
-      return { primary: "Your", special: "Score" };
-    }
     const getCurrentQuests = arr[roundCounter];
     const primary = getCurrentQuests.primaryText;
     const special = getCurrentQuests.specialWord;
@@ -178,18 +166,18 @@ class MainGameWrapper extends Component {
     document.getElementsByClassName("game-info__answer")[0].innerHTML = "";
   };
 
-  checkIfCorrect = choice => {
-    const { questionsFromLS } = this.state;
-    const { questionsFromReq } = this.props;
+  checkCountMatch = key => {
+    //checks if localStorage's and state's questCount's match
+    let storage = localStorage.getItem(key);
+    const { questCount } = this.state;
+    if (questCount !== storage && storage !== null) return storage;
+    return questCount;
+  };
+
+  checkIfCorrect = (choice, dataFromLS, dataFromReq) => {
     let roundCounter = this.checkCountMatch("questCount");
-    let whichAvailable = questionsFromLS || questionsFromReq;
-    if (choice === whichAvailable[roundCounter].correct_answer) {
-      // document.getElementsByClassName("game-info__answer")[0].innerHTML =
-      //   "CORRECT";
-      return true;
-    }
-    // document.getElementsByClassName("game-info__answer")[0].innerHTML =
-    //   "INCORRECT";
+    let whichAvailable = dataFromLS || dataFromReq;
+    if (choice === whichAvailable[roundCounter].correct_answer) return true;
     return false;
   };
 
@@ -198,6 +186,13 @@ class MainGameWrapper extends Component {
     let parsedStorage = JSON.parse(storage);
     parsedStorage++;
     return parsedStorage;
+  };
+
+  resetGame = () => {
+    localStorage.removeItem("resultCount");
+    localStorage.removeItem("questCount");
+    localStorage.removeItem("questions");
+    localStorage.removeItem("questCountHelp");
   };
 
   render() {
@@ -240,10 +235,7 @@ class MainGameWrapper extends Component {
               name={"Play Again"}
               classType={"game-info__btn-primary"}
               action={() => {
-                localStorage.removeItem("resultCount");
-                localStorage.removeItem("questCount");
-                localStorage.removeItem("questions");
-                localStorage.removeItem("questCountHelp");
+                this.resetGame();
                 this.setState(this.initialState);
                 window.location.reload();
               }}

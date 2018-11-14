@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import InitialPageWrapper from "./initialPage/initialPageWrapper";
-import AuthPageWrapper from "./sliderComps/auth/authPageWrapper";
-import NamePageWrapper from "./sliderComps/name/namePageWrapper";
-import ContactPageWrapper from "./sliderComps/contact/contactPageWrapper";
-import PlanPageWrapper from "./sliderComps/plan/planPageWrapper";
-// import MainGameWrapper from "./mainGame/MainGameWrapper";
+import InitialPageWrapper from "./initial/initialPageWrapper";
+import AuthPageWrapper from "./auth/authPageWrapper";
+import NamePageWrapper from "./name/namePageWrapper";
+// import ContactPageWrapper from "./contact/contactPageWrapper";
+import PlanPageWrapper from "./plan/planPageWrapper";
 
-class GameWrapper extends Component {
+
+class PreGameWrapper extends Component {
   removeFooter = () => {
     let footer = document.getElementsByClassName("footer__img-main")[0];
 
@@ -46,4 +46,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, null)(GameWrapper);
+export default connect(mapStateToProps, null)(PreGameWrapper);

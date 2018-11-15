@@ -2,8 +2,8 @@ import React from "react";
 import { shallow, mount } from "enzyme";
 import InitialPageWrapper from "../initialPageWrapper";
 import MainHeading from "../mainHeading";
-import { GameButton } from "../../customComps";
-import Root from "../../../../root";
+import { GameButton } from "../../../customComps";
+import Root from "../../../../../root";
 
 describe("InitialPage components", () => {
   let wrapper;

@@ -2,31 +2,6 @@ import React from "react";
 import sacreCoeur from "../../../../images/sacreCoeur.png";
 import { Heading, GameButton } from "../customComps";
 
-// export const QuestionFrame = () => {
-//   return (
-//     <div className="game-info">
-//       <div className="game-info__correct-count">
-//         Question{" "}
-//         {localStorage.getItem("resultCount")
-//           ? this.incrementedResultCount()
-//           : this.state.resultCount + 1}{" "}
-//         / 20{" "}
-//       </div>
-//       <div className="game-info__main-wrap">
-//         <Heading
-//           primaryText={titleItems.primary}
-//           secondaryText={titleItems.special}
-//           tertiaryText={"?"}
-//         />
-//         <div class="game-info__image-box-wrap-main">
-//           {this.getRoundQuestions(questionsSource)}
-//         </div>
-//         {this.renderButtonType(this.state.answered)}
-//       </div>
-//     </div>
-//   );
-// };
-
 export const Question = ({
   img,
   title,
@@ -46,6 +21,7 @@ export const Question = ({
   };
 
   const answerStyle = type => {
+  	
     if (isCorrect && isAnswered && choice === title) {
       if (type === "class") return "correct";
       return "CORRECT!";

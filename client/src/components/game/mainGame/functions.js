@@ -1,6 +1,32 @@
 import React from "react";
 import Question from "./question";
+import { Heading, GameButton } from "../customComps";
 
+//QUESTION COMPONENT
+////////////////////
+
+export const isChosen = props => {
+  if (props.choice === props.title) {
+    return "chosen";
+  }
+  return "";
+};
+
+export const answerStyle = (type, props) => {
+  if (props.isCorrect && props.isAnswered && props.choice === props.title) {
+    if (type === "class") {
+      return "correct";
+    }
+    return "CORRECT!";
+  } else if (!props.isCorrect && props.isAnswered && props.choice === props.title) {
+    if (type === "class") return "incorrect";
+    return "INCORRECT!";
+  }
+  return "";
+};
+
+//MAIN WRAPPER
+//////////////
 export const isCorrect = (title, correctAnswer) => {
   if (title === correctAnswer) return true;
   return false;
@@ -12,7 +38,7 @@ export const buttonStateCheck = state => {
 };
 
 export const incrementLSCount = key => {
-  let storage = localStorage.getItem(key);
+  const storage = localStorage.getItem(key);
   if (!storage) {
     localStorage.setItem(key, 1);
   } else {
@@ -24,10 +50,10 @@ export const incrementLSCount = key => {
 };
 
 export const getInitialQuestions = (action, setQState, incrementLSCount) => {
-  let LSquestions = localStorage.getItem("questions");
-  let LSresultCount = localStorage.getItem("resultCount");
-  let LSquestCount = localStorage.getItem("questCount");
-  let LSquestCountHelp = localStorage.getItem("questCountHelp");
+  const LSquestions = localStorage.getItem("questions");
+  const LSresultCount = localStorage.getItem("resultCount");
+  const LSquestCount = localStorage.getItem("questCount");
+  const LSquestCountHelp = localStorage.getItem("questCountHelp");
 
   if (LSquestions === null) {
     action(1);
@@ -40,34 +66,8 @@ export const getInitialQuestions = (action, setQState, incrementLSCount) => {
       incrementLSCount("questCount");
     }
   }
-  let parsedLSQuestions = JSON.parse(LSquestions);
+  const parsedLSQuestions = JSON.parse(LSquestions);
   setQState(parsedLSQuestions);
-};
-
-export const renderQuestions = (
-  questArray,
-  correctAnswer,
-  state,
-  isCorrect
-) => {
-  console.log("Quests", questArray);
-  const answersArr = questArray.answers;
-  return answersArr.map(item => {
-    return (
-      <Question
-        title={item.title}
-        onClick={() =>
-          this.state.answered
-            ? this.incrementCount()
-            : this.setState({ choice: item.title })
-        }
-        image={item.image}
-        choice={state.choice}
-        isCorrect={isCorrect(item.title, correctAnswer)}
-        isAnswered={state.answered}
-      />
-    );
-  });
 };
 
 export const doResultIncrement = prevState => ({
@@ -86,34 +86,92 @@ export const answerHandler = (isCorrect, setResultState, incrementLSCount) => {
     : incrementLSCount("questCountHelp");
 };
 
+export const renderButtonType = (
+  state,
+  questionsFromReq,
+  setResultState,
+  changeToAnswered,
+  incrementCount
+) => {
+  let isMatch = getCountNumber("questCount", state.questCount);
+  if (state.answered === false)
+    return (
+      <GameButton
+        name={"Check answer"}
+        classType={"game-info__btn-primary"}
+        action={() => {
+          let isCorrect = checkIfCorrect(
+            state.choice,
+            state.questionsFromLS,
+            questionsFromReq,
+            getCountNumber,
+            state.questCount
+          );
+          answerHandler(isCorrect, setResultState, incrementLSCount);
+          changeToAnswered();
+        }}
+        isDisabled={buttonStateCheck(state.choice)}
+      />
+    );
+  return (
+    <GameButton
+      name={"Next question"}
+      classType={"game-info__btn-primary"}
+      action={() => incrementCount()}
+      isDisabled={buttonStateCheck(state.choice)}
+    />
+  );
+};
+// render a set of 4 questions everytime.
+export const renderQuestions = (
+  questArray,
+  correctAnswer,
+  state,
+  isCorrect,
+  checkIfAnswered
+) => {
+  const answersArr = questArray.answers;
+  return answersArr.map(item => (
+    <Question
+      title={item.title}
+      onClick={() => checkIfAnswered(item.title)}
+      image={item.image}
+      choice={state.choice}
+      isCorrect={isCorrect(item.title, correctAnswer)}
+      isAnswered={state.answered}
+    />
+  ));
+};
+
 export const getRoundQuestions = (
   arr,
   getCountNumber,
   renderQuestions,
   state,
-  isCorrect
+  isCorrect,
+  checkIfAnswered
 ) => {
-  let roundCounter = getCountNumber("questCount");
-  let currentQuest = arr[roundCounter];
+  const roundCounter = getCountNumber("questCount");
+  const currentQuest = arr[roundCounter];
   return renderQuestions(
     currentQuest,
     arr[roundCounter].correct_answer,
     state,
-    isCorrect
+    isCorrect,
+    checkIfAnswered
   );
 };
 
 export const getQuestTitle = (arr, getCountNumber) => {
-  let roundCounter = getCountNumber("questCount");
+  const roundCounter = getCountNumber("questCount");
   const getCurrentQuests = arr[roundCounter];
   const primary = getCurrentQuests.primaryText;
   const special = getCurrentQuests.specialWord;
   return { primary, special };
 };
-
+//checks if localStorage's and state's questCount's match
 export const getCountNumber = (key, questCount) => {
-  //checks if localStorage's and state's questCount's match
-  let storage = localStorage.getItem(key);
+  const storage = localStorage.getItem(key);
   if (questCount !== storage && storage !== null) return storage;
   return questCount;
 };
@@ -125,15 +183,14 @@ export const checkIfCorrect = (
   getCountNumber,
   questCount
 ) => {
-  let roundCounter = getCountNumber("questCount", questCount);
-  let whichAvailable = dataFromLS || dataFromReq;
-  console.log("HAHA", choice, whichAvailable[roundCounter].correct_answer);
+  const roundCounter = getCountNumber("questCount", questCount);
+  const whichAvailable = dataFromLS || dataFromReq;
   if (choice === whichAvailable[roundCounter].correct_answer) return true;
   return false;
 };
 
 export const incrementLSQuestCount = () => {
-  let storage = localStorage.getItem("questCount");
+  const storage = localStorage.getItem("questCount");
   let parsedStorage = JSON.parse(storage);
   parsedStorage++;
   return parsedStorage;

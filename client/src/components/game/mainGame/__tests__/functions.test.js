@@ -5,8 +5,61 @@ import Question from "../question";
 
 window.localStorage = localStorageMock;
 
+const getQArray = () => {
+  return {
+    answers: [
+      { title: "Moulin Rouge", image: "moulinRouge", status: true },
+      { title: "The Louvre", image: "louvre", status: true },
+      { title: "The Eiffel Tower", image: "eiffelTower", status: true },
+      { title: "Arc de Triomphe", image: "arcDeTriomphe", status: true }
+    ]
+  };
+};
+
 describe("MainGameWrapper functions", () => {
-  describe("isCorrect works correctly", () => {
+  describe("renderButtonType", () => {
+    let actions;
+    let state;
+    beforeEach(() => {
+      actions = {
+        questionsFromReq: jest.fn(),
+        setResultState: jest.fn(),
+        changeToAnswered: jest.fn(),
+        incrementCount: jest.fn()
+      };
+      state = {
+        questCount: 2,
+        choice: "",
+        questionsFromLS: getQArray()
+      };
+    });
+    ///Will need to change
+    it("returns arrow if answered is true", () => {
+      const answeredTrue = Object.assign({ answered: true }, state);
+      const result = functions.renderButtonType(
+        answeredTrue,
+        actions.questionsFromReq,
+        actions.setResultState,
+        actions.changeToAnswered,
+        actions.incrementCount
+      );
+      expect(result.props.name).toBe("Next question");
+    });
+
+    it("returns check answer button is answered is false", () => {
+      const answeredFalse = Object.assign({ answered: false }, state);
+      const result = functions.renderButtonType(
+        answeredFalse,
+        actions.questionsFromReq,
+        actions.setResultState,
+        actions.changeToAnswered,
+        actions.incrementCount
+      );
+      expect(result.props.name).toBe("Check answer");
+    });
+  });
+
+  describe("isCorrect", () => {
     it("returns true if names match", () => {
       let result = functions.isCorrect("Eiffel Tower", "Eiffel Tower");
       expect(result).toBe(true);
@@ -106,31 +159,17 @@ describe("MainGameWrapper functions", () => {
 
   describe("renderQuestions", () => {
     it("has 4 questions rendered", () => {
-      let questionArr = {
-        _id: "5be4c0abe7179a51a854c5a0",
-        round: 1,
-        question: "Which building was supposed to be temporary?",
-        correct_answer: "The Eiffel Tower",
-        primaryText: "Which building was supposed to be",
-        specialWord: "temporary",
-        answers: [
-          { title: "Moulin Rouge", image: "moulinRouge", status: true },
-          { title: "The Louvre", image: "louvre", status: true },
-          { title: "The Eiffel Tower", image: "eiffelTower", status: true },
-          { title: "Arc de Triomphe", image: "arcDeTriomphe", status: true }
-        ]
-      };
-
+      let questionArr = getQArray();
       let state = { answered: false, choice: "" };
-      let actions = { isCorrect: jest.fn() };
+      let actions = { isCorrect: jest.fn(), ifAnswered: jest.fn() };
 
       const result = functions.renderQuestions(
         questionArr,
         "The Eiffel Tower",
         state,
-        functions.isCorrect
+        functions.isCorrect,
+        functions.ifAnswered
       );
-
       expect(result.length).toBe(4);
     });
   });

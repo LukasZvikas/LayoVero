@@ -14,7 +14,7 @@ describe("QuestionsWrapper", () => {
       LSQcount: "7",
       getRoundQuestions: jest.fn(),
       incrementLSQCount: jest.fn(),
-      renderButtonType: jest.fn(() => GameButton),
+      renderButtonType: jest.fn(),
       state: {
         questionsFromLS: [
           { correct_answer: "The Eiffel Tower" },
@@ -38,7 +38,6 @@ describe("QuestionsWrapper", () => {
     expect(wrapper.find(QuestionCount)).toHaveLength(1);
   });
   it("has one Heading component", () => {
-  
     expect(wrapper.find(Heading)).toHaveLength(1);
   });
 });

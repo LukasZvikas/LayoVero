@@ -1,13 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const GameButton = ({ action, name, classType, isDisabled }) => {
-  console.log("ISIT", isDisabled);
-  return (
-    <button onClick={action} className={classType} disabled={isDisabled}>
-      {name}
-    </button>
-  );
+export const GameButton = ({ action, name, classType, isDisabled, to }) => {
+  const checkType = to => {
+    if (to)
+      return (
+        <Link
+          onClick={action}
+          className={`${classType} link`}
+          disabled={isDisabled}
+          to={to}
+        >
+          {name}
+        </Link>
+      );
+    return (
+      <button onClick={action} className={classType} disabled={isDisabled}>
+        {name}
+      </button>
+    );
+  };
+  return checkType(to);
 };
 
 export const GameInput = ({ name, classType, placeholder, action }) => {

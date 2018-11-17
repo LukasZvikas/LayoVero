@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
 import { emailField, passwordField } from "./formFields.js";
 import { connect } from "react-redux";
-import { SignUserUp, ShowSignInModal } from "../../actions/authActions";
+import {
+  SignUserUp,
+  ShowSignInModal,
+  HideModal
+} from "../../actions/authActions";
 import { Modal } from "../Modal";
 
 import layovero from "../../../images/layovero.png";
@@ -12,11 +16,16 @@ class SignUp extends Component {
     this.props.SignUserUp({ email, password });
   }
 
+  hideModal() {
+    this.props.HideModal();
+  }
+
   render() {
     const {
       handleSubmit,
       fields: { email, password, passwordConfirm },
-      ShowSignInModal
+      ShowSignInModal,
+      HideModal
     } = this.props;
 
     return (
@@ -24,7 +33,7 @@ class SignUp extends Component {
         className="auth-form"
         onSubmit={handleSubmit(this.onFormSubmit.bind(this))}
       >
-        <div className="auth-form__exit" onClick={this.props.hide}>
+        <div className="auth-form__exit" onClick={() => HideModal()}>
           &times;
         </div>
         <div className="auth-form__box">
@@ -110,4 +119,4 @@ export default reduxForm({
   form: "signUpForm",
   fields: ["email", "password", "passwordConfirm"],
   validate
-})(connect(null, { SignUserUp, ShowSignInModal })(SignUp));
+})(connect(null, { SignUserUp, ShowSignInModal, HideModal })(SignUp));

@@ -7,7 +7,7 @@ import {
   SHOW_FORGOT_PASS,
   SEND_FORGOT,
   SHOW_RESET,
-  RESET_PASS, 
+  RESET_PASS,
   SEND_US_EMAIL
 } from "../reducers/types";
 import axios from "axios";
@@ -60,6 +60,7 @@ export const ShowResetComponent = () => async dispatch => {
 };
 
 export const ShowSignUpModal = () => {
+  console.log("ACTION SIGN UP");
   return { type: SHOW_SIGNUP };
 };
 
@@ -72,7 +73,7 @@ export const ShowForgotPassword = () => {
 };
 
 export const SendUsEmail = () => {
-  console.log("here")
+  console.log("here");
   return { type: SEND_US_EMAIL };
 };
 

@@ -4,6 +4,8 @@ import BlogWrapper from "./blog/BlogWrapper";
 import BlogPost from "./blog/BlogPost";
 import AfterAuthWrapper from "./index/afterAuth/AfterAuthWrapper";
 import PreGameWrapper from "./game/preGame/preGameWrapper";
+import AuthPageWrapper from "./game/preGame/auth/authPageWrapper";
+import PlanPageWrapper from "./game/preGame/plan/planPageWrapper";
 import MainGameWrapper from "./game/mainGame/MainGameWrapper";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "./Header/Header";
@@ -14,7 +16,7 @@ import ResetPassword from "./authentication/resetPassword";
 class Main extends Component {
   render() {
     return (
-      <div>
+      <div className="main">
         <BrowserRouter>
           <div>
             <Header />
@@ -25,7 +27,11 @@ class Main extends Component {
               <Route path="/signup" component={SignUp} />
               <Route path="/reset/:token" component={ResetPassword} />*/}
               <Route exact path="/" component={PreGameWrapper} />
-              <Route exact path="/round/:token" component={MainGameWrapper} />
+              <div className="game-info">
+                <Route exact path="/ready" component={AuthPageWrapper} />
+                <Route exact path="/plan" component={PlanPageWrapper} />
+                <Route exact path="/round/:token" component={MainGameWrapper} />
+              </div>
             </Switch>
             <Footer />
           </div>

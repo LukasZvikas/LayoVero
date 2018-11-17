@@ -1,5 +1,5 @@
 .game-info {
-  margin: 12rem 0 0 0;
+  margin: 13rem 0 0 0;
   &__main-wrap {
     @include flexCenter;
     @include columnSpaceAround;
@@ -47,6 +47,10 @@
       @include buttonHover(var(--color-white), var(--color-primary));
     }
     @include noOutlineFocus;
+  }
+
+  .link {
+    @include flexCenter;
   }
 
   &__btn-secondary {
@@ -168,7 +172,7 @@
   }
 
   &__answer {
-  	font-size: 2rem;
+    font-size: 2rem;
     display: flex;
     justify-content: center;
     height: 4rem;
@@ -176,11 +180,10 @@
   }
 
   .correct {
-    color: var(--color-primary); 
-   }
+    color: var(--color-primary);
+  }
 
   .incorrect {
-	color: var(--color-error);
-	}
-
+    color: var(--color-error);
+  }
 }

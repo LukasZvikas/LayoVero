@@ -11,12 +11,10 @@ class InitialPageWrapper extends Component {
       <div className="game-info__main-wrap">
         <MainHeading />
         <GameButton
-          action={() => {
-            console.log("clicked");
-            askForAuth();
-          }}
+          action={() => askForAuth()}
           name={"Start"}
           classType={"game-info__btn-tertiary"}
+          to={"/ready"}
         />
       </div>
     );

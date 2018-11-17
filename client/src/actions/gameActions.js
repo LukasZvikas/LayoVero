@@ -32,14 +32,11 @@ export const showPlan = () => {
 };
 
 export const getRoundQuestions = round => async dispatch => {
-  console.log(round);
   const res = await axios.post("/game/getRoundCity", { round });
-
-  console.log("RES", res);
 
   await localStorage.setItem("questions", JSON.stringify(res.data));
 
   // history.push("/round/1");
-  
+
   dispatch({ type: GET_ROUND_CITY, payload: res.data });
 };

@@ -3,9 +3,8 @@ import { connect } from "react-redux";
 import InitialPageWrapper from "./initial/initialPageWrapper";
 import AuthPageWrapper from "./auth/authPageWrapper";
 import NamePageWrapper from "./name/namePageWrapper";
-// import ContactPageWrapper from "./contact/contactPageWrapper";
+import ContactPageWrapper from "./contact/contactPageWrapper";
 import PlanPageWrapper from "./plan/planPageWrapper";
-
 
 class PreGameWrapper extends Component {
   removeFooter = () => {

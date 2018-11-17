@@ -9,7 +9,6 @@ import {
 } from "./types";
 
 export default (state = {}, action) => {
-  console.log("RED",state);
   switch (action.type) {
     // case INITIAL_PAGE:
     case AUTH_PAGE:
@@ -23,7 +22,6 @@ export default (state = {}, action) => {
     case START_GAME:
       return { ...state, stateOfPage: "startGame" };
     case GET_ROUND_CITY:
-      console.log("REDUCER", action.payload);
       return { ...state, questions: action.payload };
     default:
       return { stateOfPage: "initialPage" };

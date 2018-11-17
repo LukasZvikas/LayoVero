@@ -42,6 +42,42 @@ class Header extends Component {
     }
   }
 
+  modalRenderer = type => {
+    let props = { type, container: null };
+    switch (type) {
+      case "signUp":
+        props.container = <SignUp />;
+        return this.getModal(props);
+      case "signIn":
+        props.container = <SignIn />;
+        return this.getModal(props);
+      case "emailVerification":
+        props.container = <VerifyEmail />;
+        return this.getModal(props);
+      case "forgotPass":
+        props.container = <ForgotPassword />;
+        return this.getModal(props);
+      case "resetPass":
+        props.container = <ResetPassword />;
+        return this.getModal(props);
+      case "showResetSuccess":
+        props.container = <SuccessPassReset />;
+        return this.getModal(props);
+      case "forgetPassSuccess":
+        props.container = <ForgetPassSuccess />;
+        return this.getModal(props);
+      case "sendUsEmail":
+        props.container = <EmailUs />;
+        return this.getModal(props);
+    }
+  };
+
+  getModal = props => {
+    return (
+      <ModalTemplate modalType={props.type} modalContainer={props.container} />
+    );
+  };
+
   hideModal() {
     this.props.HideModal();
   }
@@ -53,48 +89,12 @@ class Header extends Component {
       )
     )
       return null;
-
+    const { auth } = this.props;
+    console.log("AUTH", auth);
     return (
       <div>
         {this.renderContent()}
-        <ModalTemplate
-          modalType={this.props.auth.signUp}
-          modalContainer={<SignUp hide={() => this.hideModal()} />}
-        />
-
-        <ModalTemplate
-          modalType={this.props.auth.signIn}
-          modalContainer={<SignIn hide={() => this.hideModal()} />}
-        />
-
-        <ModalTemplate
-          modalType={this.props.auth.emailVerification}
-          modalContainer={<VerifyEmail hide={() => this.hideModal()} />}
-        />
-
-        <ModalTemplate
-          modalType={this.props.auth.forgotPass}
-          modalContainer={<ForgotPassword hide={() => this.hideModal()} />}
-        />
-
-        <ModalTemplate
-          modalType={this.props.auth.resetPass}
-          modalContainer={<ResetPassword hide={() => this.hideModal()} />}
-        />
-
-        <ModalTemplate
-          modalType={this.props.auth.showResetSuccess}
-          modalContainer={<SuccessPassReset hide={() => this.hideModal()} />}
-        />
-
-        <ModalTemplate
-          modalType={this.props.auth.forgetPassSuccess}
-          modalContainer={<ForgetPassSuccess hide={() => this.hideModal()} />}
-        />
-        <ModalTemplate
-          modalType={this.props.auth.sendUsEmail}
-          modalContainer={<EmailUs hide={() => this.hideModal()} />}
-        />
+        {this.modalRenderer(auth.type)}
       </div>
     );
   }

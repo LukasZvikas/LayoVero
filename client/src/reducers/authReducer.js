@@ -25,23 +25,23 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case SIGN_UP:
-      return action.payload, { emailVerification: true, signUp: false };
+      return action.payload, { type: "emailVerification" };
     case SIGN_IN:
       return { authenticated: true };
     case SHOW_SIGNUP:
-      return { signUp: true };
+      return { ...state, type: "signUp" };
     case SHOW_SIGNIN:
-      return { signIn: true, emailVerification: false, signUp: false };
+      return { ...state, type: "signIn" };
     case SHOW_FORGOT_PASS:
-      return { forgotPass: true, signIn: false };
+      return { type: "forgotPass" };
     case SEND_FORGOT:
-      return { forgetPassSuccess: true };
+      return { type: "forgetPassSuccess" };
     case SHOW_RESET:
       return action.payload;
     case RESET_PASS:
-      return initialState, { showResetSuccess: true };
+      return initialState, { type: "showResetSuccess" };
     case SEND_US_EMAIL:
-      return { sendUsEmail: true };
+      return { type: "sendUsEmail" };
     case HIDE_MODAL:
       return initialState;
     default:

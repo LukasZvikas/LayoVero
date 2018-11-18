@@ -97,6 +97,7 @@ export class MainGameWrapper extends Component {
         );
         return (
           <QuestionsWrapper
+          	LSResultCount={localStorage.getItem("resultCount")}
             LSQcount={localStorage.getItem("questCount")}
             incrementLSQCount={functions.incrementLSQuestCount}
             state={this.state}

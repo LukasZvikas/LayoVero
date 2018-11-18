@@ -1,5 +1,5 @@
 .game-info {
-  margin: 13rem 0 0 0;
+  margin: 6.5rem 0 0 0;
   &__main-wrap {
     @include flexCenter;
     @include columnSpaceAround;
@@ -145,6 +145,12 @@
 
   .blurred {
     opacity: 0.5;
+  }
+
+  &__count-wrap {
+    margin: 0rem 3rem 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
   }
 
   &__correct-count {

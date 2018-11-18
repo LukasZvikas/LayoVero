@@ -16,7 +16,7 @@ import ResetPassword from "./authentication/resetPassword";
 class Main extends Component {
   render() {
     return (
-      <div className="main">
+      <div>
         <BrowserRouter>
           <div>
             <Header />

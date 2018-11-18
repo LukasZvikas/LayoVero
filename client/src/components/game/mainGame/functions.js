@@ -6,17 +6,14 @@ import { Heading, GameButton } from "../customComps";
 ////////////////////
 
 export const isChosen = props => {
-  if (props.choice === props.title) {
-    return "chosen";
-  }
+  if (props.choice === props.title) return "chosen";
+  else if (props.isAnswered && props.isCorrect) return "chosen";
   return "";
 };
 
-export const answerStyle = (type, props) => {
+export const correctChecker = (type, props) => {
   if (props.isCorrect && props.isAnswered && props.choice === props.title) {
-    if (type === "class") {
-      return "correct";
-    }
+    if (type === "class") return "correct";
     return "CORRECT!";
   } else if (
     !props.isCorrect &&
@@ -25,7 +22,15 @@ export const answerStyle = (type, props) => {
   ) {
     if (type === "class") return "incorrect";
     return "INCORRECT!";
+  } else if (
+    props.isCorrect &&
+    props.isAnswered &&
+    props.choice !== props.title
+  ) {
+    if (type === "class") return "correct";
+    return "CORRECT!";
   }
+
   return "";
 };
 

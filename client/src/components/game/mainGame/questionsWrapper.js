@@ -11,6 +11,7 @@ const QuestionWrapper = props => {
         LSQcount={props.LSQcount}
         action={props.incrementLSQCount}
         stateQCount={props.state.questCount}
+        LSResultCount={props.LSResultCount}
       />
       <div className="game-info__main-wrap">
         <Heading

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import QuestionsWrapper from "./QuestionsWrapper";
 import GameEndWrapper from "./GameEndWrapper";
-import { getRoundQuestions } from "../../../actions/gameActions";
+import { getRoundQuestions, saveScore } from "../../../actions/gameActions";
 import { removeFooter } from "../helperFunctions";
 import * as functions from "./functions";
 
@@ -69,8 +69,22 @@ export class MainGameWrapper extends Component {
     document.getElementsByClassName("game-info__answer")[0].innerHTML = "";
   };
 
+  checkIfLast = (roundCounter, arr, action) => {
+    const diff = arr.length - roundCounter;
+
+    if (diff === 1) return action;
+    return null;
+  };
+
+  clearQStorage = () => {
+    localStorage.removeItem("resultCount");
+    localStorage.removeItem("questCount");
+    localStorage.removeItem("questions");
+    localStorage.removeItem("questCountHelp");
+  };
+
   render() {
-    const { questionsFromReq } = this.props;
+    const { questionsFromReq, saveScore } = this.props;
     const { questionsFromLS, questCount } = this.state;
     const questionsSource = questionsFromReq || questionsFromLS;
     const roundCounter = functions.getCountNumber("questCount", questCount);
@@ -95,12 +109,14 @@ export class MainGameWrapper extends Component {
               functions.isCorrect,
               this.checkIfAnswered
             )}
+            last={this.checkIfLast(roundCounter, questionsSource, saveScore)}
             renderButtonType={functions.renderButtonType(
               this.state,
               questionsFromReq,
               this.setResultState,
               this.changeToAnswered,
-              this.incrementCount
+              this.incrementCount,
+              this.checkIfLast(roundCounter, questionsSource, saveScore)
             )}
           />
         );
@@ -109,7 +125,7 @@ export class MainGameWrapper extends Component {
         <GameEndWrapper
           LSResultCount={localStorage.getItem("resultCount")}
           action={() => {
-            localStorage.clear();
+            this.clearQStorage();
             this.setState(this.initialState);
             window.location.reload();
           }}
@@ -126,4 +142,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { getRoundQuestions })(MainGameWrapper);
+export default connect(mapStateToProps, { getRoundQuestions, saveScore })(
+  MainGameWrapper
+);

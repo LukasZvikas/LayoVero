@@ -64,7 +64,6 @@ exports.signup = async (req, res, next) => {
 };
 
 exports.signin = async (req, res, next) => {
-  console.log(req.user._id);
   await User.findById({ _id: req.user.id }, (err, user) => {
     if (err) {
       return next(err);

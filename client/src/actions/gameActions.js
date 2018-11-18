@@ -40,3 +40,9 @@ export const getRoundQuestions = round => async dispatch => {
 
   dispatch({ type: GET_ROUND_CITY, payload: res.data });
 };
+
+export const saveScore = (score, token) => async dispatch => {
+  const res = await axios.post("/game/saveScore", { score, token });
+
+  console.log("RESS", res);
+};

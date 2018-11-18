@@ -81,7 +81,7 @@ const config = {
         target: "http://localhost:5000",
         changeOrigin: true
       },
-      "/game/*": {
+      "/game": {
         target: "http://localhost:5000",
         changeOrigin: true
       }

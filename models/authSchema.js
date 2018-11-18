@@ -9,7 +9,8 @@ const userSchema = new Schema({
   username: { type: String, unique: true, lowercase: true },
   password: String,
   confirmed: { type: Boolean, default: false },
-  resetPassToken: { type: String, default: undefined }
+  resetPassToken: { type: String, default: undefined },
+  points: {type: Number, default: 0}
   // resetPassExp: { type: Date, default: undefined }
 });
 

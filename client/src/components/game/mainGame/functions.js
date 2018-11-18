@@ -18,7 +18,11 @@ export const answerStyle = (type, props) => {
       return "correct";
     }
     return "CORRECT!";
-  } else if (!props.isCorrect && props.isAnswered && props.choice === props.title) {
+  } else if (
+    !props.isCorrect &&
+    props.isAnswered &&
+    props.choice === props.title
+  ) {
     if (type === "class") return "incorrect";
     return "INCORRECT!";
   }
@@ -91,8 +95,14 @@ export const renderButtonType = (
   questionsFromReq,
   setResultState,
   changeToAnswered,
-  incrementCount
+  incrementCount,
+  checkIfLast
 ) => {
+  //console.log("checkIfLast", checkIfLast);
+
+  const token = localStorage.getItem("token");
+  const last = checkIfLast;
+
   let isMatch = getCountNumber("questCount", state.questCount);
   if (state.answered === false)
     return (
@@ -109,6 +119,10 @@ export const renderButtonType = (
           );
           answerHandler(isCorrect, setResultState, incrementLSCount);
           changeToAnswered();
+          if (typeof last === "function") {
+            const score = localStorage.getItem("resultCount");
+            last(score, token);
+          }
         }}
         isDisabled={buttonStateCheck(state.choice)}
       />

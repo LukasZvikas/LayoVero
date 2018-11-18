@@ -4,6 +4,7 @@ import Question from "./question";
 import QuestionCount from "./questionCount";
 
 const QuestionWrapper = props => {
+  console.log(props);
   return (
     <div className="game-info">
       <QuestionCount

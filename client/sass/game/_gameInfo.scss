@@ -1,8 +1,16 @@
 .game-info {
-  margin: 6.5rem 0 0 0;
+  margin: 6rem 0 0 0;
+
+  &__pre {
+    margin: 6rem 0 0 0;
+  }
   &__main-wrap {
     @include flexCenter;
     @include columnSpaceAround;
+  }
+
+  .pre {
+    margin: 13rem 0 0 0;
   }
   &__wrap-height {
     height: 30rem;
@@ -20,10 +28,10 @@
     }
   }
   &__secondary-heading {
-    font-size: 3.8rem;
+    font-size: 3.5rem;
     width: 60%;
     text-align: center;
-    line-height: 6rem;
+    line-height: 4rem;
   }
 
   &__tertiary-heading {
@@ -104,8 +112,12 @@
   &__image-box-wrap-main {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-gap: 5rem;
+    grid-gap: 8rem;
     margin: 5.5rem 0 5.5rem 0;
+  }
+
+  .mg-wrap-margin {
+    margin: 5.5rem 0 0 0;
   }
 
   &__image-wrap {
@@ -191,5 +203,12 @@
 
   .incorrect {
     color: var(--color-error);
+  }
+
+  &__explanation {
+    line-height: 3rem;
+    font-size: 1.8rem;
+    text-align: center;
+    margin: 3rem 25rem 5rem 25rem;
   }
 }

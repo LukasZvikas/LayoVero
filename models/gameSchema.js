@@ -5,6 +5,7 @@ const gameQuestionSchema = new Schema({
   _id: String,
   round: Number,
   question: String,
+  explanation: String,
   primaryText: String,
   specialWord: String,
   answers: [

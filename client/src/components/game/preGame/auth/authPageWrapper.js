@@ -25,7 +25,7 @@ class AuthPageWrapper extends Component {
   render() {
     const { askForName, ShowSignUpModal } = this.props;
     return (
-      <div className="game-info__main-wrap game-info__wrap-height">
+      <div className="game-info__main-wrap game-info__wrap-height pre">
         <Heading
           primaryText={"ARE YOU"}
           secondaryText={"READY"}

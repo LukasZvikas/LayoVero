@@ -9,6 +9,12 @@ export const Question = props => {
     <div>
       <div className={`${isChosen(props)} ${correctChecker("class", props)}`}>
         <div className="game-info__image-wrap" onClick={props.onClick}>
+{/*          <div>
+            Located in Kuala Lumpur, Malaysia, the Petronas Towers stand at
+            1,483 feet. They also boast the world's highest two-story bridge, a
+            sky bridge on the 41st and 42nd floors, that takes visitors between
+            the two skyscrapers
+          </div>*/}
           <img src={sacreCoeur} className="game-info__image" />
         </div>
         <div className="game-info__image-main-title">{props.title}</div>

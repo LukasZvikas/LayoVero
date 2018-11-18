@@ -20,7 +20,7 @@ class PlanPageWrapper extends Component {
 
   render() {
     return (
-      <div className="game-info__main-wrap">
+      <div className="game-info__main-wrap pre">
         <Heading primaryText={"LET'S"} secondaryText={"PLAY A GAME"} />
         <div className="game-info__tertiary-heading">
           This is{" "}

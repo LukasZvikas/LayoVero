@@ -42,7 +42,7 @@ export const Heading = ({ primaryText, secondaryText, tertiaryText }) => {
   return (
     <div className="game-info__secondary-heading">
       {primaryText}{" "}
-      <span className="game-info__special-word">{secondaryText}</span>
+      <span className="game-info__special-word">{secondaryText}</span>{" "}
       {tertiaryText}
     </div>
   );

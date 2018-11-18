@@ -8,7 +8,7 @@ class InitialPageWrapper extends Component {
   render() {
     const { askForAuth } = this.props;
     return (
-      <div className="game-info__main-wrap">
+      <div className="game-info__main-wrap pre">
         <MainHeading />
         <GameButton
           action={() => askForAuth()}

@@ -5,6 +5,10 @@ import QuestionCount from "./questionCount";
 
 const QuestionWrapper = props => {
   console.log(props);
+
+  const showExplanation = (answered, explanation) => {
+    return answered ? explanation : null;
+  };
   return (
     <div className="game-info">
       <QuestionCount
@@ -19,8 +23,11 @@ const QuestionWrapper = props => {
           secondaryText={props.titleItems.special}
           tertiaryText={"?"}
         />
-        <div class="game-info__image-box-wrap-main">
+        <div className="game-info__image-box-wrap-main mg-wrap-margin">
           {props.getRoundQuestions}
+        </div>
+        <div className="game-info__explanation">
+          {showExplanation(props.state.answered, props.explanation)}
         </div>
         {props.renderButtonType}
       </div>

@@ -116,6 +116,10 @@
     margin: 5.5rem 0 5.5rem 0;
   }
 
+  &__q-frame {
+    border-style: solid;
+    border-color: white;
+  }
   .mg-wrap-margin {
     margin: 5.5rem 0 0 0;
   }
@@ -186,7 +190,7 @@
 
   .chosen {
     border-style: solid;
-    color: var(--color-secondary);
+    border-color: var(--color-secondary);
   }
 
   &__answer {

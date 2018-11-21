@@ -63,7 +63,7 @@ describe("Question interactions", () => {
           .find("div")
           .at(1)
           .prop("className")
-      ).toBe("chosen");
+      ).toBe("chosen correct game-info__q-frame");
     });
 
     it("if choice and title match, div at position 4 has a correct class and div content is CORRECT ", () => {

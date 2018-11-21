@@ -174,7 +174,7 @@ describe("MainGameWrapper functions", () => {
     });
   });
 
-  describe("answerHandler", () => {
+  describe("answerScoreHandler", () => {
     let actions;
     beforeEach(() => {
       actions = {
@@ -183,7 +183,7 @@ describe("MainGameWrapper functions", () => {
       };
     });
     it("calls setState once and incrementLSCount twice, if true parameter is provided", () => {
-      const result = functions.answerHandler(
+      const result = functions.answerScoreHandler(
         true,
         actions.setResultState,
         actions.incrementLSCount
@@ -192,42 +192,12 @@ describe("MainGameWrapper functions", () => {
       expect(actions.incrementLSCount).toHaveBeenCalledTimes(2);
     });
     it("calls incrementLSCount twice, if false parameter is provided", () => {
-      const result = functions.answerHandler(
+      const result = functions.answerScoreHandler(
         false,
         actions.setResultState,
         actions.incrementLSCount
       );
       expect(actions.incrementLSCount).toHaveBeenCalledTimes(1);
-    });
-  });
-
-  describe("getRoundQuestions", () => {
-    it("getCountNumber and renderQuestions gets called once", () => {
-      let actions = {
-        getCountNumber: jest.fn(() => 1),
-        renderQuestions: jest.fn(),
-        isCorrect: jest.fn()
-      };
-      let questionArr = [
-        {
-          correct_answer: "The Eiffel Tower"
-        },
-        {
-          correct_answer: "Russia"
-        }
-      ];
-      let state = { questCount: 0 };
-
-      functions.getRoundQuestions(
-        questionArr,
-        actions.getCountNumber,
-        actions.renderQuestions,
-        state,
-        actions.isCorrect
-      );
-
-      expect(actions.getCountNumber).toHaveBeenCalledTimes(1);
-      expect(actions.renderQuestions).toHaveBeenCalledTimes(1);
     });
   });
 

@@ -15,7 +15,7 @@ describe("QuestionCount", () => {
       wrapper = shallow(<QuestionCount {...props} />);
     });
     it("has 1 div", () => {
-      expect(wrapper.find("div")).toHaveLength(1);
+      expect(wrapper.find("div")).toHaveLength(3);
     });
 
     it("action gets called once if LSQcount exists", () => {
@@ -31,9 +31,6 @@ describe("QuestionCount", () => {
         stateQCount: 0
       };
       wrapper = shallow(<QuestionCount {...props} />);
-    });
-    it("stateQCount gets incremented by 1", () => {
-      expect(wrapper.find("div").props().children[1]).toBe(1);
     });
     it("action does not get called", () => {
       expect(props.action).toHaveBeenCalledTimes(0);

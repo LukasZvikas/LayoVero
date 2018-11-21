@@ -11,10 +11,9 @@ import {
 import { Modal } from "../Modal";
 import { Link, withRouter } from "react-router-dom";
 
-import fb from "../../../images/facebook.svg";
-import google from "../../../images/google.svg";
-import layovero from "../../../images/layovero.png";
-import { Facebook } from "../svgIcons";
+import Heading from "./formComponents/heading";
+import Oauth from "./formComponents/oauth";
+import Footer from "./formComponents/footer";
 
 class SignIn extends Component {
   onFormSubmit({ email, password }) {
@@ -38,19 +37,10 @@ class SignIn extends Component {
           &times;
         </div>
         <div className="auth-form__box">
-          <div className="auth-form__logo">
-            <img src={layovero} width="65" height="65" />
-          </div>
-          <div className="auth-form__heading">
-            <div className="auth-form__heading-item selected">Sign In</div>
-            <span className="auth-form__heading-item or">or</span>
-            <div
-              className="auth-form__heading-item idle"
-              onClick={() => ShowSignUpModal()}
-            >
-              Sign Up
-            </div>
-          </div>
+          <Heading
+            onClick2={() => ShowSignUpModal()}
+            selectOrIdle={{ first: "selected", second: "idle" }}
+          />
           <div className="auth-form__field-wrapper">
             <div className="auth-form__input-box">
               <Field
@@ -77,44 +67,15 @@ class SignIn extends Component {
             <div className="auth-form__cross-line">
               <span className="auth-form__cross-text">or</span>
             </div>
-            <div className="auth-form__oauth-box">
-              <div
-                className="auth-form__google"
-                style={{ backgroundColor: "#dd4b39" }}
-              >
-                <a href="/user/auth/google" className="auth-form__oauth-text">
-                  Login With Google
-                </a>
-
-                <img
-                  className="auth-form__oauth-logo"
-                  src={google}
-                  style={{ left: 1.2 + "rem" }}
-                />
-              </div>
-              <div
-                className="auth-form__facebook"
-                style={{ backgroundColor: "#3b5998" }}
-              >
-                <div className="auth-form__oauth-text">
-                  Sign in with Facebook
-                </div>
-
-                <Facebook
-                  svgClass={"auth-form__oauth-logo"}
-                  height={2.4 + "rem"}
-                  width={2.4 + "rem"}
-                  fill={"#fff"}
-                />
-              </div>
-            </div>
-            <div className="auth-form__new-forgot">Not a Member?</div>
-            <div
-              className="auth-form__new-forgot"
+            <Oauth />
+            <Footer
+              text={"Not a member?"}
+              onClick={() => this.props.ShowSignUpModal()}
+            />
+            <Footer
+              text={"Forgot password?"}
               onClick={() => this.props.ShowForgotPassword()}
-            >
-              Forgot Password?
-            </div>
+            />
           </div>
         </div>
       </form>

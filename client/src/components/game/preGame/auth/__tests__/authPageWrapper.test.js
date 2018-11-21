@@ -4,6 +4,7 @@ import AuthPageWrapper from "../authPageWrapper";
 import MainPageWrapper from "../../../MainPageWrapper";
 import { GameButton, GameInput } from "../../../customComps";
 import Root from "../../../../../root";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 describe("authPageWrapper", () => {
   let wrapper;
@@ -11,7 +12,9 @@ describe("authPageWrapper", () => {
   beforeEach(() => {
     wrapper = mount(
       <Root>
-        <AuthPageWrapper />
+        <Router>
+          <AuthPageWrapper />
+        </Router>
       </Root>
     );
   });
@@ -31,5 +34,3 @@ describe("authPageWrapper", () => {
     expect(wrapper.find("span")).toHaveLength(1);
   });
 });
-
-

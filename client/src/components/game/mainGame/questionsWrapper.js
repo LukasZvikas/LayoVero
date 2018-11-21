@@ -4,8 +4,7 @@ import Question from "./question";
 import QuestionCount from "./questionCount";
 
 const QuestionWrapper = props => {
-  console.log(props);
-
+  console.log("PROPS", props);
   const showExplanation = (answered, explanation) => {
     return answered ? explanation : null;
   };
@@ -24,7 +23,7 @@ const QuestionWrapper = props => {
           tertiaryText={"?"}
         />
         <div className="game-info__image-box-wrap-main mg-wrap-margin">
-          {props.getRoundQuestions}
+          {props.renderQuestions}
         </div>
         <div className="game-info__explanation">
           {showExplanation(props.state.answered, props.explanation)}

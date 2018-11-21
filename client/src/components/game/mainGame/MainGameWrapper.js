@@ -103,10 +103,9 @@ export class MainGameWrapper extends Component {
             incrementLSQCount={functions.incrementLSQuestCount}
             state={this.state}
             titleItems={titleItems}
-            getRoundQuestions={functions.getRoundQuestions(
+            renderQuestions={functions.renderQuestions(
               questionsSource,
-              functions.getCountNumber,
-              functions.renderQuestions,
+              roundCounter,
               this.state,
               functions.isCorrect,
               this.checkIfAnswered

@@ -6,8 +6,8 @@ import { Heading, GameButton } from "../customComps";
 ////////////////////
 
 export const isChosen = props => {
-  if (props.choice === props.title) return "chosen";
-  else if (props.isAnswered && props.isCorrect) return "chosen";
+  if (props.choice === props.title || (props.isAnswered && props.isCorrect))
+    return "chosen";
   return "";
 };
 
@@ -87,7 +87,11 @@ export const setResultState = () => {
   this.setState(doResultIncrement);
 };
 
-export const answerHandler = (isCorrect, setResultState, incrementLSCount) => {
+export const answerScoreHandler = (
+  isCorrect,
+  setResultState,
+  incrementLSCount
+) => {
   return isCorrect
     ? (setResultState(),
       incrementLSCount("resultCount"),
@@ -122,7 +126,7 @@ export const renderButtonType = (
             getCountNumber,
             state.questCount
           );
-          answerHandler(isCorrect, setResultState, incrementLSCount);
+          answerScoreHandler(isCorrect, setResultState, incrementLSCount);
           changeToAnswered();
           if (typeof last === "function") {
             const score = localStorage.getItem("resultCount");
@@ -141,15 +145,18 @@ export const renderButtonType = (
     />
   );
 };
+
 // render a set of 4 questions everytime.
 export const renderQuestions = (
-  questArray,
-  correctAnswer,
+  arr,
+  roundCounter,
   state,
   isCorrect,
   checkIfAnswered
 ) => {
-  const answersArr = questArray.answers;
+  const currentQuest = arr[roundCounter];
+  const correctAnswer = currentQuest.correct_answer;
+  const answersArr = currentQuest.answers;
   return answersArr.map(item => (
     <Question
       title={item.title}
@@ -160,25 +167,6 @@ export const renderQuestions = (
       isAnswered={state.answered}
     />
   ));
-};
-
-export const getRoundQuestions = (
-  arr,
-  getCountNumber,
-  renderQuestions,
-  state,
-  isCorrect,
-  checkIfAnswered
-) => {
-  const roundCounter = getCountNumber("questCount");
-  const currentQuest = arr[roundCounter];
-  return renderQuestions(
-    currentQuest,
-    arr[roundCounter].correct_answer,
-    state,
-    isCorrect,
-    checkIfAnswered
-  );
 };
 
 export const getQuestTitle = (arr, getCountNumber) => {

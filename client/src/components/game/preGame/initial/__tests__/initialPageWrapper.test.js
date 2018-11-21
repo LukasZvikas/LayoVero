@@ -4,24 +4,27 @@ import InitialPageWrapper from "../initialPageWrapper";
 import MainHeading from "../mainHeading";
 import { GameButton } from "../../../customComps";
 import Root from "../../../../../root";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 describe("InitialPage components", () => {
   let wrapper;
   beforeEach(() => {
     wrapper = mount(
       <Root>
-        <InitialPageWrapper />
+        <Router>
+          <InitialPageWrapper />
+        </Router>
       </Root>
     );
   });
 
-  it("main div has a className ip", () => {
+  it("main div has a className pre", () => {
     expect(
       wrapper
         .find("div")
         .first()
         .prop("className")
-    ).toBe("game-info__main-wrap");
+    ).toBe("game-info__main-wrap pre");
   });
 
   it("should have a Play A Game heading", () => {

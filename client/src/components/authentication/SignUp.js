@@ -9,7 +9,8 @@ import {
 } from "../../actions/authActions";
 import { Modal } from "../Modal";
 
-import layovero from "../../../images/layovero.png";
+import Heading from "./formComponents/heading";
+import Footer from "./formComponents/footer";
 
 class SignUp extends Component {
   onFormSubmit({ email, password }) {
@@ -37,19 +38,10 @@ class SignUp extends Component {
           &times;
         </div>
         <div className="auth-form__box">
-          <div className="auth-form__logo">
-            <img src={layovero} width="65" height="65" />
-          </div>
-          <div className="auth-form__heading">
-            <div
-              className="auth-form__heading-item idle"
-              onClick={() => ShowSignInModal()}
-            >
-              Sign In
-            </div>
-            <span className="auth-form__heading-item or">or</span>
-            <div className="auth-form__heading-item selected"> Sign Up </div>
-          </div>
+          <Heading
+            onClick1={() => ShowSignInModal()}
+            selectOrIdle={{ first: "idle", second: "selected" }}
+          />
           <div className="auth-form__field-wrapper">
             <div className="auth-form__input-box">
               <Field
@@ -86,7 +78,10 @@ class SignUp extends Component {
               By clicking "Sign Up", you agree to Layovero's Terms of Use and
               acknowledge you have read the Privacy Policy.
             </div>
-            <div className="auth-form__new">Already a Member?</div>
+            <Footer
+              text={"Already a member?"}
+              onClick={() => this.props.ShowSignInModal()}
+            />
           </div>
         </div>
       </form>

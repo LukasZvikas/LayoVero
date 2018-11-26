@@ -36,6 +36,21 @@ export const correctChecker = (type, props) => {
 
 //MAIN WRAPPER
 //////////////
+
+export const checkIfLast = (roundCounter, arr, action) => {
+  const diff = 1;
+
+  if (diff === 1) return action;
+  return null;
+};
+
+export const clearQStorage = () => {
+  localStorage.removeItem("resultCount");
+  localStorage.removeItem("questCount");
+  localStorage.removeItem("questions");
+  localStorage.removeItem("questCountHelp");
+};
+
 export const isCorrect = (title, correctAnswer) => {
   if (title === correctAnswer) return true;
   return false;
@@ -111,7 +126,7 @@ export const renderButtonType = (
 
   const token = localStorage.getItem("token");
   const last = checkIfLast;
-
+  console.log("STATEEEE", state);
   let isMatch = getCountNumber("questCount", state.questCount);
   if (state.answered === false)
     return (
@@ -169,8 +184,8 @@ export const renderQuestions = (
   ));
 };
 
-export const getQuestTitle = (arr, getCountNumber) => {
-  const roundCounter = getCountNumber("questCount");
+export const getQuestTitle = (arr, getCountNumber, questCount) => {
+  const roundCounter = getCountNumber("questCount", questCount);
   const getCurrentQuests = arr[roundCounter];
   const primary = getCurrentQuests.primaryText;
   const special = getCurrentQuests.specialWord;

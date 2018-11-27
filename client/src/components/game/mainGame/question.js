@@ -4,7 +4,6 @@ import { Heading, GameButton } from "../customComps";
 import { isChosen, correctChecker } from "./functions";
 export const Question = props => {
   //`../../../../images/${image}.png`
-    console.log("props", props);
   return (
     <div className="">
       <div className={`${isChosen(props)} ${correctChecker("class", props)} game-info__q-frame`}>

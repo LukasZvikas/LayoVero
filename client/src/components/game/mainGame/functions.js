@@ -39,7 +39,6 @@ export const correctChecker = (type, props) => {
 
 export const checkIfLast = (roundCounter, arr, action) => {
   const diff = 1;
-
   if (diff === 1) return action;
   return null;
 };
@@ -114,19 +113,8 @@ export const answerScoreHandler = (
     : incrementLSCount("questCountHelp");
 };
 
-export const renderButtonType = (
-  state,
-  questionsFromReq,
-  setResultState,
-  changeToAnswered,
-  incrementCount,
-  checkIfLast
-) => {
-  //console.log("checkIfLast", checkIfLast);
-
+export const renderButtonType = ({ state, props, actions }) => {
   const token = localStorage.getItem("token");
-  const last = checkIfLast;
-  console.log("STATEEEE", state);
   let isMatch = getCountNumber("questCount", state.questCount);
   if (state.answered === false)
     return (
@@ -137,15 +125,19 @@ export const renderButtonType = (
           let isCorrect = checkIfCorrect(
             state.choice,
             state.questionsFromLS,
-            questionsFromReq,
+            props.questionsFromReq,
             getCountNumber,
             state.questCount
           );
-          answerScoreHandler(isCorrect, setResultState, incrementLSCount);
-          changeToAnswered();
+          answerScoreHandler(
+            isCorrect,
+            actions.setResultState,
+            incrementLSCount
+          );
+          actions.changeToAnswered();
           if (typeof last === "function") {
             const score = localStorage.getItem("resultCount");
-            last(score, token);
+            checkIfLast(score, token);
           }
         }}
         isDisabled={buttonStateCheck(state.choice)}
@@ -155,27 +147,22 @@ export const renderButtonType = (
     <GameButton
       name={"Next question"}
       classType={"game-info__btn-primary"}
-      action={() => incrementCount()}
+      action={() => actions.incrementCount()}
       isDisabled={buttonStateCheck(state.choice)}
     />
   );
 };
 
 // render a set of 4 questions everytime.
-export const renderQuestions = (
-  arr,
-  roundCounter,
-  state,
-  isCorrect,
-  checkIfAnswered
-) => {
-  const currentQuest = arr[roundCounter];
+export const renderQuestions = ({ questionsSource, state, actions }) => {
+  const roundCount = getCountNumber("questCount", state.questCount);
+  const currentQuest = questionsSource[roundCount];
   const correctAnswer = currentQuest.correct_answer;
   const answersArr = currentQuest.answers;
   return answersArr.map(item => (
     <Question
       title={item.title}
-      onClick={() => checkIfAnswered(item.title)}
+      onClick={() => actions.checkIfAnswered(item.title)}
       image={item.image}
       choice={state.choice}
       isCorrect={isCorrect(item.title, correctAnswer)}
@@ -184,9 +171,9 @@ export const renderQuestions = (
   ));
 };
 
-export const getQuestTitle = (arr, getCountNumber, questCount) => {
-  const roundCounter = getCountNumber("questCount", questCount);
-  const getCurrentQuests = arr[roundCounter];
+export const getQuestTitle = ({ questionsSource, state }) => {
+  const roundCounter = getCountNumber("questCount", state.questCount);
+  const getCurrentQuests = questionsSource[roundCounter];
   const primary = getCurrentQuests.primaryText;
   const special = getCurrentQuests.specialWord;
   return { primary, special };

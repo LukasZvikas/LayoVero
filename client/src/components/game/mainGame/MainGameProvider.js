@@ -79,42 +79,26 @@ export class MainGameProvider extends Component {
   };
 
   render() {
-    console.log("CHILDREN", functions);
     const { questionsFromReq, saveScore, children } = this.props;
     const { questionsFromLS, questCount } = this.state;
     const questionsSource = questionsFromReq || questionsFromLS;
     const roundCounter = functions.getCountNumber("questCount", questCount);
-    console.log("QUEST COUNT", questCount);
+   
     const gameProps = {
       questionsSource,
       state: this.state,
       checkIfAnswered: this.checkIfAnswered,
       props: { questionsFromReq, saveScore },
-      actions: this.getActions()
-    };
-
-    const endGameProps = {
+      actions: this.getActions(),
       resetState: () => {
         this.setState(this.initialState);
       },
       resultCount: this.state.resultCount
     };
 
-    if (questionsSource) {
-      if (questionsSource.length != roundCounter) {
-        return (
-          <GameContext.Provider value={gameProps}>
-            {children[0]}
-          </GameContext.Provider>
-        );
-      }
-      return (
-        <GameContext.Provider value={endGameProps}>
-          {children[1]}
-        </GameContext.Provider>
-      );
-    }
-    return <div>Loading...</div>;
+    return (
+      <GameContext.Provider value={gameProps}>{children}</GameContext.Provider>
+    );
   }
 }
 

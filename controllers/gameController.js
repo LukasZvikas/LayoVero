@@ -25,11 +25,23 @@ exports.saveScore = (req, res, next) => {
   User.findByIdAndUpdate(
     decoded.id,
     { $inc: { points: score } },
-    function(err, user) {
+    (err, user) => {
       if (err) {
         res.send({ message: "could not save points" });
       }
       res.send({ message: "points saved successfully" });
     }
   );
+};
+
+exports.sendRefferalCode = (req, res, next) => {
+  const token = req.body.token;
+  const decoded = decodeToken(token);
+  User.findById(decoded.id, (err, user) => {
+    if (err) {
+      res.send({ message: "user was not found" });
+    }
+    console.log("USER IS HERE", user);
+    res.send({ message: user.refferal_code });
+  });
 };

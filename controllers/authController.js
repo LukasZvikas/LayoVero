@@ -32,11 +32,13 @@ exports.signup = async (req, res, next) => {
     }
 
     const id = crypto.randomBytes(16).toString("hex");
+    const refCode = crypto.randomBytes(6).toString("hex");
 
     const newUser = User({
       _id: id,
       username: email,
-      password: password
+      password: password,
+      refferal_code: refCode
     });
 
     await newUser.save(err => {

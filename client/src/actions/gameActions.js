@@ -46,3 +46,9 @@ export const saveScore = (score, token) => async dispatch => {
 
   console.log("RESS", res);
 };
+
+export const getRefferalCode = token => async dispatch => {
+  const res = await axios.post("/game/getReff", { token });
+  console.log("RESS", res);
+  localStorage.setItem("refferalCode", res.data.message);
+};

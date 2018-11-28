@@ -10,7 +10,8 @@ const userSchema = new Schema({
   password: String,
   confirmed: { type: Boolean, default: false },
   resetPassToken: { type: String, default: undefined },
-  points: {type: Number, default: 0}
+  points: {type: Number, default: 0},
+  refferal_code: String
   // resetPassExp: { type: Date, default: undefined }
 });
 

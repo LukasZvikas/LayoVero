@@ -1,6 +1,6 @@
 import React, { createContext } from "react";
 import { Heading, GameButton } from "../customComps";
-import Question from "./question";
+import QuestionsRenderer from "./questionsRenderer";
 import QuestionCount from "./questionCount";
 import {
   renderQuestions,
@@ -17,7 +17,6 @@ const QuestionWrapper = props => {
   return (
     <GameContext.Consumer>
       {({ functions, props, state, checkIfAnswered, actions }) => {
-        console.log("STATEEE", state)
         return (
           <div className="game-info">
             <QuestionCount />
@@ -25,31 +24,23 @@ const QuestionWrapper = props => {
               <Heading
                 primaryText={
                   getQuestTitle({
-                    questions: props.questions,
-                    questCount: props.questCount
+                    questions: props.game.questions,
+                    questCount: props.game.questCount
                   }).primary
                 }
                 secondaryText={
                   getQuestTitle({
-                    questions: props.questions,
-                    questCount: props.questCount
+                    questions: props.game.questions,
+                    questCount: props.game.questCount
                   }).special
                 }
                 tertiaryText={"?"}
               />
-              <div className="game-info__image-box-wrap-main mg-wrap-margin">
-                {renderQuestions({
-                  choice: state.choice,
-                  answered: state.answered,
-                  questions: props.questions,
-                  actions,
-                  questCount: props.questCount
-                })}
-              </div>
+              <QuestionsRenderer />
               <div className="game-info__explanation">
                 {showExplanation(
                   state.answered,
-                  props.questions[props.questCount].explanation
+                  props.game.questions[props.game.questCount].explanation
                 )}
               </div>
               {renderButtonType({

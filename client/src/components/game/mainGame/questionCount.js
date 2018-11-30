@@ -17,10 +17,10 @@ const QuestionCount = () => {
         return (
           <div className="game-info__count-wrap">
             <div className="game-info__correct-count">
-              Question {props.questCount} / 20{" "}
+              Question {props.game.questCount + 1} / 20{" "}
             </div>
             <div className="game-info__correct-count">
-              Correct {props.resultCount} / 20{" "}
+              Correct {props.game.resultCount} / 20{" "}
             </div>
           </div>
         );

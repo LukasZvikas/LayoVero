@@ -25,21 +25,16 @@ export class MainGameProvider extends Component {
   //first check where to render data from. Make a request or just get it from localStorage.
   componentDidMount() {
     removeFooter();
+    if (this.props.game.questCount !== this.props.game.questCountHelp) {
+      this.props.incrementCount();
+    }
     const getQuestions = this.props.getRoundQuestions(1);
   }
 
-  // incrementCount = () => {
-  //   this.setState(
-  //     prevState => ({
-  //       questCount: prevState.questCount + 1
-  //     }),
-  //     () => {
-  //       functions.incrementLSCount("questCount");
-  //       this.setState({ answered: false, choice: "" });
-  //       this.resetAnswerCheck();
-  //     }
-  //   );
-  // };
+  resetChoice = () => {
+    this.setState({ answered: false, choice: "" });
+    this.resetAnswerCheck();
+  };
 
   checkIfAnswered = title => {
     return this.state.answered
@@ -51,10 +46,6 @@ export class MainGameProvider extends Component {
     this.setState({ answered: true });
   };
 
-  setResultState = () => {
-    this.setState(functions.doResultIncrement);
-  };
-
   resetAnswerCheck = () => {
     document.getElementsByClassName("game-info__answer")[0].innerHTML = "";
   };
@@ -62,22 +53,17 @@ export class MainGameProvider extends Component {
   getActions = () => {
     return {
       checkIfAnswered: this.checkIfAnswered,
-      setResultState: this.setResultState,
-      changeToAnswered: this.changeToAnswered
+      changeToAnswered: this.changeToAnswered,
+      resetChoice: this.resetChoice
     };
-  };
-
-  resetState = () => {
-    this.setState(this.initialState);
   };
 
   render() {
     const {
-      questions,
+      game,
       saveScore,
       children,
       incrementCount,
-      questCount,
       correctAnswerAction,
       incorrectAnswerAction
     } = this.props;
@@ -86,18 +72,14 @@ export class MainGameProvider extends Component {
       state: this.state,
       checkIfAnswered: this.checkIfAnswered,
       props: {
-        questions,
+        game,
         saveScore,
         incrementCount,
-        questCount,
         correctAnswerAction,
         incorrectAnswerAction
       },
-      actions: this.getActions(),
-      resetState: this.resetState
+      actions: this.getActions()
     };
-    console.log("STATE", this.state);
-    console.log("PROPS", this.props);
     return (
       <GameContext.Provider value={gameProps}>{children}</GameContext.Provider>
     );
@@ -106,8 +88,7 @@ export class MainGameProvider extends Component {
 
 const mapStateToProps = state => {
   return {
-    questions: state.game.questions,
-    questCount: state.game.questCount
+    game: state.game
   };
 };
 

@@ -7,7 +7,7 @@ import PreGameWrapper from "./game/preGame/preGameWrapper";
 import AuthPageWrapper from "./game/preGame/auth/authPageWrapper";
 import PlanPageWrapper from "./game/preGame/plan/planPageWrapper";
 import MainGameWrapper from "./game/mainGame/MainGameWrapper";
-import RefferalWrapper from "./game/refferal/refferalWrapper";
+import ReferralWrapper from "./game/referral/referralWrapper";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "./Header/Header";
 import Footer from "./Footer";
@@ -31,7 +31,7 @@ class Main extends Component {
               <div className="game-info">
                 <Route exact path="/ready" component={AuthPageWrapper} />
                 <Route exact path="/plan" component={PlanPageWrapper} />
-                <Route exact path="/refferal" component={RefferalWrapper} />
+                <Route exact path="/referral" component={ReferralWrapper} />
                 <Route exact path="/round/:token" component={MainGameWrapper} />
               </div>
             </Switch>

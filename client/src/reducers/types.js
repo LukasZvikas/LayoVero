@@ -23,3 +23,8 @@ export const CONTACT_PAGE = "contact_page";
 export const PLAN_PAGE = "plan_page";
 export const START_GAME = "start_game";
 export const GET_ROUND_CITY = "get_round_city";
+
+export const NEXT_QUESTION = "next_question";
+export const RESET_GAME = "reset_game";
+export const CORRECT_ANSWER = "correct_answer";
+export const INCORRECT_ANSWER = "incorrect_answer";

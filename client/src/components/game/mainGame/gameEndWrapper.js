@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Heading, GameButton } from "../customComps";
-import { saveScore } from "../../../actions/gameActions";
+import { saveScore, resetGame } from "../../../actions/gameActions";
 import { GameContext } from "./mainGameProvider";
 import {
   getCountNumber,
@@ -28,7 +28,7 @@ class GameEndWrapper extends Component {
                 classType={"game-info__btn-primary"}
                 action={() => {
                   resetState;
-                  clearQStorage();
+                  this.props.resetGame();
                   window.location.reload();
                 }}
               />
@@ -40,4 +40,4 @@ class GameEndWrapper extends Component {
   }
 }
 
-export default connect(null, { saveScore })(GameEndWrapper);
+export default connect(null, { saveScore, resetGame })(GameEndWrapper);

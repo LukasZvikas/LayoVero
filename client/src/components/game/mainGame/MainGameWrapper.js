@@ -9,12 +9,10 @@ const MainGameWrapper = props => {
   return (
     <MainGameProvider>
       <GameContext.Consumer>
-        {({ questionsSource, actions, state }) => {
-          if (questionsSource) {
-            if (
-              questionsSource.length !=
-              getCountNumber("questCount", state.questCount)
-            ) {
+        {({ props, actions, state }) => {
+          console.log("PRR", props.questCount);
+          if (props.questions) {
+            if (props.questions.length != props.questCount) {
               return <QuestionsWrapper />;
             }
           }

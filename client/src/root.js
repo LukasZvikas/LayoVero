@@ -6,10 +6,14 @@ import appReducer from "./reducers";
 import { loadState, saveState } from "./localStorage";
 
 const persistedState = loadState();
-const store = createStore(appReducer, persistedState, applyMiddleware(reduxThunk));
-
+const store = createStore(
+  appReducer,
+  persistedState,
+  applyMiddleware(reduxThunk)
+);
+console.log("store1", store.getState());
 store.subscribe(() => {
-  saveState({ game: store.getState() });
+  saveState({ game: store.getState().game });
 });
 
 console.log("store", store.getState());

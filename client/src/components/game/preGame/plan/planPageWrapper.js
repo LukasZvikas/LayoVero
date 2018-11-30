@@ -5,7 +5,6 @@ import { GameButton, GameInput, Heading, ImageBox } from "../../customComps";
 import imageBoxTypes from "./imageBoxTypes";
 import { startGame, getRoundQuestions } from "../../../../actions/gameActions";
 import { renderRoundBoxes, removeFooter } from "../../helperFunctions";
-import RefferalWrapper from "../../refferal/refferalWrapper";
 
 class PlanPageWrapper extends Component {
   getActions = () => {

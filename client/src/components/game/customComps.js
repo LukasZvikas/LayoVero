@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const GameButton = ({ action, name, classType, isDisabled, to }) => {
+  
   const checkType = to => {
     if (to)
       return (

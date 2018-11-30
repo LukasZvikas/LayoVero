@@ -1,6 +1,12 @@
 import React, { Component, createContext } from "react";
 import { connect } from "react-redux";
-import { getRoundQuestions, saveScore } from "../../../actions/gameActions";
+import {
+  getRoundQuestions,
+  saveScore,
+  incrementCount,
+  correctAnswerAction,
+  incorrectAnswerAction
+} from "../../../actions/gameActions";
 import { removeFooter } from "../helperFunctions";
 import * as functions from "./functions";
 
@@ -10,8 +16,6 @@ export class MainGameProvider extends Component {
   constructor(props) {
     super(props);
     this.initialState = {
-      questionsFromLS: null,
-      questCount: 0,
       choice: "",
       answered: false,
       resultCount: 0
@@ -21,31 +25,21 @@ export class MainGameProvider extends Component {
   //first check where to render data from. Make a request or just get it from localStorage.
   componentDidMount() {
     removeFooter();
-    const getQuestions = this.props.getRoundQuestions;
-    const { setQuestionState } = this;
-    functions.getInitialQuestions(
-      getQuestions,
-      setQuestionState,
-      functions.incrementLSCount
-    );
+    const getQuestions = this.props.getRoundQuestions(1);
   }
 
-  setQuestionState = questions => {
-    this.setState({ questionsFromLS: questions });
-  };
-
-  incrementCount = () => {
-    this.setState(
-      prevState => ({
-        questCount: prevState.questCount + 1
-      }),
-      () => {
-        functions.incrementLSCount("questCount");
-        this.setState({ answered: false, choice: "" });
-        this.resetAnswerCheck();
-      }
-    );
-  };
+  // incrementCount = () => {
+  //   this.setState(
+  //     prevState => ({
+  //       questCount: prevState.questCount + 1
+  //     }),
+  //     () => {
+  //       functions.incrementLSCount("questCount");
+  //       this.setState({ answered: false, choice: "" });
+  //       this.resetAnswerCheck();
+  //     }
+  //   );
+  // };
 
   checkIfAnswered = title => {
     return this.state.answered
@@ -57,12 +51,8 @@ export class MainGameProvider extends Component {
     this.setState({ answered: true });
   };
 
-  doResultIncrement = prevState => ({
-    resultCount: prevState.resultCount + 1
-  });
-
   setResultState = () => {
-    this.setState(this.doResultIncrement);
+    this.setState(functions.doResultIncrement);
   };
 
   resetAnswerCheck = () => {
@@ -73,29 +63,41 @@ export class MainGameProvider extends Component {
     return {
       checkIfAnswered: this.checkIfAnswered,
       setResultState: this.setResultState,
-      changeToAnswered: this.changeToAnswered,
-      incrementCount: this.incrementCount
+      changeToAnswered: this.changeToAnswered
     };
   };
 
+  resetState = () => {
+    this.setState(this.initialState);
+  };
+
   render() {
-    const { questionsFromReq, saveScore, children } = this.props;
-    const { questionsFromLS, questCount } = this.state;
-    const questionsSource = questionsFromReq || questionsFromLS;
-    const roundCounter = functions.getCountNumber("questCount", questCount);
-   
+    const {
+      questions,
+      saveScore,
+      children,
+      incrementCount,
+      questCount,
+      correctAnswerAction,
+      incorrectAnswerAction
+    } = this.props;
+
     const gameProps = {
-      questionsSource,
       state: this.state,
       checkIfAnswered: this.checkIfAnswered,
-      props: { questionsFromReq, saveScore },
-      actions: this.getActions(),
-      resetState: () => {
-        this.setState(this.initialState);
+      props: {
+        questions,
+        saveScore,
+        incrementCount,
+        questCount,
+        correctAnswerAction,
+        incorrectAnswerAction
       },
-      resultCount: this.state.resultCount
+      actions: this.getActions(),
+      resetState: this.resetState
     };
-
+    console.log("STATE", this.state);
+    console.log("PROPS", this.props);
     return (
       <GameContext.Provider value={gameProps}>{children}</GameContext.Provider>
     );
@@ -104,10 +106,15 @@ export class MainGameProvider extends Component {
 
 const mapStateToProps = state => {
   return {
-    questionsFromReq: state.game.questions
+    questions: state.game.questions,
+    questCount: state.game.questCount
   };
 };
 
-export default connect(mapStateToProps, { getRoundQuestions, saveScore })(
-  MainGameProvider
-);
+export default connect(mapStateToProps, {
+  getRoundQuestions,
+  incrementCount,
+  saveScore,
+  correctAnswerAction,
+  incorrectAnswerAction
+})(MainGameProvider);

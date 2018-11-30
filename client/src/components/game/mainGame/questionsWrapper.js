@@ -2,7 +2,12 @@ import React, { createContext } from "react";
 import { Heading, GameButton } from "../customComps";
 import Question from "./question";
 import QuestionCount from "./questionCount";
-import { renderQuestions, renderButtonType, getQuestTitle } from "./functions";
+import {
+  renderQuestions,
+  renderButtonType,
+  getQuestTitle,
+  getCountNumber
+} from "./functions";
 import { GameContext } from "./mainGameProvider";
 
 const QuestionWrapper = props => {
@@ -11,15 +16,8 @@ const QuestionWrapper = props => {
   };
   return (
     <GameContext.Consumer>
-      {({
-        functions,
-        questionsSource,
-        props,
-        state,
-        checkIfAnswered,
-        actions
-      }) => {
-        const currentQuest = getCountNumber("questCount", state.questCount);
+      {({ functions, props, state, checkIfAnswered, actions }) => {
+        console.log("STATEEE", state)
         return (
           <div className="game-info">
             <QuestionCount />
@@ -27,29 +25,31 @@ const QuestionWrapper = props => {
               <Heading
                 primaryText={
                   getQuestTitle({
-                    questionsSource,
-                    state
+                    questions: props.questions,
+                    questCount: props.questCount
                   }).primary
                 }
                 secondaryText={
                   getQuestTitle({
-                    questionsSource,
-                    state
+                    questions: props.questions,
+                    questCount: props.questCount
                   }).special
                 }
                 tertiaryText={"?"}
               />
               <div className="game-info__image-box-wrap-main mg-wrap-margin">
                 {renderQuestions({
-                  state,
-                  questionsSource,
-                  actions
+                  choice: state.choice,
+                  answered: state.answered,
+                  questions: props.questions,
+                  actions,
+                  questCount: props.questCount
                 })}
               </div>
               <div className="game-info__explanation">
                 {showExplanation(
                   state.answered,
-                  questionsSource[currentQuest].explanation
+                  props.questions[props.questCount].explanation
                 )}
               </div>
               {renderButtonType({

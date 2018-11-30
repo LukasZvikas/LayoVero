@@ -12,17 +12,19 @@ const QuestionCount = () => {
   };
   return (
     <GameContext.Consumer>
-      {({ stateQCount }) => (
-        <div className="game-info__count-wrap">
-          <div className="game-info__correct-count">
-            Question{" "}
-            {checkQuestionCount(getCountFromLS("questCount"), stateQCount)} / 20{" "}
+      {({ props }) => {
+        console.log("STATECOunt", props);
+        return (
+          <div className="game-info__count-wrap">
+            <div className="game-info__correct-count">
+              Question {props.questCount} / 20{" "}
+            </div>
+            <div className="game-info__correct-count">
+              Correct {props.resultCount} / 20{" "}
+            </div>
           </div>
-          <div className="game-info__correct-count">
-            Correct {getCountFromLS("resultCount")} / 20{" "}
-          </div>
-        </div>
-      )}
+        );
+      }}
     </GameContext.Consumer>
   );
 };

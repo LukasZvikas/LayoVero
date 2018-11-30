@@ -37,18 +37,22 @@ export const correctChecker = (type, props) => {
 //MAIN WRAPPER
 //////////////
 
+export const doResultIncrement = prevState => ({
+  resultCount: prevState.resultCount + 1
+});
+
 export const checkIfLast = (roundCounter, arr, action) => {
   const diff = 1;
   if (diff === 1) return action;
   return null;
 };
 
-export const clearQStorage = () => {
-  localStorage.removeItem("resultCount");
-  localStorage.removeItem("questCount");
-  localStorage.removeItem("questions");
-  localStorage.removeItem("questCountHelp");
-};
+// export const clearQStorage = () => {
+//   localStorage.removeItem("resultCount");
+//   localStorage.removeItem("questCount");
+//   localStorage.removeItem("questions");
+//   localStorage.removeItem("questCountHelp");
+// };
 
 export const isCorrect = (title, correctAnswer) => {
   if (title === correctAnswer) return true;
@@ -72,68 +76,53 @@ export const incrementLSCount = key => {
   }
 };
 
-export const getInitialQuestions = (action, setQState, incrementLSCount) => {
-  const LSquestions = localStorage.getItem("questions");
-  const LSresultCount = localStorage.getItem("resultCount");
-  const LSquestCount = localStorage.getItem("questCount");
-  const LSquestCountHelp = localStorage.getItem("questCountHelp");
+// export const getInitialQuestions = (action, setQState, incrementLSCount) => {
+//   const LSquestions = localStorage.getItem("questions");
+//   const LSresultCount = localStorage.getItem("resultCount");
+//   const LSquestCount = localStorage.getItem("questCount");
+//   const LSquestCountHelp = localStorage.getItem("questCountHelp");
 
-  if (LSquestions === null) {
-    action(1);
-    localStorage.setItem("questCount", 0);
-    localStorage.setItem("resultCount", 0);
-    localStorage.setItem("questCountHelp", 0);
-  } else {
-    //added LSquestCountHelp to make sure that if the question is answered and page is refreshed, it shows a new question, instead of the one answered
-    if (LSquestCount !== LSquestCountHelp) {
-      incrementLSCount("questCount");
-    }
-  }
-  const parsedLSQuestions = JSON.parse(LSquestions);
-  setQState(parsedLSQuestions);
-};
+//   if (LSquestions === null) {
+//     action(1);
+//   } else {
+//     //added LSquestCountHelp to make sure that if the question is answered and page is refreshed, it shows a new question, instead of the one answered
+//     if (LSquestCount !== LSquestCountHelp) {
+//       incrementLSCount("questCount");
+//     }
+//   }
+//   const parsedLSQuestions = JSON.parse(LSquestions);
+//   setQState(parsedLSQuestions);
+// };
 
-export const doResultIncrement = prevState => ({
-  resultCount: prevState.resultCount + 1
-});
-
-export const setResultState = () => {
-  this.setState(doResultIncrement);
-};
-
-export const answerScoreHandler = (
+export const answerScoreHandler = ({
   isCorrect,
-  setResultState,
-  incrementLSCount
-) => {
-  return isCorrect
-    ? (setResultState(),
-      incrementLSCount("resultCount"),
-      incrementLSCount("questCountHelp"))
-    : incrementLSCount("questCountHelp");
+  correctAction,
+  incorrectAction
+}) => {
+  console.log("corr", correctAction, "incorr", incorrectAction);
+  return isCorrect ? (setResultState(), correctAnswer()) : incorrectAction();
 };
 
 export const renderButtonType = ({ state, props, actions }) => {
   const token = localStorage.getItem("token");
-  let isMatch = getCountNumber("questCount", state.questCount);
+  let isMatch = props.questCount;
+  console.log("STTTT", state, "ACTIONs", actions);
   if (state.answered === false)
     return (
       <GameButton
         name={"Check answer"}
         classType={"game-info__btn-primary"}
         action={() => {
-          let isCorrect = checkIfCorrect(
-            state.choice,
-            state.questionsFromLS,
-            props.questionsFromReq,
-            getCountNumber,
-            state.questCount
-          );
-          answerScoreHandler(
+          let isCorrect = checkIfCorrect({
+            choice: state.choice,
+            questions: props.questions,
+            questCount: props.questCount
+          });
+          answerScoreHandler({
             isCorrect,
-            actions.setResultState,
-            incrementLSCount
-          );
+            correctAction: props.correctAnswerAction,
+            incorrectAction: props.incorrectAnswerAction
+          });
           actions.changeToAnswered();
           if (typeof last === "function") {
             const score = localStorage.getItem("resultCount");
@@ -147,16 +136,21 @@ export const renderButtonType = ({ state, props, actions }) => {
     <GameButton
       name={"Next question"}
       classType={"game-info__btn-primary"}
-      action={() => actions.incrementCount()}
+      action={() => props.incrementCount()}
       isDisabled={buttonStateCheck(state.choice)}
     />
   );
 };
 
 // render a set of 4 questions everytime.
-export const renderQuestions = ({ questionsSource, state, actions }) => {
-  const roundCount = getCountNumber("questCount", state.questCount);
-  const currentQuest = questionsSource[roundCount];
+export const renderQuestions = ({
+  questions,
+  choice,
+  questCount,
+  answered,
+  actions
+}) => {
+  const currentQuest = questions[questCount];
   const correctAnswer = currentQuest.correct_answer;
   const answersArr = currentQuest.answers;
   return answersArr.map(item => (
@@ -164,16 +158,16 @@ export const renderQuestions = ({ questionsSource, state, actions }) => {
       title={item.title}
       onClick={() => actions.checkIfAnswered(item.title)}
       image={item.image}
-      choice={state.choice}
+      choice={choice}
       isCorrect={isCorrect(item.title, correctAnswer)}
-      isAnswered={state.answered}
+      isAnswered={answered}
     />
   ));
 };
 
-export const getQuestTitle = ({ questionsSource, state }) => {
-  const roundCounter = getCountNumber("questCount", state.questCount);
-  const getCurrentQuests = questionsSource[roundCounter];
+export const getQuestTitle = ({ questions, questCount }) => {
+  console.log("Q", questCount, "quest", questions);
+  const getCurrentQuests = questions[questCount];
   const primary = getCurrentQuests.primaryText;
   const special = getCurrentQuests.specialWord;
   return { primary, special };
@@ -185,16 +179,9 @@ export const getCountNumber = (key, questCount) => {
   return questCount;
 };
 
-export const checkIfCorrect = (
-  choice,
-  dataFromLS,
-  dataFromReq,
-  getCountNumber,
-  questCount
-) => {
-  const roundCounter = getCountNumber("questCount", questCount);
-  const whichAvailable = dataFromLS || dataFromReq;
-  if (choice === whichAvailable[roundCounter].correct_answer) return true;
+export const checkIfCorrect = ({ choice, questions, questCount }) => {
+  const whichAvailable = questions;
+  if (choice === whichAvailable[questCount].correct_answer) return true;
   return false;
 };
 

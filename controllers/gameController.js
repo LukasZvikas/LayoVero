@@ -2,6 +2,8 @@ const GameQuestions = require("../models/gameSchema");
 const User = require("../models/authSchema");
 const keys = require("../config/keys");
 const JWT = require("jwt-simple");
+const sgMail = require("@sendgrid/mail");
+const referralTemplate = require("../services/referralTemplate");
 
 const decodeToken = token => {
   const decoded = JWT.decode(token, keys.JWT_SECRET);
@@ -34,14 +36,35 @@ exports.saveScore = (req, res, next) => {
   );
 };
 
-exports.sendRefferalCode = (req, res, next) => {
+exports.sendReferralCode = (req, res, next) => {
   const token = req.body.token;
   const decoded = decodeToken(token);
   User.findById(decoded.id, (err, user) => {
     if (err) {
       res.send({ message: "user was not found" });
     }
-    console.log("USER IS HERE", user);
-    res.send({ message: user.refferal_code });
+    res.send({ message: user.referral_code });
+  });
+};
+
+exports.sendEmails = (req, res, next) => {
+  const refCode = req.body.refCode;
+  const emails = req.body.emails;
+  
+  User.findOne({ referral_code: refCode }, (err, user) => {
+    if (err) {
+      return next(err);
+    }
+    const url = `localhost:8080/${refCode}`;
+    emails.map(email => {
+      const msg = {
+        to: email,
+        from: user.username,
+        subject: `${email} invited you to join Layovero`,
+        text: "Accept this invitation, please",
+        html: referralTemplate(url)
+      };
+      sgMail.send(msg);
+    });
   });
 };

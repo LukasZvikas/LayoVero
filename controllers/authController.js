@@ -38,7 +38,7 @@ exports.signup = async (req, res, next) => {
       _id: id,
       username: email,
       password: password,
-      refferal_code: refCode
+      referral_code: refCode
     });
 
     await newUser.save(err => {

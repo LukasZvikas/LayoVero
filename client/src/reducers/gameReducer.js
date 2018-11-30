@@ -1,29 +1,37 @@
 import {
-  INITIAL_PAGE,
-  AUTH_PAGE,
-  NAME_PAGE,
-  CONTACT_PAGE,
-  PLAN_PAGE,
-  START_GAME,
-  GET_ROUND_CITY
+  GET_ROUND_CITY,
+  NEXT_QUESTION,
+  RESET_GAME,
+  CORRECT_ANSWER,
+  INCORRECT_ANSWER
 } from "./types";
 
-export default (state = {}, action) => {
+const initialState = {
+  questCount: 0,
+  resultCount: 0,
+  questCountHelp: 0
+};
+
+export default (state = { initialState }, action) => {
   switch (action.type) {
-    // case INITIAL_PAGE:
-    case AUTH_PAGE:
-      return { stateOfPage: "authPage" };
-    case NAME_PAGE:
-      return { stateOfPage: "namePage" };
-    case CONTACT_PAGE:
-      return { stateOfPage: "contactPage" };
-    case PLAN_PAGE:
-      return { stateOfPage: "planPage" };
-    case START_GAME:
-      return { ...state, stateOfPage: "startGame" };
+    case NEXT_QUESTION:
+      return { ...state, questCount: state.questCount + 1 };
     case GET_ROUND_CITY:
       return { ...state, questions: action.payload };
+    case CORRECT_ANSWER:
+      return {
+        ...state,
+        questCountHelp: state.questCountHelp + 1,
+        resultCount: state.resultCount + 1
+      };
+    case INCORRECT_ANSWER:
+      return {
+        ...state,
+        questCountHelp: state.questCountHelp + 1
+      };
+    case RESET_GAME:
+      return { ...initialState };
     default:
-      return { stateOfPage: "initialPage" };
+      return { ...state } || { ...initialState, stateOfPage: "initialPage" };
   }
 };

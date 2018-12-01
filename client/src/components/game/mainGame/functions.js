@@ -61,45 +61,6 @@ export const answerScoreHandler = ({
   return isCorrect ? correctAction() : incorrectAction();
 };
 
-export const renderButtonType = ({ state, props, gameProps, actions }) => {
-  if (state.answered === false)
-    return (
-      <GameButton
-        name={"Check answer"}
-        classType={"game-info__btn-primary"}
-        action={() => {
-          let isCorrect = checkIfCorrect({
-            choice: state.choice,
-            questions: props.game.questions,
-            questCount: props.game.questCount
-          });
-          answerScoreHandler({
-            isCorrect,
-            correctAction: props.correctAnswerAction,
-            incorrectAction: props.incorrectAnswerAction
-          });
-          actions.changeToAnswered();
-          if (typeof last === "function") {
-            const score = localStorage.getItem("resultCount");
-            checkIfLast(score, token);
-          }
-        }}
-        isDisabled={buttonStateCheck(state.choice)}
-      />
-    );
-  return (
-    <GameButton
-      name={"Next question"}
-      classType={"game-info__btn-primary"}
-      action={() => {
-        props.incrementCount();
-        actions.resetChoice();
-      }}
-      isDisabled={buttonStateCheck(state.choice)}
-    />
-  );
-};
-
 // render a set of 4 questions everytime.
 export const renderQuestions = ({
   questions,
@@ -132,7 +93,6 @@ export const getQuestTitle = ({ questions, questCount }) => {
 //checks if localStorage's and state's questCount's match
 
 export const checkIfCorrect = ({ choice, questions, questCount }) => {
-  const whichAvailable = questions;
-  if (choice === whichAvailable[questCount].correct_answer) return true;
+  if (choice === questions[questCount].correct_answer) return true;
   return false;
 };

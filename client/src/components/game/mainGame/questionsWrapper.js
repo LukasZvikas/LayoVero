@@ -1,13 +1,9 @@
 import React, { createContext } from "react";
 import { Heading, GameButton } from "../customComps";
 import QuestionsRenderer from "./questionsRenderer";
+import ButtonRenderer from "./buttonRenderer";
 import QuestionCount from "./questionCount";
-import {
-  renderQuestions,
-  renderButtonType,
-  getQuestTitle,
-  getCountNumber
-} from "./functions";
+import { renderButtonType, getQuestTitle } from "./functions";
 import { GameContext } from "./mainGameProvider";
 
 const QuestionWrapper = props => {
@@ -43,11 +39,7 @@ const QuestionWrapper = props => {
                   props.game.questions[props.game.questCount].explanation
                 )}
               </div>
-              {renderButtonType({
-                state,
-                props,
-                actions
-              })}
+              <ButtonRenderer />
             </div>
           </div>
         );

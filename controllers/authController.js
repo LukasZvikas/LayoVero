@@ -15,7 +15,8 @@ function userToken(user) {
 exports.signup = async (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
-
+  const refBy = req.body.refBy;
+  
   if (!email || !password) {
     return res
       .status(422)
@@ -38,7 +39,8 @@ exports.signup = async (req, res, next) => {
       _id: id,
       username: email,
       password: password,
-      referral_code: refCode
+      referral_code: refCode,
+      referred_by: refBy
     });
 
     await newUser.save(err => {
@@ -49,8 +51,10 @@ exports.signup = async (req, res, next) => {
       const emailJWT = jsonToken.sign({ id: newUser._id }, keys.EMAIL_SECRET, {
         expiresIn: "1d"
       });
+      
+      const isRef = refBy ? `${refBy}` : '';
 
-      const url = `http://localhost:5000/confirmation/${emailJWT}`;
+      const url = `http://localhost:5000/confirmation/${emailJWT}/${isRef}`;
 
       const msg = {
         to: email,
@@ -79,7 +83,7 @@ exports.signin = async (req, res, next) => {
       return res.status(401).send({ error: "Please confirm your account" });
     }
 
-    res.json({ token: userToken(req.user) });
+    res.json({ token: userToken(req.user), refCode: user.referral_code });
   });
 };
 

@@ -5,14 +5,14 @@ const forgotTemplate = require("../services/forgotEmailTemplate");
 const resetTemplate = require("../services/resetEmailTemplate");
 const sgMail = require("@sendgrid/mail");
 
-exports.confirmEmail = async (req, res, next) => {
+exports.confirmEmail = (req, res, next) => {
   const token = req.params.token;
-
+  const refToken = req.params.refToken;
   const decoded = jsonToken.verify(token, keys.EMAIL_SECRET);
 
-  await User.findByIdAndUpdate(
+  User.findByIdAndUpdate(
     { _id: decoded.id },
-    { confirmed: true },
+    refToken ? { confirmed: true, $inc: { points: 25 } } : { confirmed: true },
     async (err, user) => {
       if (err) {
         return next(err);
@@ -20,6 +20,18 @@ exports.confirmEmail = async (req, res, next) => {
 
       if (!user) {
         res.status(422).send({ error: "User was not found" });
+      }
+
+      if (refToken) {
+        User.findOneAndUpdate(
+          { referral_code: refToken },
+          { $inc: { points: 50 } },
+          (err, user) => {
+            if (err) {
+              return next(err);
+            }
+          }
+        );
       }
 
       await user.save(err => {
@@ -35,7 +47,6 @@ exports.confirmEmail = async (req, res, next) => {
 
 exports.forgot = async (req, res, next) => {
   const email = req.body.email;
-  console.log(email);
 
   const resetToken = jsonToken.sign(
     { email: req.body.email },
@@ -91,7 +102,7 @@ exports.forgotTokenGet = async (req, res, next) => {
 };
 
 exports.forgotTokenPost = async (req, res, next) => {
-  console.log("PASS",req.body.password)
+  console.log("PASS", req.body.password);
   await User.findOne(
     { resetPassToken: req.params.token },
     async (err, user) => {
@@ -99,7 +110,6 @@ exports.forgotTokenPost = async (req, res, next) => {
         return next(err);
       }
       if (!user) {
-
         res.status(422).send({ error: "User was not found" });
       }
       user.password = req.body.password;
@@ -121,8 +131,8 @@ exports.forgotTokenPost = async (req, res, next) => {
         html: resetTemplate(url)
       };
 
-      console.log(user)
-      console.log(msg)
+      console.log(user);
+      console.log(msg);
       sgMail.send(msg);
     }
   );

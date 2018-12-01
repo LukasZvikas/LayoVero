@@ -1,6 +1,7 @@
 import {
   SIGN_UP,
   SIGN_IN,
+  SIGN_UP_REF,
   SHOW_SIGNUP,
   SHOW_SIGNIN,
   HIDE_MODAL,
@@ -12,16 +13,25 @@ import {
 } from "../reducers/types";
 import axios from "axios";
 
-export const SignUserUp = ({ email, password }) => async dispatch => {
-  const res = await axios.post("/user/signup", { email, password });
+export const SignUserUp = ({ email, password, refCode }) => async dispatch => {
+  const refBy = refCode || null;
+  console.log("from ref", refBy)
+  const res = await axios.post("/user/signup", { email, password, refBy });
 
   dispatch({ type: SIGN_UP, payload: res.data });
 };
+
+// export const signUpFromRef = ({ email, password, refCode }) => async dispatch => {
+//   const res = await axios.post("/user/signupRef", { email, password, refCode });
+//   console.log("THIS IS RES", res.data);
+//   dispatch({ type: SIGN_UP_REF, payload: res.data });
+// };
 
 export const SignUserIn = ({ email, password }) => async dispatch => {
   const res = await axios.post("/user/signin", { email, password });
 
   localStorage.setItem("token", res.data.token);
+  localStorage.setItem("refCode", res.data.refCode);
 
   dispatch({ type: SIGN_IN });
 };

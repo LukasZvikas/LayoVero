@@ -8,7 +8,8 @@ import {
   SEND_FORGOT,
   RESET_PASS,
   SIGN_IN,
-  SEND_US_EMAIL
+  SEND_US_EMAIL,
+  SIGN_UP_REF
 } from "./types";
 
 const initialState = {
@@ -28,6 +29,9 @@ export default function(state = initialState, action) {
       return action.payload, { type: "emailVerification" };
     case SIGN_IN:
       return { authenticated: true };
+    case SIGN_UP_REF:
+      console.log("SIGNUPREF", action.payload);
+      return action.payload;
     case SHOW_SIGNUP:
       return { ...state, type: "signUp" };
     case SHOW_SIGNIN:

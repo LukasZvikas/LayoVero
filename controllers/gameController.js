@@ -55,7 +55,7 @@ exports.sendEmails = (req, res, next) => {
     if (err) {
       return next(err);
     }
-    const url = `localhost:8080/${refCode}`;
+    const url = `http://localhost:8080/referrals/${refCode}`;
     emails.map(email => {
       const msg = {
         to: email,

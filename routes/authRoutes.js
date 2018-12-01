@@ -31,9 +31,11 @@ module.exports = app => {
 
   app.post("/user/signup", authController.signup);
 
+  // app.post("/user/signupRef", authController.signup);
+
   app.post("/user/signin", requireSignin, authController.signin);
 
-  app.get("/confirmation/:token", emailController.confirmEmail);
+  app.get("/confirmation/:token/:refToken", emailController.confirmEmail);
 
   app.post("/user/forgot", emailController.forgot);
 

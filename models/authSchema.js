@@ -9,9 +9,10 @@ const userSchema = new Schema({
   username: { type: String, unique: true, lowercase: true },
   password: String,
   confirmed: { type: Boolean, default: false },
-  resetPassToken: { type: String, default: undefined },
+  resetPassToken: { type: String, default: null },
   points: {type: Number, default: 0},
-  referral_code: String
+  referral_code: String,
+  referred_by: {type: String, default: null}
   // resetPassExp: { type: Date, default: undefined }
 });
 

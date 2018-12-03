@@ -36,10 +36,10 @@ class RefSignup extends Component {
       >
         <form
           className="auth-form"
-          style={{ height: 60 + "%" }}
+          style={{ height: 60 + "%", height: 45 + "%", width: 38 + "vw" }}
           onSubmit={handleSubmit(this.onFormSubmit.bind(this))}
         >
-          <div className="auth-form__box">
+          <div className="auth-form__box" style={{ margin: 0 }}>
             <div className="auth-form__field-wrapper">
               <div className="auth-form__input-box">
                 <Field

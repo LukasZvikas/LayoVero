@@ -42,34 +42,64 @@ class SignUp extends Component {
             onClick1={() => ShowSignInModal()}
             selectOrIdle={{ first: "idle", second: "selected" }}
           />
-          <div className="auth-form__field-wrapper">
-            <div className="auth-form__input-box">
-              <Field
-                key={"email"}
-                type="text"
-                label={"Email"}
-                name={"email"}
-                placehold={"Enter your email"}
-                component={emailField}
-              />
+          <div className="auth-form__content-wrapper">
+            <div className="auth-form__field-wrapper">
+              <div className="auth-form__input-box">
+                <Field
+                  key={"email"}
+                  type="text"
+                  label={"Email"}
+                  name={"email"}
+                  placehold={"Enter your email"}
+                  component={emailField}
+                />
 
-              <Field
-                key={"password"}
-                type="text"
-                label={"Password"}
-                name={"password"}
-                placehold={"*******"}
-                component={passwordField}
-              />
+                <Field
+                  key={"password"}
+                  type="text"
+                  label={"Password"}
+                  name={"password"}
+                  placehold={"*******"}
+                  component={passwordField}
+                />
 
-              <Field
-                key={"passwordConfirm"}
-                type="text"
-                label={"Confirm Password"}
-                name={"passwordConfirm"}
-                placehold={"*******"}
-                component={passwordField}
-              />
+                <Field
+                  key={"passwordConfirm"}
+                  type="text"
+                  label={"Confirm Password"}
+                  name={"passwordConfirm"}
+                  placehold={"*******"}
+                  component={passwordField}
+                />
+              </div>
+              <div className="auth-form__input-box">
+                <Field
+                  key={"email"}
+                  type="text"
+                  label={"Email"}
+                  name={"email"}
+                  placehold={"Enter your email"}
+                  component={emailField}
+                />
+
+                <Field
+                  key={"password"}
+                  type="text"
+                  label={"Password"}
+                  name={"password"}
+                  placehold={"*******"}
+                  component={passwordField}
+                />
+
+                <Field
+                  key={"passwordConfirm"}
+                  type="text"
+                  label={"Confirm Password"}
+                  name={"passwordConfirm"}
+                  placehold={"*******"}
+                  component={passwordField}
+                />
+              </div>
             </div>
             <button className="auth-form__button" type="submit">
               Sign Up

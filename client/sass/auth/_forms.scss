@@ -27,12 +27,18 @@
   background-color: var(--color-white);
   transition: all 0.5s ease-in;
 
-  &__field-wrapper {
-    width: 60%;
+  &__content-wrapper {
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+
+  &__field-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 26rem);
+    grid-gap: 10rem;
   }
 
   &__field-wrapper.forgot {
@@ -112,11 +118,26 @@
     width: 100%;
   }
 
-  .input {
-    font-size: 1.3rem;
+  &__input {
+    font-size: 1.6rem;
     padding: 0.4rem 0;
-    border-bottom: 2px solid var(--color-light-grey-2);
+    background: #f5f5f5;
+    border-radius: 4rem;
     width: 100%;
+    height: 5rem;
+    border: none;
+    padding: 0 1.6rem 0 1.6rem;
+  }
+
+  &__input:focus {
+    outline: none;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.3);
+    border-bottom: 4px solid var(--color-secondary);
+  }
+  ::placeholder {
+    text-align: center;
+    color: var(--color-black);
+    opacity: 1;
   }
 
   .label {
@@ -131,10 +152,30 @@
   }
 
   &__button {
-    width: 10rem;
-    height: 3rem;
-    border-radius: 1.6rem;
-    margin: 3rem;
+    font-size: 1.6rem;
+    padding: 1.6rem 5rem;
+    border-radius: 4rem;
+    margin: 3rem 12rem 3rem 12rem;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    border: 1px solid var(--color-primary);
+    background-color: var(--white);
+
+    &:hover {
+      color: var(--color-white);
+      background-color: var(--color-primary);
+      transform: translateY(3px);
+      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.3);
+    }
+
+    &:active {
+      outline: none;
+      box-shadow: var(--header-shadow);
+    }
+
+    &:focus {
+      outline: none;
+    }
   }
 
   &__link {
@@ -152,8 +193,13 @@
   }
 
   &__heading-item {
-    font-size: 3rem;
+    font-size: 5rem;
     margin: 2rem 0.5rem;
+    text-transform: uppercase;
+  }
+
+  .middle {
+    text-transform: lowercase;
   }
 
   &__legal {
@@ -194,37 +240,17 @@
   }
 
   .selected {
-    position: relative;
-  }
-
-  .selected::before {
-    content: "";
-    position: absolute;
-    background: #000;
-    height: 2px;
-    top: 100%;
-    left: 0;
-    width: 100%;
+    color: var(--color-black);
   }
 
   .idle {
     color: var(--color-light-grey-1);
     position: relative;
+    transition: all 0.2s linear;
   }
 
-  .idle::before {
-    content: "";
-    position: absolute;
-    background: #0b4246;
-    height: 2px;
-    top: 100%;
-    left: 0;
-    width: 0%;
-    transition: width 0.5s ease;
-  }
-
-  .idle:hover::before {
-    width: 100%;
+  .idle:hover {
+    color: var(--color-secondary);
   }
   // .idle:hover {
   //   color: #a9a9a9;

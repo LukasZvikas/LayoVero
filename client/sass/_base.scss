@@ -4,7 +4,6 @@
   src: url(../fonts/Oswald/Oswald-Medium.ttf);
 }
 
-
 @font-face{
   font-family: 'Oswald-Regular';
   src: url(../fonts/Oswald/Oswald-Regular.ttf);
@@ -27,6 +26,15 @@
 
 $insta-photo-largest-w: 26.5rem;
 $insta-photo-largest-h: 28.5rem;
+
+$bp-largest1: 81.2em;
+$bp-largest: 78em;
+$bp-large: 68.75em; //1100px
+$bp-medium1: 56.2em; //900px
+$bp-medium2: 46.9em; //775px
+$bp-small: 34.38em;
+$bp-smaller: 28em;
+$bp-smallest: 26.5em;
 
 * {
   margin: 0;

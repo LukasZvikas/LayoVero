@@ -55,7 +55,10 @@
     }
   }
 
-  &__field-wrapper-sign-goo {
+  &__field-wrapper-sign-in {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   &__field-wrapper.forgot {
@@ -85,17 +88,37 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 1.2rem 0 1.2rem 0;
+
+    @media only screen and (min-width: 375px) {
+      flex-direction: column;
+      margin: 1rem 0 0 0;
+    }
+
+    @media only screen and (min-width: 1200px) {
+      flex-direction: row;
+      margin: 1.2rem 0 1.2rem 0;
+    }
+
     &__item {
       position: relative;
       border-radius: 2rem;
-      font-size: 1.4rem;
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 45%;
-      height: 3.8rem;
-      margin-bottom: 2rem;
+
+      @media only screen and (min-width: 375px) {
+        width: 60%;
+        border-radius: 4rem;
+        height: 6rem;
+        margin: 0 0 3rem 0;
+      }
+
+      @media only screen and (min-width: 1200px) {
+        width: 45%;
+        height: 3.8rem;
+        border-radius: 2rem;
+        margin: 2rem 0 2rem 0;
+      }
     }
 
     &__google {
@@ -111,13 +134,27 @@
     &__text-google {
       font-family: "Oswald-Regular";
       color: #d34836;
-      font-size: 1.5rem;
+
+      @media only screen and (min-width: 375px) {
+        font-size: 2.6rem;
+      }
+
+      @media only screen and (min-width: 1200px) {
+        font-size: 1.6rem;
+      }
     }
 
     &__text-facebook {
       font-family: "Oswald-Regular";
       color: #3b5998;
-      font-size: 1.5rem;
+
+      @media only screen and (min-width: 375px) {
+        font-size: 2.6rem;
+      }
+
+      @media only screen and (min-width: 1200px) {
+        font-size: 1.6rem;
+      }
     }
 
     &__logo {
@@ -144,7 +181,7 @@
 
   &__wrapper:first-of-type {
     @media only screen and (min-width: 375px) {
-      margin-top: 4rem;
+      margin-top: 2.2rem;
     }
 
     @media only screen and (min-width: 1200px) {
@@ -157,7 +194,7 @@
   }
   &__wrapper {
     @media only screen and (min-width: 375px) {
-      margin-bottom: 4rem;
+      margin-bottom: 2.2rem;
     }
 
     @media only screen and (min-width: 1200px) {
@@ -234,10 +271,6 @@
   }
 
   &__button {
-    font-size: 1.6rem;
-    padding: 1.6rem 5rem;
-    border-radius: 4rem;
-    margin: 0 12rem 3rem 12rem;
     text-transform: uppercase;
     transition: all 0.3s;
     border: 1px solid var(--color-primary);
@@ -246,15 +279,16 @@
 
     @media only screen and (min-width: 375px) {
       font-size: 3.6rem;
-      padding: 2.6rem 6rem;
+      padding: 2.2rem 7rem;
       border-radius: 8rem;
-      margin: 3rem 12rem 3rem 12rem;
+      margin: 2.6rem 12rem 2.6rem 12rem;
     }
 
     @media only screen and (min-width: 1200px) {
       font-size: 1.6rem;
       padding: 1.6rem 5rem;
       border-radius: 4rem;
+      margin: 0 12rem 0 12rem;
     }
 
     &:hover {
@@ -292,7 +326,7 @@
     height: 10rem;
 
     @media only screen and (min-width: 375px) {
-      margin: 9rem 0 4rem 0;
+      margin: 2rem 0 5rem 0;
     }
 
     @media only screen and (min-width: 1200px) {
@@ -325,7 +359,7 @@
     font-family: "Oswald-Medium";
 
     @media only screen and (min-device-width: 375px) {
-      margin: 2rem 0 2rem 0;
+      margin: 1.6rem 0 1.6rem 0;
       width: 60%;
       font-size: 2.6rem;
     }

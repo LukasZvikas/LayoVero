@@ -1,34 +1,29 @@
 import React from "react";
-import { Facebook } from "../../svgIcons";
+import { Facebook, Google } from "../../svgIcons";
 import google from "../../../../images/google.svg";
 
 const Oauth = () => {
   return (
-    <div className="auth-form__oauth-box">
-      <div className="auth-form__google" style={{ backgroundColor: "#dd4b39" }}>
-        <a href="/user/auth/google" className="auth-form__oauth-text">
-          Login With Google
+    <div className="auth-form__oauth">
+      <div className="auth-form__oauth__item auth-form__oauth__google">
+        <a href="/user/auth/google" className="auth-form__oauth__text-google">
+          Google
         </a>
-
-        <img
-          className="auth-form__oauth-logo"
-          src={google}
-          style={{ left: 1.2 + "rem" }}
+        <Google
+          svgClass={"auth-form__oauth__logo"}
+          height={2.4 + "rem"}
+          width={2.4 + "rem"}
+          fill={"#d34836"}
         />
       </div>
 
-      
-      <div
-        className="auth-form__facebook"
-        style={{ backgroundColor: "#3b5998" }}
-      >
-        <div className="auth-form__oauth-text">Sign in with Facebook</div>
-
+      <div className="auth-form__oauth__item auth-form__oauth__facebook">
+        <div className="auth-form__oauth__text-facebook">Facebook</div>
         <Facebook
-          svgClass={"auth-form__oauth-logo"}
+          svgClass={"auth-form__oauth__logo"}
           height={2.4 + "rem"}
           width={2.4 + "rem"}
-          fill={"#fff"}
+          fill={"#3b5998"}
         />
       </div>
     </div>

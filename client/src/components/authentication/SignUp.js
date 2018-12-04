@@ -43,7 +43,7 @@ class SignUp extends Component {
             selectOrIdle={{ first: "idle", second: "selected" }}
           />
           <div className="auth-form__content-wrapper">
-            <div className="auth-form__field-wrapper">
+            <div className="auth-form__field-wrapper-sign-up">
               <div className="auth-form__input-box">
                 <Field
                   key={"email"}
@@ -53,7 +53,6 @@ class SignUp extends Component {
                   placehold={"Enter your email"}
                   component={emailField}
                 />
-
                 <Field
                   key={"password"}
                   type="text"
@@ -62,7 +61,6 @@ class SignUp extends Component {
                   placehold={"*******"}
                   component={passwordField}
                 />
-
                 <Field
                   key={"passwordConfirm"}
                   type="text"
@@ -81,7 +79,6 @@ class SignUp extends Component {
                   placehold={"Enter your email"}
                   component={emailField}
                 />
-
                 <Field
                   key={"password"}
                   type="text"
@@ -90,7 +87,6 @@ class SignUp extends Component {
                   placehold={"*******"}
                   component={passwordField}
                 />
-
                 <Field
                   key={"passwordConfirm"}
                   type="text"

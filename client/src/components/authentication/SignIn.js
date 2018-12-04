@@ -41,7 +41,7 @@ class SignIn extends Component {
             onClick2={() => ShowSignUpModal()}
             selectOrIdle={{ first: "selected", second: "idle" }}
           />
-          <div className="auth-form__field-wrapper">
+          <div className="auth-form__field-wrapper-sign-in">
             <div className="auth-form__input-box">
               <Field
                 key={"email"}
@@ -64,9 +64,9 @@ class SignIn extends Component {
             <button className="auth-form__button" type="submit">
               Sign In
             </button>
-            <div className="auth-form__cross-line">
+   {/*         <div className="auth-form__cross-line">
               <span className="auth-form__cross-text">or</span>
-            </div>
+            </div>*/}
             <Oauth />
             <Footer
               text={"Not a member?"}

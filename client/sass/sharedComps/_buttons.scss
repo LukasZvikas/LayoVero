@@ -1,0 +1,47 @@
+.button-primary {
+  text-transform: uppercase;
+  transition: all 0.3s;
+  border: 1px solid var(--color-primary);
+  background-color: var(--white);
+  font-family: "Oswald-Regular";
+
+  @media only screen and (min-width: 375px) {
+    font-size: 3.2rem;
+    padding: 2.2rem 7rem;
+    border-radius: 8rem;
+    margin: 2.6rem 12rem 2.6rem 12rem;
+  }
+
+  @media only screen and (min-width: 1200px) {
+    font-size: 1.6rem;
+    padding: 1.6rem 5rem;
+    border-radius: 4rem;
+    margin: 0 12rem 0 12rem;
+  }
+
+  &:hover {
+    color: var(--color-white);
+    background-color: var(--color-primary);
+    transform: translateY(3px);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.3);
+  }
+
+  &:active {
+    outline: none;
+    box-shadow: var(--header-shadow);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.plan {
+  @media only screen and (min-width: 375px) {
+    margin: 0 0 30% 0;
+  }
+
+  @media only screen and (min-width: 1200px) {
+    margin: 0;
+  }
+}

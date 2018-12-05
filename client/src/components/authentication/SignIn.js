@@ -61,7 +61,7 @@ class SignIn extends Component {
                 component={passwordField}
               />
             </div>
-            <button className="auth-form__button" type="submit">
+            <button className="button-primary" type="submit">
               Sign In
             </button>
    {/*         <div className="auth-form__cross-line">

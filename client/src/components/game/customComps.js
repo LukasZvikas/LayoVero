@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const GameButton = ({ action, name, classType, isDisabled, to }) => {
-  
   const checkType = to => {
     if (to)
       return (
@@ -56,7 +55,10 @@ export const ImageBox = ({ img, title, status, onClick }) => {
 
   const checkTextStatus = status => {
     return status ? null : (
-      <div className="game-info__image-main-text">COMING SOON </div>
+      <div className="game-info__image-main-text">
+        <div>COMING</div>
+        <div>SOON</div>
+      </div>
     );
   };
 

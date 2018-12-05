@@ -44,7 +44,7 @@ class PlanPageWrapper extends Component {
         <div className="game-info__image-box-wrap-main">
           {renderRoundBoxes(imageBoxTypes, this.getActions())}
         </div>
-        <GameButton name={"Rules"} classType={"game-info__btn-primary"} />
+        <GameButton name={"Rules"} classType={"button-primary plan"} />
       </div>
     );
   }

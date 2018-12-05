@@ -1,9 +1,10 @@
 @import "base";
 
+@import "sharedComps/buttons.scss";
+
 @import "game/gameMixins";
 @import "game/gameInfo";
 @import "game/referral/referralMain";
-
 
 @import "blogMixins";
 @import "auth/formMixins";

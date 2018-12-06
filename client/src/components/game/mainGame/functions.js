@@ -61,7 +61,6 @@ export const answerScoreHandler = ({
   return isCorrect ? correctAction() : incorrectAction();
 };
 
-// render a set of 4 questions everytime.
 export const renderQuestions = ({
   questions,
   choice,
@@ -90,7 +89,7 @@ export const getQuestTitle = ({ questions, questCount }) => {
   const special = getCurrentQuests.specialWord;
   return { primary, special };
 };
-//checks if localStorage's and state's questCount's match
+
 
 export const checkIfCorrect = ({ choice, questions, questCount }) => {
   if (choice === questions[questCount].correct_answer) return true;

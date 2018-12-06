@@ -12,7 +12,7 @@ const initialState = {
   questCountHelp: 0
 };
 
-export default (state = { initialState }, action) => {
+export default (state = { ...initialState }, action) => {
   switch (action.type) {
     case NEXT_QUESTION:
       return { ...state, questCount: state.questCount + 1 };
@@ -32,6 +32,6 @@ export default (state = { initialState }, action) => {
     case RESET_GAME:
       return { ...initialState };
     default:
-      return state.length ? { ...state } : { ...initialState };
+      return state.questCount === 0 ? { ...initialState } : { ...state };
   }
 };

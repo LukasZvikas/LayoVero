@@ -29,18 +29,17 @@
     }
   }
   &__secondary-heading {
-    font-size: 4.2rem;
-    width: 60%;
+    width: 100%;
     text-align: center;
-    //line-height: 4rem;
     font-family: "Oswald-Medium";
 
     @media only screen and (min-width: 375px) {
       font-size: 8rem;
+      margin: 2rem;
     }
 
     @media only screen and (min-width: 1200px) {
-      font-size: 4.2rem;
+      font-size: 3.8rem;
     }
   }
 
@@ -231,7 +230,15 @@
     font-weight: bold;
     display: flex;
     justify-content: flex-end;
-    margin: 4rem 4rem 0 0;
+    margin: 4rem 0 0 0;
+
+    @media only screen and (min-width: 375px) {
+      font-size: 4.8rem;
+    }
+
+    @media only screen and (min-width: 1200px) {
+      font-size: 2.8rem;
+    }
   }
 
   &__end-wrap {
@@ -250,11 +257,19 @@
   }
 
   &__answer {
-    font-size: 2rem;
     display: flex;
-    justify-content: center;
-    height: 4rem;
-    align-items: center;
+    position: absolute;
+    font-family: "Oswald-Medium";
+    background-color: whitesmoke;
+
+    @media only screen and (min-width: 375px) {
+      font-size: 6.4rem;
+    }
+
+    @media only screen and (min-width: 1200px) {
+      font-size: 3.8rem;
+      margin: 0;
+    }
   }
 
   .correct {
@@ -266,9 +281,17 @@
   }
 
   &__explanation {
-    line-height: 3rem;
-    font-size: 1.8rem;
     text-align: center;
-    margin: 3rem 25rem 5rem 25rem;
+    @media only screen and (min-width: 375px) {
+      font-size: 3.8rem;
+      line-height: 6rem;
+      margin: 9rem 25rem 9rem 25rem;
+    }
+
+    @media only screen and (min-width: 1200px) {
+      font-size: 1.6rem;
+      line-height: 3rem;
+      margin: 3rem 25rem 3rem 25rem;
+    }
   }
 }

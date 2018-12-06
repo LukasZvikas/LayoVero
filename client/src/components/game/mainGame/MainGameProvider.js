@@ -59,7 +59,6 @@ export class MainGameProvider extends Component {
   };
 
   render() {
-
     const {
       game,
       saveScore,

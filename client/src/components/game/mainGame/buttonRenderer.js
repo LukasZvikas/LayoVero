@@ -17,7 +17,7 @@ export const ButtonRenderer = props => {
           return (
             <GameButton
               name={"Check answer"}
-              classType={"game-info__btn-primary"}
+              classType={"button-primary plan"}
               action={() => {
                 let isCorrect = checkIfCorrect({
                   choice: state.choice,
@@ -37,7 +37,7 @@ export const ButtonRenderer = props => {
         return (
           <GameButton
             name={"Next question"}
-            classType={"game-info__btn-primary"}
+            classType={"button-primary plan"}
             action={() => {
               props.incrementCount();
               actions.resetChoice();

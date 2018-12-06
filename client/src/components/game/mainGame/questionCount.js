@@ -13,7 +13,6 @@ const QuestionCount = () => {
   return (
     <GameContext.Consumer>
       {({ props }) => {
-        console.log("STATECOunt", props);
         return (
           <div className="game-info__count-wrap">
             <div className="game-info__correct-count">

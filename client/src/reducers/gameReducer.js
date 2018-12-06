@@ -32,6 +32,6 @@ export default (state = { initialState }, action) => {
     case RESET_GAME:
       return { ...initialState };
     default:
-      return { ...state } || { ...initialState, stateOfPage: "initialPage" };
+      return state.length ? { ...state } : { ...initialState };
   }
 };

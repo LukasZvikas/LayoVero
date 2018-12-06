@@ -13,6 +13,7 @@ const QuestionWrapper = props => {
   return (
     <GameContext.Consumer>
       {({ functions, props, state, checkIfAnswered, actions }) => {
+  
         return (
           <div className="game-info">
             <QuestionCount />

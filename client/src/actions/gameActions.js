@@ -34,13 +34,10 @@ export const getRoundQuestions = round => async dispatch => {
 
 export const saveScore = (score, token) => async dispatch => {
   const res = await axios.post("/game/saveScore", { score, token });
-
-  console.log("RESS", res);
 };
 
 export const getReferralCode = token => async dispatch => {
   const res = await axios.post("/game/getRef", { token });
-  console.log("RESS", res);
   localStorage.setItem("referralCode", res.data.message);
 };
 

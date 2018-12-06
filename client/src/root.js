@@ -7,17 +7,16 @@ import { loadState, saveState } from "./localStorage";
 
 const persistedState = loadState();
 const store = createStore(
-  appReducer,
-  persistedState,
-  applyMiddleware(reduxThunk)
+	appReducer,
+	persistedState,
+	applyMiddleware(reduxThunk)
 );
-console.log("store1", store.getState());
+
 store.subscribe(() => {
-  saveState({ game: store.getState().game });
+	const { questCount, resultCount, questCountHelp } = store.getState().game;
+	saveState({ game: { questCount, resultCount, questCountHelp } });
 });
 
-console.log("store", store.getState());
-
 export default props => {
-  return <Provider store={store}>{props.children}</Provider>;
+	return <Provider store={store}>{props.children}</Provider>;
 };

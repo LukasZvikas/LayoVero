@@ -14,13 +14,13 @@ class GameEndWrapper extends Component {
     return (
       <GameContext.Consumer>
         {({ resetState, props }) => (
-          <div className="game-info">
+          <div className="game-info__main-wrap pre">
             <div className="game-info__end-wrap">
               Congratulations, you finished the Quiz! You earned{" "}
               {props.game.resultCount} points.{" "}
               <GameButton
                 name={"Play Again"}
-                classType={"game-info__btn-primary"}
+                classType={"button-primary"}
                 action={() => {
                   resetState;
                   this.props.resetGame();

@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getReferralCode, sendEmails } from "../../../actions/gameActions";
 import { removeFooter } from "../helperFunctions";
+import {
+  GoogleAuth,
+  FacebookAuth
+} from "../../authentication/formComponents/oauth";
 
 const regex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -29,76 +33,59 @@ class ReferralWrapper extends Component {
     return false;
   };
 
+  emailChecker = ({ invalidEmails, refCode, emails, sendEmails }) => {
+    return invalidEmails
+      ? this.setState({ invalidEmails })
+      : (this.props.sendEmails(emails.split(" "), refCode),
+        this.setState({ invalidEmails: "" }));
+  };
+
   renderInvalidEmails = invalidEmails => {
     return invalidEmails.map(email => <div>{email}</div>);
+  };
+
+  renderErrors = invalidEmails => {
+    console.log("invalid",invalidEmails)
+    return invalidEmails ? (
+      <div className="referral__email-errors">
+        These emails are invalid: {this.renderInvalidEmails(invalidEmails)}
+      </div>
+    ) : null;
   };
 
   render() {
     console.log(this.state);
     const { sendEmails } = this.props;
-    const { emails } = this.state;
+    const { emails, invalidEmails } = this.state;
     const refCode = localStorage.getItem("referralCode");
     return (
-      <div
-        style={{
-          marginTop: 13 + "rem",
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "column",
-          alignItems: "center"
-        }}
-        className="referral"
-      >
+      <div className="referral">
         <div>
-          {this.state.invalidEmails ? (
-            <div className="referral__email-errors">
-              These emails are invalid:{" "}
-              {this.renderInvalidEmails(this.state.invalidEmails)}
-            </div>
-          ) : null}
-
-          <div style={{ fontSize: 6 + "rem", zIndex: 1, position: "relative" }}>
-            Invite a friend
+          {this.renderErrors(invalidEmails)}
+          <div
+            className="game-info__secondary-heading"
+            style={{ zIndex: 1, position: "relative" }}
+          >
+            INVITE A FRIEND
           </div>
         </div>
 
-        <div
-          style={{
-            fontSize: 2.5 + "rem",
-            width: 75 + "rem",
-            textAlign: "center",
-            margin: 6 + "rem",
-            lineHeight: 4.2 + "rem"
-          }}
-        >
+        <div className="game-info__tertiary-heading">
           Want more points? Invite a friend and get 50 points, because we're
           thankful that You let us grow! Oh, and your friend will get 25 points
           after registration with your link!
         </div>
-        <div style={{ display: "flex" }}>
+        <div className="referral__input-wrap">
           <input
-            style={{
-              width: 40 + "rem",
-              height: 4 + "rem",
-              fontSize: 2 + "rem"
-            }}
+            className="referral__input"
             type="text"
             onChange={event => this.setState({ emails: event.target.value })}
           />
           <button
-            style={{
-              width: 10 + "rem",
-              height: 4.2 + "rem",
-              fontSize: 2 + "rem",
-              background: "#78B7CF",
-              color: "#fff"
-            }}
+            className="referral__button"
             onClick={() => {
-              const result = this.emailValidation(this.state.emails);
-              return result
-                ? this.setState({ invalidEmails: result })
-                : (sendEmails(emails.split(" "), refCode),
-                  this.setState({ invalidEmails: "" }));
+              const invalidEmails = this.emailValidation(this.state.emails);
+              this.emailChecker({ invalidEmails, emails, sendEmails, refCode });
             }}
             disabled={this.state.emails ? false : true}
           >
@@ -106,16 +93,15 @@ class ReferralWrapper extends Component {
           </button>
         </div>
         <div className="referral__options-wrap">
-          <div className="referral__options-wrap__heading ">
+          <div className="referral__heading ">
             More ways to invite your friends
           </div>
-          <div className="referral__options-wrap__button-wrap">
-            <button className="referral__options-wrap__button">
-              Copy link
-            </button>
-            <button className="referral__options-wrap__button">
-              Share on Facebook
-            </button>
+          <div className="referral__button-wrap">
+            <div style={{ width: 25 + "%" }}>
+              <button className="referral__link">Copy link</button>
+            </div>
+            <FacebookAuth buttonWidth={25 + "%"} />
+            <GoogleAuth buttonWidth={25 + "%"} />
           </div>
         </div>
       </div>

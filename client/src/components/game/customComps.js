@@ -5,19 +5,23 @@ export const GameButton = ({ action, name, classType, isDisabled, to }) => {
   const checkType = to => {
     if (to)
       return (
-        <Link
-          onClick={action}
-          className={`${classType} link`}
-          disabled={isDisabled}
-          to={to}
-        >
-          {name}
-        </Link>
+        <div className="game-info__btn-secondary-wrap">
+          <Link
+            onClick={action}
+            className={`${classType} link`}
+            disabled={isDisabled}
+            to={to}
+          >
+            {name}
+          </Link>
+        </div>
       );
     return (
-      <button onClick={action} className={classType} disabled={isDisabled}>
-        {name}
-      </button>
+      <div className="game-info__btn-secondary-wrap">
+        <button onClick={action} className={classType} disabled={isDisabled}>
+          {name}
+        </button>
+      </div>
     );
   };
   return checkType(to);

@@ -39,7 +39,7 @@ class AuthPageWrapper extends Component {
         <GameButton name={"Sign In"} classType={"game-info__btn-secondary"} />
         <GameButton
           name={"Not yet"}
-          classType={"game-info__btn-primary"}
+          classType={"button-primary"}
           action={() => askForName()}
           to={"/plan"}
         />

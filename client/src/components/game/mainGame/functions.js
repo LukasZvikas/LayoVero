@@ -37,12 +37,6 @@ export const correctChecker = (type, props) => {
 //MAIN WRAPPER
 //////////////
 
-export const checkIfLast = (roundCounter, arr, action) => {
-  const diff = 1;
-  if (diff === 1) return action;
-  return null;
-};
-
 export const isCorrect = (title, correctAnswer) => {
   if (title === correctAnswer) return true;
   return false;
@@ -89,7 +83,6 @@ export const getQuestTitle = ({ questions, questCount }) => {
   const special = getCurrentQuests.specialWord;
   return { primary, special };
 };
-
 
 export const checkIfCorrect = ({ choice, questions, questCount }) => {
   if (choice === questions[questCount].correct_answer) return true;

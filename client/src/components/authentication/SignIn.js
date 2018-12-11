@@ -12,7 +12,7 @@ import { Modal } from "../Modal";
 import { Link, withRouter } from "react-router-dom";
 
 import Heading from "./formComponents/heading";
-import Oauth from "./formComponents/oauth";
+import { GoogleAuth, FacebookAuth } from "./formComponents/oauth";
 import Footer from "./formComponents/footer";
 
 class SignIn extends Component {
@@ -64,10 +64,13 @@ class SignIn extends Component {
             <button className="button-primary" type="submit">
               Sign In
             </button>
-   {/*         <div className="auth-form__cross-line">
+            {/*         <div className="auth-form__cross-line">
               <span className="auth-form__cross-text">or</span>
             </div>*/}
-            <Oauth />
+            <div className="auth-form__oauth">
+              <GoogleAuth />
+              <FacebookAuth />
+            </div>
             <Footer
               text={"Not a member?"}
               onClick={() => this.props.ShowSignUpModal()}

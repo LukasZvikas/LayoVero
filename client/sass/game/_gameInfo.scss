@@ -2,16 +2,22 @@
   font-family: "Oswald-Regular";
   margin: 6rem 0 0 0;
 
-  &__pre {
-    margin: 6rem 0 0 0;
-  }
+  // &__pre {
+  //   margin: 6rem 0 0 0;
+  // }
   &__main-wrap {
     @include flexCenter;
     @include columnSpaceAround;
   }
 
   .pre {
-    margin: 13rem 0 0 0;
+    @media only screen and (min-width: 375px) {
+      margin: 35rem 0 0 0;
+    }
+
+    @media only screen and (min-width: 1200px) {
+      margin: 13rem 0 0 0;
+    }
   }
   &__wrap-height {
     height: 30rem;
@@ -39,25 +45,27 @@
     }
 
     @media only screen and (min-width: 1200px) {
-      font-size: 3.8rem;
+      font-size: 4.8rem;
+      margin: 0;
     }
   }
 
   &__tertiary-heading {
+    word-spacing: 0.2rem;
     text-align: center;
+    margin: 3rem 0 5rem 0;
+    font-family: "Oswald-Medium";
 
     @media only screen and (min-width: 375px) {
       width: 70%;
       font-size: 2.8rem;
       line-height: 6.2rem;
-      margin: 3rem 0 3rem 0;
     }
 
     @media only screen and (min-width: 1200px) {
       width: 60%;
-      font-size: 1.8rem;
       line-height: 3.5rem;
-      margin: 3rem 0 0 0;
+      font-size: 2.5rem;
     }
   }
 
@@ -80,17 +88,50 @@
     @include flexCenter;
   }
 
-  &__btn-secondary {
-    $btn-sec: 28rem, 5rem, 3rem, 2rem, var(--color-white),
-      var(--color-light-grey-1);
-    @include borderStyle($btn-sec...);
-    border: none;
+  &__btn-secondary-wrap {
+    @media only screen and (min-width: 375px) {
+      margin: 2.2rem 12rem 2.2rem 12rem;
+    }
+    @media only screen and (min-width: 1200px) {
+      margin: 1.6rem 12rem 1.6rem 12rem;
+    }
+  }
 
-    &:hover {
-      @include buttonHover(var(--color-white), var(--color-primary));
+  &__btn-secondary {
+    text-transform: uppercase;
+    transition: all 0.3s;
+    border: none;
+    background-color: var(--color-light-grey-2);
+    font-family: "Oswald-Regular";
+
+    @media only screen and (min-width: 375px) {
+      font-size: 3.2rem;
+      padding: 2.2rem 12rem;
+      border-radius: 8rem;
     }
 
-    @include noOutlineFocus;
+    @media only screen and (min-width: 1200px) {
+      font-size: 1.8rem;
+      padding: 1.6rem 12rem;
+      border-radius: 4rem;
+    }
+
+    &:hover {
+      color: var(--color-black);
+      background-color: whitesmoke;
+      //border: 1px solid var(--color-primary);
+      transform: translateY(1px);
+      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.3);
+    }
+
+    &:active {
+      outline: none;
+      box-shadow: var(--header-shadow);
+    }
+
+    &:focus {
+      outline: none;
+    }
   }
 
   &__btn-tertiary {
@@ -109,7 +150,6 @@
     @include borderStyle($play-button...);
     border: none;
     padding: 0rem 2rem;
-
     @include noOutlineFocus;
   }
   ::placeholder {
@@ -131,7 +171,7 @@
   &__image-box-wrap-main {
     display: grid;
     grid-gap: 8rem;
-    margin: 5.5rem 0 5.5rem 0;
+    margin: 0 0 2.2rem 0;
 
     @media only screen and (min-width: 375px) {
       grid-template-columns: 40rem;

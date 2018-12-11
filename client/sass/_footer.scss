@@ -4,9 +4,17 @@
   justify-content: center;
 
   &__img-main {
-    width: 78%;
     position: fixed;
-    bottom: 0px;
+
+    @media only screen and (min-width: 375px) {
+      width: 100%;
+      bottom: 30rem;
+    }
+
+    @media only screen and (min-width: 1200px) {
+      width: 66%;
+      bottom: 0px;
+    }
   }
 
   &__bottom {

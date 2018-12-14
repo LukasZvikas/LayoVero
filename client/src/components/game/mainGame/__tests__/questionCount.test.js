@@ -3,37 +3,40 @@ import QuestionCount from "../questionCount";
 import { shallow } from "enzyme";
 
 describe("QuestionCount", () => {
-  let props;
   let wrapper;
-  describe("if LSQcount exists", () => {
-    beforeEach(() => {
-      props = {
-        LSQcount: 1,
-        action: jest.fn(),
-        stateQCount: 1
-      };
-      wrapper = shallow(<QuestionCount {...props} />);
-    });
-    it("has 1 div", () => {
-      expect(wrapper.find("div")).toHaveLength(3);
-    });
-
-    it("action gets called once if LSQcount exists", () => {
-      expect(props.action).toHaveBeenCalledTimes(1);
-    });
+  let context;
+  beforeEach(() => {
+    context = {
+      props: {
+        game: {
+          questCount: 1,
+          resultCount: 1
+        }
+      }
+    };
+    const outer = shallow(<QuestionCount />);
+    const Children = outer.props().children(context);
+    wrapper = shallow(Children);
+  });
+  it("has 3 divs", () => {
+    expect(wrapper.find("div")).toHaveLength(3);
   });
 
-  describe("if LSQcount does not exist", () => {
-    beforeEach(() => {
-      props = {
-        LSQcount: undefined,
-        action: jest.fn(),
-        stateQCount: 0
-      };
-      wrapper = shallow(<QuestionCount {...props} />);
-    });
-    it("action does not get called", () => {
-      expect(props.action).toHaveBeenCalledTimes(0);
-    });
+  it("renders correct questCount", () => {
+    expect(
+      wrapper
+        .find("div")
+        .at(1)
+        .props().children[1]
+    ).toBe(2);
+  });
+
+  it("renders correct resultCount", () => {
+    expect(
+      wrapper
+        .find("div")
+        .at(2)
+        .props().children[1]
+    ).toBe(1);
   });
 });

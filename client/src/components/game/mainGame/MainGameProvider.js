@@ -68,6 +68,7 @@ export class MainGameProvider extends Component {
       incorrectAnswerAction
     } = this.props;
 
+    console.log(game.questions);
     const gameProps = {
       state: this.state,
       checkIfAnswered: this.checkIfAnswered,

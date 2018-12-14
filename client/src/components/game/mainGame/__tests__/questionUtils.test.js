@@ -3,8 +3,6 @@ import * as functions from "../functions";
 import { localStorageMock } from "./lsMock";
 import Question from "../question";
 
-window.localStorage = localStorageMock;
-
 const getProps = (choice, title, answered, correct) => {
   return {
     choice: choice,

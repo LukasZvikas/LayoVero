@@ -1,37 +1,36 @@
 import React from "react";
-import QuestionCount from "../questionsWrapper";
+import QuestionCount from "../questionCount";
 import QuestionsWrapper from "../questionsWrapper";
-import { Heading, GameButton } from "../../customComps";
+import QuestionsRenderer from "../questionsRenderer";
+import ButtonRenderer from "../buttonRenderer";
+import { Heading } from "../../customComps";
 import { shallow, mount } from "enzyme";
 import { getRoundQuestions, renderButtonType } from "../functions";
+import { getQArray } from "./testHelpers";
 
 describe("QuestionsWrapper", () => {
-  let props;
+  let context;
   let wrapper;
 
   beforeEach(() => {
-    props = {
-      LSQcount: "7",
-      getRoundQuestions: jest.fn(),
-      incrementLSQCount: jest.fn(),
-      renderButtonType: jest.fn(),
+    context = {
       state: {
-        questionsFromLS: [
-          { correct_answer: "The Eiffel Tower" },
-          { correct_answer: "Russia" }
-        ],
-        questCount: 0,
-        choice: "",
         answered: false,
-        resultCount: 0
+        choice: ""
       },
-      titleItems: {
-        primary: "Which city has the highest concentration of in the world",
-        secondary: "Art Deco buildings"
-      }
+      props: {
+        game: {
+          questCount: 0,
+          resultCount: 0,
+          questions: getQArray()
+        }
+      },
+      actions: { checkIfAnswered: jest.fn() }
     };
 
-    wrapper = mount(<QuestionsWrapper {...props} />);
+    const outer = shallow(<QuestionsWrapper />);
+    const Children = outer.props().children(context);
+    wrapper = shallow(Children);
   });
 
   it("has one QuestionCount component", () => {
@@ -39,5 +38,25 @@ describe("QuestionsWrapper", () => {
   });
   it("has one Heading component", () => {
     expect(wrapper.find(Heading)).toHaveLength(1);
+  });
+  it("heading primaryText prop is correct", () => {
+    expect(wrapper.find(Heading).prop("primaryText")).toBe(
+      "Which building was supposed to be"
+    );
+  });
+  it("heading secondaryText prop is correct", () => {
+    expect(wrapper.find(Heading).prop("secondaryText")).toBe("temporary");
+  });
+  it("heading tertiaryText prop is correct", () => {
+    expect(wrapper.find(Heading).prop("tertiaryText")).toBe("?");
+  });
+  it("has one QuestionsRenderer component", () => {
+    expect(wrapper.find(QuestionsRenderer)).toHaveLength(1);
+  });
+  it("has one ButtonRenderer component", () => {
+    expect(wrapper.find(ButtonRenderer)).toHaveLength(1);
+  });
+  it("has 3 divs", () => {
+    expect(wrapper.find("div")).toHaveLength(3);
   });
 });

@@ -37,12 +37,17 @@ export const correctChecker = (type, props) => {
 //MAIN WRAPPER
 //////////////
 
+export const showExplanation = (answered, explanation) => {
+  return answered ? explanation : null;
+};
+
 export const isCorrect = (title, correctAnswer) => {
   if (title === correctAnswer) return true;
   return false;
 };
 
 export const buttonStateCheck = state => {
+  console.log(state);
   if (state === "") return true;
   return false;
 };

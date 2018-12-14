@@ -1,38 +1,7 @@
 import MainGameWrapper from "../MainGameWrapper";
 import * as utils from "../functions";
 import Question from "../question";
-
-const getQArray = () => {
-  return [
-    {
-      round: 1,
-      question: "Which building was supposed to be temporary?",
-      correct_answer: "The Eiffel Tower",
-      explanation:
-        "The Eiffel Tower. It was supposed to be a temporary installation for 1889 World Fair.",
-      primaryText: "Which building was supposed to be",
-      specialWord: "temporary",
-      answers: [
-        {
-          title: "Moulin Rouge",
-          image: "moulinRouge"
-        },
-        {
-          title: "The Louvre",
-          image: "louvre"
-        },
-        {
-          title: "The Eiffel Tower",
-          image: "eiffelTower"
-        },
-        {
-          title: "Arc de Triomphe",
-          image: "arcDeTriomphe"
-        }
-      ]
-    }
-  ];
-};
+import { getQArray } from "./testHelpers";
 
 describe("MainGameWrapper functions", () => {
   describe("isChosen", () => {
@@ -158,6 +127,22 @@ describe("MainGameWrapper functions", () => {
         questCount
       });
       expect(result).toEqual(false);
+    });
+  });
+
+  describe("showExplanation", () => {
+    let answered;
+    let explanation =
+      "The Eiffel Tower. It was supposed to be a temporary installation for 1889 World Fair.";
+    it("is answered is true, explanation is returned", () => {
+      answered = true;
+      const res = utils.showExplanation(answered, explanation);
+      expect(res).toEqual(explanation);
+    });
+    it("is answered is false, null is returned", () => {
+      answered = false;
+      const res = utils.showExplanation(answered, explanation);
+      expect(res).toEqual(null);
     });
   });
 });

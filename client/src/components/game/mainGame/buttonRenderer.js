@@ -3,13 +3,12 @@ import { GameContext } from "./mainGameProvider";
 import { GameButton } from "../customComps";
 import { renderQuestions } from "./functions";
 import {
-  isCorrect,
   answerScoreHandler,
   buttonStateCheck,
   checkIfCorrect
 } from "./functions";
 
-export const ButtonRenderer = props => {
+export const ButtonRenderer = () => {
   return (
     <GameContext.Consumer>
       {({ state, props, actions }) => {

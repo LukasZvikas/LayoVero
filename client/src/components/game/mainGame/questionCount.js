@@ -1,15 +1,7 @@
 import React from "react";
-import { incrementLSQuestCount } from "./functions";
 import { GameContext } from "./mainGameProvider";
 
-const QuestionCount = () => {
-  const checkQuestionCount = (LSQcount, stateQCount) => {
-    return LSQcount ? incrementLSQuestCount() : stateQCount + 1;
-  };
-
-  const getCountFromLS = key => {
-    return localStorage.getItem(key);
-  };
+const QuestionCount = props => {
   return (
     <GameContext.Consumer>
       {({ props }) => {
@@ -30,7 +22,3 @@ const QuestionCount = () => {
 
 export default QuestionCount;
 
-// LSQcount={localStorage.getItem("resultCount")}
-// action={localStorage.getItem("questCount")}
-// stateQCount={1}
-// LSResultCount={props.LSResultCount}

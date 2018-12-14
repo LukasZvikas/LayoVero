@@ -3,17 +3,13 @@ import { Heading, GameButton } from "../customComps";
 import QuestionsRenderer from "./questionsRenderer";
 import ButtonRenderer from "./buttonRenderer";
 import QuestionCount from "./questionCount";
-import { renderButtonType, getQuestTitle } from "./functions";
+import { renderButtonType, getQuestTitle, showExplanation } from "./functions";
 import { GameContext } from "./mainGameProvider";
 
-const QuestionWrapper = props => {
-  const showExplanation = (answered, explanation) => {
-    return answered ? explanation : null;
-  };
+const QuestionWrapper = () => {
   return (
     <GameContext.Consumer>
       {({ functions, props, state, checkIfAnswered, actions }) => {
-  
         return (
           <div className="game-info">
             <QuestionCount />

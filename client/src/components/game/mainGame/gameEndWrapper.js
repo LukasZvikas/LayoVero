@@ -9,20 +9,21 @@ import {
   clearQStorage
 } from "./functions";
 
-class GameEndWrapper extends Component {
+export class GameEndWrapper extends Component {
   render() {
     return (
       <GameContext.Consumer>
-        {({ resetState, props }) => (
+        {({ props }) => (
           <div className="game-info__main-wrap pre">
             <div className="game-info__end-wrap">
-              Congratulations, you finished the Quiz! You earned{" "}
-              {props.game.resultCount} points.{" "}
+              <div>
+                Congratulations, you finished the Quiz! You earned{" "}
+                {props.game.resultCount} points.{" "}
+              </div>
               <GameButton
                 name={"Play Again"}
                 classType={"button-primary"}
                 action={() => {
-                  resetState;
                   this.props.resetGame();
                   window.location.reload();
                 }}
